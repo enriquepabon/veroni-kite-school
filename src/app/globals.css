@@ -14,10 +14,25 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Offset for fixed header when scrolling to sections */
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+@media (min-width: 768px) {
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
 }
 
 @layer utilities {
