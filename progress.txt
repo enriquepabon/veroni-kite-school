@@ -232,3 +232,42 @@ Started: 2026-02-11T21:22:00-05:00
 - Files: src/components/FAQ.tsx, src/__tests__/faq.test.ts
 - **Learnings:** Use max-h-0/max-h-96 with overflow-hidden for smooth accordion animations; aria-controls links button to panel id
 ---
+
+## 2026-02-12 09:36 - US-009: Create Footer with contact information and social links
+- Created src/components/Footer.tsx as server component
+- Implemented comprehensive footer with:
+  - id="contacto" for anchor navigation from header
+  - 4-column responsive layout (stacks on mobile)
+  - Brand column: Logo, description, social media links (Instagram, Facebook)
+  - Navigation column: Quick links to all page sections
+  - Contact column: WhatsApp, email, location with icons
+  - Map column: Google Maps placeholder with link to Salinas del Rey
+  - Copyright bar with dynamic year and legal links
+- Contact information includes:
+  - WhatsApp: +57 300 123 4567 with wa.me link
+  - Email: info@veronikiteschool.com (placeholder)
+  - Location: Salinas del Rey, Colombia
+- Social media icons: Instagram and Facebook with aria-labels
+- Dynamic copyright year using `new Date().getFullYear()`
+- Design: Dark theme (bg-gray-900) with cyan accent colors
+- Comprehensive data-testid attributes for testing
+- Created footer.test.ts with 31 tests covering all acceptance criteria:
+  - Component existence and export (2 tests)
+  - Section ID for anchor navigation (2 tests)
+  - WhatsApp contact (2 tests)
+  - Email address display (2 tests)
+  - Location information (3 tests)
+  - Social media links (4 tests)
+  - Copyright notice with dynamic year (4 tests)
+  - Quick navigation links (2 tests)
+  - Google Maps integration (2 tests)
+  - Brand section (2 tests)
+  - Accessibility (2 tests)
+  - Responsive design (2 tests)
+  - Visual design (2 tests)
+- Updated page.tsx to include Footer component
+- Fixed Hero.tsx: added "use client" directive (was missing, causing build failure)
+- All 246 tests pass, typecheck clean, build succeeds
+- Files: src/components/Footer.tsx, src/__tests__/footer.test.ts, src/app/page.tsx, src/components/Hero.tsx
+- **Learnings:** Components with onClick handlers must have "use client" directive; hardcode data-testid values in file for tests that read raw file content (template literals not evaluated)
+---
