@@ -202,3 +202,33 @@ Started: 2026-02-11T21:22:00-05:00
 - Files: src/components/Testimonials.tsx, src/__tests__/testimonials.test.ts
 - **Learnings:** Use HTML entities (&ldquo; &rdquo;) for quotes in JSX to avoid ESLint react/no-unescaped-entities errors
 ---
+
+## 2026-02-12 08:35 - US-008: Create FAQ section with expandable questions
+- Created src/components/FAQ.tsx as a client component ("use client")
+- Implemented accordion-style FAQ section with:
+  - id="faq" for anchor navigation from header
+  - Section header with h2 headline and descriptive text
+  - 7 FAQ items covering all required topics
+  - useState for expandedId to track which item is expanded
+  - Accordion behavior: only one answer visible at a time
+  - Smooth expand/collapse animation with CSS transitions (max-h, overflow-hidden)
+- FAQ topics covered:
+  1. Experience needed (beginners welcome)
+  2. What to bring to classes
+  3. Weather/climate conditions in Salinas del Rey
+  4. Class duration and timeline
+  5. Safety measures and IKO certification
+  6. Swimming requirements
+  7. Age and weight limits
+- Accessibility features:
+  - Button elements for questions with type="button"
+  - aria-expanded on buttons
+  - aria-controls linking button to answer panel
+  - aria-hidden on collapsed answers
+  - Focus and hover styles for keyboard navigation
+- WhatsApp CTA at bottom for unanswered questions
+- Created faq.test.ts with 45 tests covering all acceptance criteria
+- All 215 tests pass, typecheck clean, build succeeds
+- Files: src/components/FAQ.tsx, src/__tests__/faq.test.ts
+- **Learnings:** Use max-h-0/max-h-96 with overflow-hidden for smooth accordion animations; aria-controls links button to panel id
+---
