@@ -1,0 +1,11 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow potential admin or private paths (future-proofing)
+Disallow: /admin
+Disallow: /private
+Disallow: /api
+
+# Sitemap location
+Sitemap: https://veronikiteschool.com/sitemap.xml
