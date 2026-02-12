@@ -33,3 +33,37 @@ Started: 2026-02-11T21:22:00-05:00
 - All 7 tests pass, typecheck passes, build succeeds
 - **Learnings:** Node.js tests with tsx run as ESM - use import.meta.url instead of __dirname
 ---
+
+## 2026-02-11 21:42 - US-002: Create root layout with SEO metadata and Spanish language config
+- Created app/layout.tsx with html lang='es' for Spanish
+- Added comprehensive Metadata export with:
+  - Title: "Veroni Kite School | Escuela de Kitesurf en Salinas del Rey, Colombia"
+  - Description with keywords: kitesurf, Colombia, Salinas del Rey, IKO
+  - Keywords array with target SEO terms
+  - metadataBase for absolute URL resolution
+- Added Open Graph metadata (type, locale, title, description, images)
+- Added Twitter card metadata (summary_large_image)
+- Configured viewport with themeColor (#0891b2 cyan)
+- Imported Inter Google Font via next/font/google with CSS variable
+- Updated tailwind.config.ts to use Inter as default sans font
+- Created layout.test.ts with 21 tests covering all acceptance criteria
+- Files changed: src/app/layout.tsx, tailwind.config.ts, src/__tests__/layout.test.ts
+- **Learnings:** Use metadataBase to avoid Next.js warnings about OG image resolution
+---
+
+## 2026-02-12 02:25 - US-003: Create Header component with logo placeholder and mobile navigation
+- Created src/components/Header.tsx as a client component ("use client")
+- Implemented responsive header with:
+  - Logo placeholder: SVG icon + "Veroni Kite School" text
+  - Desktop navigation with 6 links: Inicio, Clases, Nosotros, Testimonios, FAQ, Contacto
+  - Mobile hamburger menu hidden above md breakpoint (768px)
+  - Mobile menu with slide-down animation controlled by isMenuOpen state
+  - Fixed/sticky positioning (fixed top-0 left-0 right-0 z-50)
+  - Scroll-aware shadow effect via useEffect + scroll listener
+  - Smooth scroll to sections using scrollIntoView({ behavior: "smooth" })
+- Added accessibility: aria-expanded, aria-controls, aria-label on hamburger button
+- Created header.test.ts with 27 tests covering all acceptance criteria
+- All 55 tests pass, typecheck clean, build succeeds
+- Files: src/components/Header.tsx, src/__tests__/header.test.ts
+- **Learnings:** Use data-testid attributes for test verification of component structure
+---
