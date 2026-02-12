@@ -92,3 +92,27 @@ Started: 2026-02-11T21:22:00-05:00
 - Files: src/components/Hero.tsx, src/__tests__/hero.test.ts
 - **Learnings:** Use Next.js Link component for external links with target="_blank" and rel="noopener noreferrer"
 ---
+
+## 2026-02-12 04:25 - US-005: Create Classes section with pricing cards
+- Created src/components/Classes.tsx as a server component
+- Implemented pricing section with:
+  - id="clases" for anchor navigation from header
+  - Section header with h2 headline and descriptive text
+  - Three pricing cards in responsive grid layout
+  - Card 1: "Clase por Hora" - $50,000 COP (per hour lesson)
+  - Card 2: "Curso Básico" - $500,000 COP (highlighted as "Más Popular")
+  - Card 3: "Curso Completo" - $500,000 COP (intensive program)
+- Card structure:
+  - Title with h3 element
+  - Price displayed prominently with COP currency
+  - Description text explaining the offering
+  - Features list with checkmark icons
+  - WhatsApp CTA button with pre-filled message
+- Responsive grid: grid-cols-1 (mobile) -> md:grid-cols-3 (desktop)
+- Visual design: rounded-2xl cards, shadow-lg, highlighted card has cyan background and -translate-y-4
+- Each CTA links to WhatsApp with course-specific message
+- Created classes.test.ts with 34 tests covering all acceptance criteria
+- All 117 tests pass, typecheck clean, build succeeds
+- Files: src/components/Classes.tsx, src/__tests__/classes.test.ts
+- **Learnings:** Use template literals for dynamic data-testid values in mapped arrays
+---
