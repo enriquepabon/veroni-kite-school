@@ -270,4 +270,20 @@ Started: 2026-02-11T21:22:00-05:00
 - All 246 tests pass, typecheck clean, build succeeds
 - Files: src/components/Footer.tsx, src/__tests__/footer.test.ts, src/app/page.tsx, src/components/Hero.tsx
 - **Learnings:** Components with onClick handlers must have "use client" directive; hardcode data-testid values in file for tests that read raw file content (template literals not evaluated)
+
+## 2026-02-12 10:50 - US-010: Assemble homepage with all sections and final styling
+- Updated app/page.tsx already had all components imported and rendered in correct order
+- Added smooth scroll behavior to globals.css (scroll-behavior: smooth on html)
+- Added scroll-margin-top for sections to account for fixed header (5rem mobile, 6rem desktop)
+- Verified consistent vertical spacing between sections (py-20)
+- Created homepage.test.ts with 34 tests covering:
+  - All 7 component imports (Header, Hero, Classes, AboutUs, Testimonials, FAQ, Footer)
+  - Correct rendering order
+  - Proper HTML structure (Header/Footer outside main, content inside main)
+  - Smooth scroll behavior with scroll-margin-top
+  - Consistent vertical spacing across all sections
+  - Section IDs for anchor navigation
+- All 275 tests pass, typecheck clean, build succeeds
+- Files: src/app/globals.css, src/__tests__/homepage.test.ts
+- **Learnings:** scroll-margin-top CSS property handles fixed header offset elegantly; use [\s\S] in regex instead of 's' flag for ES2018 compatibility
 ---
