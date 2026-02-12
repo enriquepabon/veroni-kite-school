@@ -116,3 +116,89 @@ Started: 2026-02-11T21:22:00-05:00
 - Files: src/components/Classes.tsx, src/__tests__/classes.test.ts
 - **Learnings:** Use template literals for dynamic data-testid values in mapped arrays
 ---
+
+## 2026-02-12 05:28 - US-006: Create About Us section with IKO certification and location
+- Created src/components/AboutUs.tsx as a server component
+- Implemented section with id="nosotros" for anchor navigation
+- Two-column layout: grid-cols-1 (mobile) -> md:grid-cols-2 (desktop)
+- Left column: Placeholder image with gradient background and instructor silhouette SVG
+- IKO badge overlay prominently displaying "Certificación IKO" and "International Kiteboarding Organization"
+- Right column: Text content with:
+  - School description mentioning IKO certification
+  - Location highlight section for Salinas del Rey, Colombia
+  - Description of location benefits (constant winds, warm waters)
+  - Key features grid (certified instructors, quality equipment, small groups, guaranteed safety)
+- Responsive design with mobile-first approach
+- Comprehensive data-testid attributes for testing
+- Created aboutus.test.ts with 29 tests covering all acceptance criteria:
+  - Component existence and export
+  - Section ID for anchor navigation
+  - IKO certification mentions (4 tests)
+  - Salinas del Rey location (4 tests)
+  - Placeholder image (3 tests)
+  - Two-column layout (5 tests)
+  - Content structure (4 tests)
+  - Accessibility (2 tests)
+  - Responsive design (3 tests)
+- All 146 tests pass, typecheck clean, build succeeds
+- Files: src/components/AboutUs.tsx, src/__tests__/aboutus.test.ts
+- **Learnings:** Use border-l-4 for accent highlight boxes; combine gradient placeholder with overlaid badge for visual depth
+---
+
+## 2026-02-12 07:35 - US-007: Create Testimonials section with placeholder reviews
+- Created src/components/Testimonials.tsx as server component
+- Implemented testimonials section with:
+  - id="testimonios" for anchor navigation from header
+  - Section header with h2 headline and descriptive text
+  - 3 placeholder testimonial cards with data from array
+  - Each card has: avatar placeholder (initials), name, location, star rating, quote
+- StarRating component:
+  - Renders 5 stars, fills based on rating value
+  - Yellow color (yellow-400) for filled stars, gray-300 for empty
+  - Aria-label for accessibility
+- Responsive grid layout:
+  - grid-cols-1 (mobile) -> md:grid-cols-2 -> lg:grid-cols-3 (desktop)
+  - gap-8 between cards
+  - Responsive padding (px-4 sm:px-6 lg:px-8)
+- Card design:
+  - bg-white with rounded-2xl and shadow-lg
+  - Quote icon in cyan
+  - Blockquote for review text with italics
+  - Author section with border-t separator
+  - Avatar with gradient background (cyan-400 to blue-600)
+- Trust indicator at bottom showing average rating
+- Comprehensive data-testid attributes for testing
+- Created testimonials.test.ts with 34 tests covering all acceptance criteria
+- All 176 tests pass, typecheck clean, build succeeds
+- Files: src/components/Testimonials.tsx, src/__tests__/testimonials.test.ts
+- **Learnings:** Use HTML entities (&ldquo; &rdquo;) for quotes in JSX to avoid ESLint react/no-unescaped-entities errors
+---
+
+## 2026-02-12 07:35 - US-007: Create Testimonials section with placeholder reviews
+- Created src/components/Testimonials.tsx as server component
+- Implemented testimonials section with:
+  - id="testimonios" for anchor navigation from header
+  - Section header with h2 headline and descriptive text
+  - 3 placeholder testimonial cards with data from array
+  - Each card has: avatar placeholder (initials), name, location, star rating, quote
+- StarRating component:
+  - Renders 5 stars, fills based on rating value
+  - Yellow color (yellow-400) for filled stars, gray-300 for empty
+  - Aria-label for accessibility
+- Responsive grid layout:
+  - grid-cols-1 (mobile) -> md:grid-cols-2 -> lg:grid-cols-3 (desktop)
+  - gap-8 between cards
+  - Responsive padding (px-4 sm:px-6 lg:px-8)
+- Card design:
+  - bg-white with rounded-2xl and shadow-lg
+  - Quote icon in cyan
+  - Blockquote for review text with italics
+  - Author section with border-t separator
+  - Avatar with gradient background (cyan-400 to blue-600)
+- Trust indicator at bottom showing average rating
+- Comprehensive data-testid attributes for testing
+- Created testimonials.test.ts with 34 tests covering all acceptance criteria
+- All 176 tests pass, typecheck clean, build succeeds
+- Files: src/components/Testimonials.tsx, src/__tests__/testimonials.test.ts
+- **Learnings:** Use HTML entities (&ldquo; &rdquo;) for quotes in JSX to avoid ESLint react/no-unescaped-entities errors
+---
