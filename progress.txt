@@ -1,0 +1,26 @@
+# Progress Log
+Run: a2ff940a-2d5d-42e7-a129-cd77b1623e15
+Task: Crear landing page para Veroni Kite School
+Started: 2026-02-11T21:22:00-05:00
+
+## Codebase Patterns
+- Next.js 14 with App Router (src/app/ directory)
+- Tailwind CSS configured via tailwind.config.ts
+- Static export: output: 'export' in next.config.mjs
+- Tests use node:test with tsx runner: npx tsx src/__tests__/*.test.ts
+- Typecheck: npm run typecheck
+- Build produces out/ directory for static hosting
+
+---
+
+## 2026-02-11 21:23 - US-001: Initialize Next.js 14 project with Tailwind CSS and static export
+- Created Next.js 14 project with App Router structure
+- Configured Tailwind CSS with tailwind.config.ts
+- Set up static export in next.config.mjs (output: 'export')
+- Added images.unoptimized: true for static export compatibility
+- Added typecheck and test scripts to package.json
+- Created setup.test.ts with 7 tests verifying project configuration
+- All tests pass, build succeeds, dev server starts correctly
+- Files: next.config.mjs, package.json, src/__tests__/setup.test.ts
+- **Learnings:** Static export requires unoptimized images setting
+---
