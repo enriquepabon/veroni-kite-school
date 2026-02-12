@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Veroni Kite School
 
-## Getting Started
+Landing page para Veroni Kite School, escuela de kitesurf certificada IKO ubicada en Salinas del Rey, Colombia.
 
-First, run the development server:
+## Tecnologías
+
+- **Framework:** Next.js 14 (App Router)
+- **Estilos:** Tailwind CSS
+- **Despliegue:** GitHub Pages (static export)
+
+## Desarrollo Local
 
 ```bash
+# Instalar dependencias
+npm install
+
+# Iniciar servidor de desarrollo
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrir [http://localhost:3000](http://localhost:3000) en el navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts Disponibles
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Comando | Descripción |
+|---------|-------------|
+| `npm run dev` | Inicia el servidor de desarrollo |
+| `npm run build` | Genera el build de producción (static export) |
+| `npm run start` | Inicia servidor de producción |
+| `npm run lint` | Ejecuta ESLint |
+| `npm run typecheck` | Verifica tipos con TypeScript |
+| `npm run test` | Ejecuta los tests |
 
-## Learn More
+## Build de Producción
 
-To learn more about Next.js, take a look at the following resources:
+El proyecto está configurado para static export (SSG). El build genera archivos estáticos en el directorio `out/`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run build
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Despliegue en GitHub Pages
 
-## Deploy on Vercel
+### Método 1: GitHub Actions (Recomendado)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+El repositorio incluye un workflow de GitHub Actions (`.github/workflows/deploy.yml`) que despliega automáticamente al hacer push a `main`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Pasos para configurar:**
+
+1. En el repositorio de GitHub, ir a **Settings > Pages**
+2. En **Source**, seleccionar **GitHub Actions**
+3. Hacer push a la rama `main`
+4. El workflow construirá y desplegará automáticamente
+
+### Método 2: Deploy Manual
+
+```bash
+# Generar build
+npm run build
+
+# El directorio out/ contiene los archivos estáticos
+# Copiar contenido de out/ a la rama gh-pages o configurar en Settings
+```
+
+### Configurar BasePath (si es necesario)
+
+Si el sitio se hospeda en una subruta (ej: `usuario.github.io/veroni-kite-school/`), descomentar y configurar `basePath` en `next.config.mjs`:
+
+```javascript
+const nextConfig = {
+  output: 'export',
+  basePath: '/veroni-kite-school', // Descomentar si es necesario
+  images: {
+    unoptimized: true,
+  },
+};
+```
+
+## Estructura del Proyecto
+
+```
+src/
+├── app/
+│   ├── globals.css      # Estilos globales y Tailwind
+│   ├── layout.tsx       # Layout raíz con SEO metadata
+│   └── page.tsx         # Página principal
+├── components/
+│   ├── Header.tsx       # Navegación y logo
+│   ├── Hero.tsx         # Sección hero con CTA
+│   ├── Classes.tsx      # Precios y planes
+│   ├── AboutUs.tsx      # Sobre nosotros e IKO
+│   ├── Testimonials.tsx # Testimonios de clientes
+│   ├── FAQ.tsx          # Preguntas frecuentes
+│   └── Footer.tsx       # Pie de página y contacto
+└── __tests__/           # Tests unitarios
+```
+
+## SEO
+
+El sitio está optimizado para SEO con:
+
+- Meta tags completos (title, description, keywords)
+- Open Graph para redes sociales
+- Twitter Cards
+- JSON-LD structured data (LocalBusiness schema)
+- robots.txt y sitemap.xml
+- HTML semántico
+
+## Licencia
+
+© 2026 Veroni Kite School. Todos los derechos reservados.

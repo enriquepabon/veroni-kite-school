@@ -287,3 +287,53 @@ Started: 2026-02-11T21:22:00-05:00
 - Files: src/app/globals.css, src/__tests__/homepage.test.ts
 - **Learnings:** scroll-margin-top CSS property handles fixed header offset elegantly; use [\s\S] in regex instead of 's' flag for ES2018 compatibility
 ---
+
+## 2026-02-12 11:50 - US-011: Add robots.txt, sitemap, and final SEO optimization
+- Created public/robots.txt allowing all crawlers with sitemap reference
+- Created public/sitemap.xml with all page sections and proper priorities
+- Updated layout.tsx with JSON-LD LocalBusiness structured data:
+  - Business name, description, URL
+  - PostalAddress with Salinas del Rey location
+  - Geo coordinates for Salinas del Rey
+  - Service offerings with pricing (Clase por Hora, Curso Básico, Curso Completo)
+  - Aggregate rating (4.9/5 stars, 100 reviews)
+  - Telephone and email contact info
+- Verified all images have alt text or aria-hidden for decorative elements
+- Verified existing meta tags (title, description, keywords, OG, Twitter, robots, canonical)
+- Created seo.test.ts with 29 comprehensive tests:
+  - robots.txt existence and content (4 tests)
+  - sitemap.xml structure and URLs (5 tests)
+  - JSON-LD structured data validation (8 tests)
+  - Meta tags verification (6 tests)
+  - Accessibility checks (4 tests)
+  - Semantic HTML verification (2 tests)
+- All 304 tests pass, typecheck clean, build succeeds
+- Files: public/robots.txt, public/sitemap.xml, src/app/layout.tsx, src/__tests__/seo.test.ts
+- **Learnings:** JSON-LD structured data significantly improves SEO for local businesses; include detailed service offerings and geo coordinates in LocalBusiness schema
+---
+
+## 2026-02-12 12:55 - US-012: Configure GitHub Pages deployment and verify static build
+- Verified npm run build produces out/ directory with index.html
+- Verified all asset paths use relative /_next/ paths (CSS, JS, fonts)
+- Created .github/workflows/deploy.yml for GitHub Actions deployment
+  - Uses upload-pages-artifact and deploy-pages actions
+  - Triggers on push to main branch
+  - Deploys out/ directory
+- Created README.md with comprehensive documentation:
+  - Development instructions
+  - Available npm scripts
+  - GitHub Pages deployment guide (Actions and manual)
+  - basePath configuration for subdirectory deployment
+  - Project structure overview
+  - SEO features summary
+- Created deployment.test.ts with 28 tests covering:
+  - Build output existence (9 tests)
+  - Asset paths in built HTML (4 tests)
+  - HTML structure (3 tests)
+  - README.md content (4 tests)
+  - GitHub Actions workflow (5 tests)
+  - Next.js config (3 tests)
+- All 332 tests pass, typecheck clean
+- Files: .github/workflows/deploy.yml, README.md, src/__tests__/deployment.test.ts
+- **Learnings:** GitHub Pages deployment with Next.js static export is straightforward using upload-pages-artifact and deploy-pages actions; basePath only needed if deploying to subdirectory
+---
