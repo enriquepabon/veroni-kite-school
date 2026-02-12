@@ -67,3 +67,28 @@ Started: 2026-02-11T21:22:00-05:00
 - Files: src/components/Header.tsx, src/__tests__/header.test.ts
 - **Learnings:** Use data-testid attributes for test verification of component structure
 ---
+
+## 2026-02-12 03:25 - US-004: Create Hero section with placeholder image and WhatsApp CTA
+- Created src/components/Hero.tsx as a server component (no "use client" needed)
+- Implemented full-viewport hero section with:
+  - id="inicio" for anchor navigation from header
+  - min-h-screen for full viewport height
+  - Gradient background (cyan-400 -> cyan-600 -> blue-800) as placeholder
+  - Dark overlay for text readability
+  - Headline: "Aprende Kitesurf en el Paraíso Colombiano" (h1 for SEO)
+  - Subheadline mentioning Salinas del Rey location and IKO certification
+  - Primary CTA: WhatsApp button with wa.me link (green, opens in new tab)
+  - Secondary CTA: "Ver Clases" with smooth scroll to #clases
+  - Trust indicators: IKO certification, Salinas del Rey location, Equipment included
+  - Decorative kite SVG element
+  - Scroll indicator animation at bottom
+- Mobile-first responsive design:
+  - flex-col -> sm:flex-row for CTA buttons
+  - Responsive text sizes (text-4xl -> sm:text-5xl -> md:text-6xl -> lg:text-7xl)
+  - Responsive padding (px-4 -> sm:px-6 -> lg:px-8)
+- Accessibility: aria-hidden on decorative elements and SVGs
+- Created hero.test.ts with 29 tests covering all acceptance criteria
+- All 84 tests pass, typecheck clean, build succeeds
+- Files: src/components/Hero.tsx, src/__tests__/hero.test.ts
+- **Learnings:** Use Next.js Link component for external links with target="_blank" and rel="noopener noreferrer"
+---
