@@ -25,10 +25,18 @@ export default async function PublicLayout({
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}
             />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
-            />
+            {Array.isArray(courseSchema) ? courseSchema.map((course, i) => (
+                <script
+                    key={`course-${i}`}
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(course) }}
+                />
+            )) : (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
+                />
+            )}
         </>
     );
 }

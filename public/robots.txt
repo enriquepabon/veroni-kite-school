@@ -2,10 +2,16 @@
 User-agent: *
 Allow: /
 
-# Disallow potential admin or private paths (future-proofing)
+# Disallow private/authenticated areas
+Disallow: /dashboard
 Disallow: /admin
-Disallow: /private
+Disallow: /profile
+Disallow: /booking
+Disallow: /my-roadmap
+Disallow: /weather
+Disallow: /resources
 Disallow: /api
+Disallow: /auth
 
 # Sitemap location
 Sitemap: https://veronikiteschool.com/sitemap.xml

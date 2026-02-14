@@ -3,8 +3,8 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { Link } from '@/i18n/routing';
+import Image from 'next/image';
 
-// Static preview data — will be replaced with Supabase data in Task 2.8
 const previewCourses = [
     {
         id: '1',
@@ -12,7 +12,8 @@ const previewCourses = [
         levelColor: 'ocean-teal',
         price: 350000,
         duration: 3,
-        image: null,
+        image: '/images/cursos/curso-descubrimiento.webp',
+        slug: 'descubrimiento',
     },
     {
         id: '2',
@@ -20,7 +21,8 @@ const previewCourses = [
         levelColor: 'deep-marine',
         price: 650000,
         duration: 6,
-        image: null,
+        image: '/images/cursos/curso-control-kite.webp',
+        slug: 'control-de-kite',
     },
     {
         id: '3',
@@ -28,20 +30,21 @@ const previewCourses = [
         levelColor: 'sand-gold',
         price: 900000,
         duration: 9,
-        image: null,
+        image: '/images/cursos/curso-waterstart.webp',
+        slug: 'waterstart',
     },
 ];
-
-const levelNames: Record<string, { es: string; en: string }> = {
-    discovery: { es: 'Descubrimiento', en: 'Discovery' },
-    kite_control: { es: 'Control de Kite', en: 'Kite Control' },
-    waterstart: { es: 'Waterstart', en: 'Waterstart' },
-};
 
 const levelColors: Record<string, string> = {
     'ocean-teal': 'bg-ocean-teal',
     'deep-marine': 'bg-deep-marine-600',
     'sand-gold': 'bg-sand-gold',
+};
+
+const highlightKeys: Record<string, string[]> = {
+    discovery: ['discoveryH1', 'discoveryH2', 'discoveryH3', 'discoveryH4'],
+    kite_control: ['kiteControlH1', 'kiteControlH2', 'kiteControlH3', 'kiteControlH4'],
+    waterstart: ['waterstartH1', 'waterstartH2', 'waterstartH3', 'waterstartH4'],
 };
 
 export default function CoursePreview() {
@@ -73,26 +76,28 @@ export default function CoursePreview() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: idx * 0.1 }}
-                            className="group relative bg-salt-white rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1"
+                            className="group relative bg-salt-white rounded-[16px] overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 flex flex-col"
                         >
-                            {/* Image placeholder */}
-                            <div className="h-48 bg-gradient-to-br from-deep-marine-800 to-deep-marine-900 relative overflow-hidden">
-                                <div className="absolute inset-0 bg-gradient-to-t from-deep-marine-900/60 to-transparent" />
+                            {/* Course Image */}
+                            <div className="relative h-52 overflow-hidden">
+                                <Image
+                                    src={course.image}
+                                    alt={t(`${course.level}Name`)}
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 33vw"
+                                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-deep-marine-900/50 to-transparent" />
                                 <div className="absolute top-4 left-4">
                                     <span className={`${levelColors[course.levelColor]} text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider`}>
-                                        {levelNames[course.level]?.es}
+                                        {t(`${course.level}Name`)}
                                     </span>
-                                </div>
-                                {/* Decorative kite icon */}
-                                <div className="absolute bottom-4 right-4 text-white/20">
-                                    <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 2L2 12l10 10 10-10L12 2zm0 3.414L18.586 12 12 18.586 5.414 12 12 5.414z" />
-                                    </svg>
                                 </div>
                             </div>
 
                             {/* Content */}
-                            <div className="p-6">
+                            <div className="p-6 flex flex-col flex-grow">
+                                {/* Duration & Level */}
                                 <div className="flex items-center gap-4 text-sm text-deep-marine-500 mb-4">
                                     <span className="flex items-center gap-1">
                                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -108,7 +113,31 @@ export default function CoursePreview() {
                                     </span>
                                 </div>
 
-                                <div className="flex items-end justify-between">
+                                {/* Key Highlights */}
+                                <ul className="space-y-2 mb-5 flex-grow">
+                                    {highlightKeys[course.level].map((key) => (
+                                        <li key={key} className="flex items-start gap-2 text-sm text-deep-marine-600">
+                                            <svg
+                                                className="w-4 h-4 flex-shrink-0 mt-0.5 text-ocean-teal"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                                aria-hidden="true"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={2}
+                                                    d="M5 13l4 4L19 7"
+                                                />
+                                            </svg>
+                                            <span>{t(key)}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+
+                                {/* Price & CTA */}
+                                <div className="flex items-end justify-between mt-auto">
                                     <div>
                                         <span className="text-2xl font-heading font-bold text-night-tide">
                                             ${(course.price / 1000).toFixed(0)}K
@@ -116,7 +145,7 @@ export default function CoursePreview() {
                                         <span className="text-sm text-caribbean-aqua ml-1">COP</span>
                                     </div>
                                     <Link
-                                        href="/cursos"
+                                        href={`/reservar?curso=${course.slug}`}
                                         className="btn-primary text-sm px-4 py-2"
                                     >
                                         {t('bookThis')}

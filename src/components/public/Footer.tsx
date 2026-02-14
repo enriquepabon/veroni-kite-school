@@ -15,9 +15,9 @@ export default function Footer() {
     return (
         <footer className="bg-night-tide text-salt-white/80">
             <div className="container-main py-16">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-8">
                     {/* Brand */}
-                    <div className="lg:col-span-1">
+                    <div>
                         <Link href="/" className="inline-block mb-4">
                             <span className="text-2xl font-heading font-bold text-white tracking-tight">
                                 Veroni<span className="text-ocean-teal">Kite</span>
@@ -97,31 +97,6 @@ export default function Footer() {
                         </ul>
                     </div>
 
-                    {/* Follow Us */}
-                    <div>
-                        <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
-                            {t('followUs')}
-                        </h3>
-                        <p className="text-sm text-caribbean-aqua-200 mb-4">
-                            Síguenos en redes sociales para ver spots, tips y el estilo de vida kite.
-                        </p>
-                        <div className="flex gap-3">
-                            {socialLinks.slice(0, 3).map(({ name, href, icon }) => (
-                                <a
-                                    key={name}
-                                    href={href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-caribbean-aqua-200 hover:text-ocean-teal transition-colors"
-                                    aria-label={name}
-                                >
-                                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d={icon} />
-                                    </svg>
-                                </a>
-                            ))}
-                        </div>
-                    </div>
                 </div>
 
                 {/* Bottom bar */}
@@ -130,8 +105,8 @@ export default function Footer() {
                         © {new Date().getFullYear()} Veroni Kite. {t('rights')}
                     </p>
                     <div className="flex gap-6 text-xs text-salt-white/60">
-                        <a href="#" className="hover:text-ocean-teal transition-colors">{t('privacy')}</a>
-                        <a href="#" className="hover:text-ocean-teal transition-colors">{t('terms')}</a>
+                        <Link href="/privacidad" className="hover:text-ocean-teal transition-colors">{t('privacy')}</Link>
+                        <Link href="/terminos" className="hover:text-ocean-teal transition-colors">{t('terms')}</Link>
                     </div>
                 </div>
             </div>

@@ -53,7 +53,7 @@ export default function Navbar() {
                         <Link href="/login" className="text-sm font-medium text-salt-white/80 hover:text-white transition-colors px-3 py-2">
                             {t('login')}
                         </Link>
-                        <Link href="/cursos" className="btn-primary text-sm px-5 py-2.5">
+                        <Link href="/reservar" className="btn-primary text-sm px-5 py-2.5">
                             {t('bookNow')}
                         </Link>
                     </div>
@@ -103,7 +103,7 @@ export default function Navbar() {
                             </Link>
                         </div>
                         <div className="px-4 pt-2">
-                            <Link href="/cursos" className="btn-primary w-full text-center text-sm py-3" onClick={() => setMobileOpen(false)}>
+                            <Link href="/reservar" className="btn-primary w-full text-center text-sm py-3" onClick={() => setMobileOpen(false)}>
                                 {t('bookNow')}
                             </Link>
                         </div>

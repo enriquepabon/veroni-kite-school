@@ -2,6 +2,8 @@
 
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { Link } from '@/i18n/routing';
 
 const cards = [
     {
@@ -12,6 +14,8 @@ const cards = [
             </svg>
         ),
         gradient: 'from-ocean-teal to-ocean-teal-600',
+        image: '/images/about/instructores.webp',
+        href: '/sobre-kitesurf' as const,
     },
     {
         key: 'card2',
@@ -22,6 +26,8 @@ const cards = [
             </svg>
         ),
         gradient: 'from-sand-gold to-sand-gold-600',
+        image: '/images/about/spot-salinas.webp',
+        href: '/ubicacion' as const,
     },
     {
         key: 'card3',
@@ -31,6 +37,8 @@ const cards = [
             </svg>
         ),
         gradient: 'from-deep-marine-500 to-ocean-teal',
+        image: null,
+        href: '/roadmap' as const,
     },
 ];
 
@@ -78,22 +86,48 @@ export default function ValueProposition() {
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.2 }}
                 >
-                    {cards.map(({ key, icon, gradient }) => (
+                    {cards.map(({ key, icon, gradient, image, href }) => (
                         <motion.div
                             key={key}
                             variants={cardVariants}
-                            className="group relative bg-white rounded-2xl p-8 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1"
+                            className="group relative bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1"
                         >
-                            {/* Icon */}
-                            <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${gradient} text-white flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
-                                {icon}
+                            {/* Card image */}
+                            {image && (
+                                <div className="relative h-44 w-full overflow-hidden">
+                                    <Image
+                                        src={image}
+                                        alt={t(`${key}Title`)}
+                                        fill
+                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                        sizes="(max-width: 768px) 100vw, 33vw"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                                </div>
+                            )}
+
+                            <div className="p-8">
+                                {/* Icon */}
+                                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${gradient} text-white flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
+                                    {icon}
+                                </div>
+                                <h3 className="text-xl font-heading font-bold text-night-tide mb-3">
+                                    {t(`${key}Title`)}
+                                </h3>
+                                <p className="text-deep-marine-600 leading-relaxed mb-4">
+                                    {t(`${key}Description`)}
+                                </p>
+                                {/* Micro-CTA */}
+                                <Link
+                                    href={href}
+                                    className="inline-flex items-center text-sm font-medium text-ocean-teal hover:text-ocean-teal-600 transition-colors group/link"
+                                >
+                                    {t(`${key}Cta`)}
+                                    <svg className="w-4 h-4 ml-1 group-hover/link:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                                    </svg>
+                                </Link>
                             </div>
-                            <h3 className="text-xl font-heading font-bold text-night-tide mb-3">
-                                {t(`${key}Title`)}
-                            </h3>
-                            <p className="text-deep-marine-600 leading-relaxed">
-                                {t(`${key}Description`)}
-                            </p>
                         </motion.div>
                     ))}
                 </motion.div>

@@ -46,7 +46,7 @@ export default function CTABanner() {
                     transition={{ duration: 0.5, delay: 0.3 }}
                 >
                     <Link
-                        href="/cursos"
+                        href="/reservar"
                         className="btn-primary text-lg px-10 py-5 shadow-glow-turquoise hover:scale-105 transition-transform"
                     >
                         {t('button')}

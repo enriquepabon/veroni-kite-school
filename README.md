@@ -1,111 +1,118 @@
-# Veroni Kite School
+# Veroni Kite Academy
 
-Landing page para Veroni Kite School, escuela de kitesurf certificada IKO ubicada en Salinas del Rey, Colombia.
+Full-stack kitesurf academy platform for **Veroni Kite** in Salinas del Rey, Colombia. Built with Next.js 15, Supabase, Wompi payments, and bilingual support (ES/EN).
 
-## Tecnologías
+## Tech Stack
 
-- **Framework:** Next.js 14 (App Router)
-- **Estilos:** Tailwind CSS
-- **Despliegue:** GitHub Pages (static export)
+| Layer | Technology |
+|-------|-----------|
+| **Framework** | Next.js 15 (App Router) |
+| **Auth & DB** | Supabase (Auth, Postgres, Storage) |
+| **Payments** | Wompi (Colombian gateway) |
+| **i18n** | next-intl (ES/EN) |
+| **Styling** | Tailwind CSS 4 |
+| **Animations** | Framer Motion |
+| **Weather** | Windy API |
+| **Deploy** | Vercel |
 
-## Desarrollo Local
-
-```bash
-# Instalar dependencias
-npm install
-
-# Iniciar servidor de desarrollo
-npm run dev
-```
-
-Abrir [http://localhost:3000](http://localhost:3000) en el navegador.
-
-## Scripts Disponibles
-
-| Comando | Descripción |
-|---------|-------------|
-| `npm run dev` | Inicia el servidor de desarrollo |
-| `npm run build` | Genera el build de producción (static export) |
-| `npm run start` | Inicia servidor de producción |
-| `npm run lint` | Ejecuta ESLint |
-| `npm run typecheck` | Verifica tipos con TypeScript |
-| `npm run test` | Ejecuta los tests |
-
-## Build de Producción
-
-El proyecto está configurado para static export (SSG). El build genera archivos estáticos en el directorio `out/`.
-
-```bash
-npm run build
-```
-
-## Despliegue en GitHub Pages
-
-### Método 1: GitHub Actions (Recomendado)
-
-El repositorio incluye un workflow de GitHub Actions (`.github/workflows/deploy.yml`) que despliega automáticamente al hacer push a `main`.
-
-**Pasos para configurar:**
-
-1. En el repositorio de GitHub, ir a **Settings > Pages**
-2. En **Source**, seleccionar **GitHub Actions**
-3. Hacer push a la rama `main`
-4. El workflow construirá y desplegará automáticamente
-
-### Método 2: Deploy Manual
-
-```bash
-# Generar build
-npm run build
-
-# El directorio out/ contiene los archivos estáticos
-# Copiar contenido de out/ a la rama gh-pages o configurar en Settings
-```
-
-### Configurar BasePath (si es necesario)
-
-Si el sitio se hospeda en una subruta (ej: `usuario.github.io/veroni-kite-school/`), descomentar y configurar `basePath` en `next.config.mjs`:
-
-```javascript
-const nextConfig = {
-  output: 'export',
-  basePath: '/veroni-kite-school', // Descomentar si es necesario
-  images: {
-    unoptimized: true,
-  },
-};
-```
-
-## Estructura del Proyecto
+## Project Structure
 
 ```
 src/
 ├── app/
-│   ├── globals.css      # Estilos globales y Tailwind
-│   ├── layout.tsx       # Layout raíz con SEO metadata
-│   └── page.tsx         # Página principal
+│   ├── [locale]/
+│   │   ├── (public)/           # Marketing pages (home, courses, location, about)
+│   │   ├── (auth)/             # Login, registration
+│   │   └── (dashboard)/
+│   │       ├── dashboard/      # Student dashboard
+│   │       ├── weather/        # Weather center + Windy map
+│   │       ├── resources/      # Video/blog/news library
+│   │       ├── profile/        # User profile
+│   │       ├── booking/        # Class booking + Wompi checkout
+│   │       ├── my-roadmap/     # Student progress tracker
+│   │       └── admin/          # Admin panel (calendar, students, content)
+│   └── api/
+│       ├── weather/            # Windy API proxy (15-min cache)
+│       ├── bookings/           # Booking management
+│       ├── progress/           # Student skill progress (role-protected)
+│       └── wompi/              # Payment webhook handler
 ├── components/
-│   ├── Header.tsx       # Navegación y logo
-│   ├── Hero.tsx         # Sección hero con CTA
-│   ├── Classes.tsx      # Precios y planes
-│   ├── AboutUs.tsx      # Sobre nosotros e IKO
-│   ├── Testimonials.tsx # Testimonios de clientes
-│   ├── FAQ.tsx          # Preguntas frecuentes
-│   └── Footer.tsx       # Pie de página y contacto
-└── __tests__/           # Tests unitarios
+│   ├── public/                 # Navbar, Footer, Hero, WhatsApp widget
+│   ├── dashboard/              # DashboardLayout sidebar/nav
+│   └── weather/                # WeatherWidget, WindForecastChart
+├── lib/
+│   ├── supabase/               # Supabase client (server + browser)
+│   ├── seo/                    # JSON-LD structured data
+│   └── weather/                # Windy API integration
+├── messages/                   # es.json, en.json translations
+├── i18n/                       # next-intl config + routing
+└── styles/                     # Global CSS
 ```
 
-## SEO
+## Getting Started
 
-El sitio está optimizado para SEO con:
+```bash
+# Install dependencies
+npm install
 
-- Meta tags completos (title, description, keywords)
-- Open Graph para redes sociales
-- Twitter Cards
-- JSON-LD structured data (LocalBusiness schema)
-- robots.txt y sitemap.xml
-- HTML semántico
+# Start dev server
+npm run dev
+```
 
-## Licencia
+Open [http://localhost:3000](http://localhost:3000)
 
-© 2026 Veroni Kite School. Todos los derechos reservados.
+## Environment Variables
+
+Create `.env.local` with:
+
+```env
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+
+# Wompi Payments
+NEXT_PUBLIC_WOMPI_PUBLIC_KEY=pub_test_...
+WOMPI_PRIVATE_KEY=prv_test_...
+WOMPI_EVENTS_SECRET=test_events_...
+NEXT_PUBLIC_WOMPI_ENV=sandbox   # or "production"
+
+# Windy API
+WINDY_API_KEY=your-windy-key
+
+# App
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
+## Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Development server |
+| `npm run build` | Production build |
+| `npm run start` | Production server |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | TypeScript check |
+
+## Key Features
+
+- **6-Level Kite Road Map** — Interactive progression tracker (Discovery → Pro)
+- **Weather Center** — Real-time wind data from Windy API + embedded wind map
+- **Class Booking** — Course selection → date → slot → Wompi checkout
+- **Student Dashboard** — Progress, bookings, weather, and resources
+- **Admin Panel** — Calendar slots, student progress editor, content CMS
+- **Bilingual** — Full Spanish/English with URL-based locale routing
+- **SEO** — JSON-LD (LocalBusiness + Course), dynamic sitemap, Open Graph
+
+## Deployment (Vercel)
+
+1. Connect GitHub repo to Vercel
+2. Set environment variables in Vercel dashboard
+3. Deploy — Next.js detected automatically
+4. For production Wompi:
+   - Change `NEXT_PUBLIC_WOMPI_ENV=production`
+   - Use production Wompi keys
+   - Update webhook URL to production domain
+
+## License
+
+© 2026 Veroni Kite Academy. All rights reserved.

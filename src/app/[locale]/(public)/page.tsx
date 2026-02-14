@@ -4,6 +4,7 @@ import ValueProposition from '@/components/public/ValueProposition';
 import CoursePreview from '@/components/public/CoursePreview';
 import TestimonialCarousel from '@/components/public/TestimonialCarousel';
 import CTABanner from '@/components/public/CTABanner';
+import LeadCaptureForm from '@/components/public/LeadCaptureForm';
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
     const t = await getTranslations({ locale, namespace: 'metadata' });
@@ -27,6 +28,7 @@ export default function HomePage() {
             <CoursePreview />
             <TestimonialCarousel />
             <CTABanner />
+            <LeadCaptureForm />
         </>
     );
 }

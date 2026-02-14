@@ -169,7 +169,7 @@ export default function CoursesPage() {
                                         <span className="text-sm text-caribbean-aqua ml-1">COP</span>
                                         <p className="text-xs text-caribbean-aqua">(~${course.priceUSD} USD)</p>
                                     </div>
-                                    <Link href="/cursos" className="btn-primary text-sm px-5 py-2.5">
+                                    <Link href={`/reservar?curso=${course.slug}`} className="btn-primary text-sm px-5 py-2.5">
                                         {t('bookThis')}
                                     </Link>
                                 </div>
