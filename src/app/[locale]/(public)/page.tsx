@@ -2,6 +2,8 @@ import { getTranslations } from 'next-intl/server';
 import Hero from '@/components/public/Hero';
 import ValueProposition from '@/components/public/ValueProposition';
 import CoursePreview from '@/components/public/CoursePreview';
+import OurHistory from '@/components/public/OurHistory';
+import InstructorTeam from '@/components/public/InstructorTeam';
 import TestimonialCarousel from '@/components/public/TestimonialCarousel';
 import CTABanner from '@/components/public/CTABanner';
 import LeadCaptureForm from '@/components/public/LeadCaptureForm';
@@ -26,6 +28,8 @@ export default function HomePage() {
             <Hero />
             <ValueProposition />
             <CoursePreview />
+            <OurHistory />
+            <InstructorTeam />
             <TestimonialCarousel />
             <CTABanner />
             <LeadCaptureForm />

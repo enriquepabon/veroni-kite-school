@@ -88,6 +88,12 @@ const config: Config = {
           800: '#0B0B13',
           900: '#050509',
         },
+        // Dashboard dark mode surface layers
+        'surface': {
+          dark: '#0f1923',
+          card: '#162736',
+          elevated: '#1d3444',
+        },
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
@@ -119,6 +125,8 @@ const config: Config = {
         'card': '0 4px 24px rgba(26, 26, 46, 0.08)', // Night Tide
         'card-hover': '0 8px 40px rgba(26, 26, 46, 0.16)',
         'glass': '0 8px 32px rgba(38, 70, 83, 0.12)', // Deep Marine
+        'card-dark': '0 4px 24px rgba(0, 0, 0, 0.3)',
+        'card-dark-hover': '0 8px 40px rgba(42, 157, 143, 0.15)',
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out forwards',

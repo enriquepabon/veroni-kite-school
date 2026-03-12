@@ -91,6 +91,45 @@
 }
 
 @layer components {
+  /* Dark dashboard card */
+  .dark-card {
+    background: rgba(22, 39, 54, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    @apply rounded-2xl shadow-card-dark;
+  }
+
+  .dark-card-hover {
+    @apply hover:border-ocean-teal/10 transition-all duration-200;
+  }
+
+  .dark-card-hover:hover {
+    background: rgba(29, 52, 68, 0.8);
+    box-shadow: 0 8px 40px rgba(42, 157, 143, 0.15);
+  }
+
+  /* Dark form inputs */
+  .dark-input {
+    @apply bg-surface-card border border-white/10 text-salt-white rounded-xl px-4 py-3
+           placeholder:text-caribbean-aqua/40
+           focus:ring-2 focus:ring-ocean-teal/50 focus:border-ocean-teal/30
+           transition-all duration-200 outline-none;
+  }
+
+  /* Dark scrollbar override */
+  .dashboard-dark ::-webkit-scrollbar-track {
+    background: #0f1923;
+  }
+
+  .dashboard-dark ::-webkit-scrollbar-thumb {
+    background: #264653;
+  }
+
+  .dashboard-dark ::-webkit-scrollbar-thumb:hover {
+    background: #2A9D8F;
+  }
+
   /* Glass card effect */
   .glass-card {
     background: var(--glass-bg);
