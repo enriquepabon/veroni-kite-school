@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useLocale } from 'next-intl';
 import { motion } from 'framer-motion';
+import { MagicCard } from '@/components/ui/magic-card';
 
 type ResourceType = 'all' | 'video' | 'blog' | 'news';
 
@@ -70,9 +71,9 @@ const mockResources: Resource[] = [
 ];
 
 const typeConfig = {
-    video: { icon: '🎬', labelEs: 'Videos', labelEn: 'Videos', color: 'bg-red-100 text-red-700' },
-    blog: { icon: '📝', labelEs: 'Blog', labelEn: 'Blog', color: 'bg-blue-100 text-blue-700' },
-    news: { icon: '📰', labelEs: 'Noticias', labelEn: 'News', color: 'bg-green-100 text-green-700' },
+    video: { icon: '🎬', labelEs: 'Videos', labelEn: 'Videos', color: 'bg-red-500/20 text-red-400' },
+    blog: { icon: '📝', labelEs: 'Blog', labelEn: 'Blog', color: 'bg-blue-500/20 text-blue-400' },
+    news: { icon: '📰', labelEs: 'Noticias', labelEn: 'News', color: 'bg-green-500/20 text-green-400' },
 };
 
 export default function ResourcesPage() {
@@ -85,17 +86,17 @@ export default function ResourcesPage() {
         : mockResources.filter((r) => r.type === filter);
 
     return (
-        <div className="p-4 md:p-8">
+        <>
             {/* Header */}
             <motion.div
                 className="mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
             >
-                <h1 className="text-2xl md:text-3xl font-heading font-bold text-night-tide">
+                <h1 className="text-2xl md:text-3xl font-heading font-bold text-salt-white">
                     {isEn ? 'Learning Resources' : 'Recursos de Aprendizaje'}
                 </h1>
-                <p className="text-deep-marine-600 mt-1">
+                <p className="text-caribbean-aqua/60 mt-1">
                     {isEn
                         ? 'Videos, articles, and guides to accelerate your progression'
                         : 'Videos, artículos y guías para acelerar tu progresión'}
@@ -109,8 +110,8 @@ export default function ResourcesPage() {
                         key={type}
                         onClick={() => setFilter(type)}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap ${filter === type
-                                ? 'bg-deep-marine-500 text-white shadow-md'
-                                : 'bg-white text-deep-marine-500 border border-salt-white hover:bg-salt-white'
+                                ? 'bg-ocean-teal text-white shadow-glow-ocean-teal/30'
+                                : 'bg-surface-card text-caribbean-aqua/60 border border-white/5 hover:text-salt-white hover:bg-surface-elevated'
                             }`}
                     >
                         {type === 'all'
@@ -125,37 +126,38 @@ export default function ResourcesPage() {
                 {filtered.map((resource, idx) => (
                     <motion.article
                         key={resource.id}
-                        className="bg-white rounded-2xl shadow-card overflow-hidden hover:shadow-card-hover transition-shadow group cursor-pointer"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3, delay: idx * 0.05 }}
                     >
-                        {/* Thumbnail area */}
-                        <div className="h-36 bg-gradient-to-br from-deep-marine-100 to-ocean-teal-100 flex items-center justify-center">
-                            <span className="text-5xl group-hover:scale-110 transition-transform duration-300">
-                                {resource.thumbnail}
-                            </span>
-                        </div>
-
-                        <div className="p-4">
-                            <div className="flex items-center gap-2 mb-2">
-                                <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${typeConfig[resource.type].color}`}>
-                                    {isEn ? typeConfig[resource.type].labelEn : typeConfig[resource.type].labelEs}
-                                </span>
-                                <span className="text-xs text-caribbean-aqua">
-                                    {new Date(resource.date).toLocaleDateString(locale)}
+                        <MagicCard className="dark-card dark-card-hover overflow-hidden cursor-pointer group">
+                            {/* Thumbnail area */}
+                            <div className="h-36 bg-gradient-to-br from-deep-marine-700/50 to-ocean-teal-900/50 flex items-center justify-center">
+                                <span className="text-5xl group-hover:scale-110 transition-transform duration-300">
+                                    {resource.thumbnail}
                                 </span>
                             </div>
-                            <h3 className="font-heading font-bold text-night-tide text-sm mb-1 line-clamp-2">
-                                {isEn ? resource.title_en : resource.title_es}
-                            </h3>
-                            <p className="text-xs text-deep-marine-500 line-clamp-2">
-                                {isEn ? resource.description_en : resource.description_es}
-                            </p>
-                        </div>
+
+                            <div className="p-4">
+                                <div className="flex items-center gap-2 mb-2">
+                                    <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${typeConfig[resource.type].color}`}>
+                                        {isEn ? typeConfig[resource.type].labelEn : typeConfig[resource.type].labelEs}
+                                    </span>
+                                    <span className="text-xs text-caribbean-aqua/40">
+                                        {new Date(resource.date).toLocaleDateString(locale)}
+                                    </span>
+                                </div>
+                                <h3 className="font-heading font-bold text-salt-white text-sm mb-1 line-clamp-2">
+                                    {isEn ? resource.title_en : resource.title_es}
+                                </h3>
+                                <p className="text-xs text-caribbean-aqua/50 line-clamp-2">
+                                    {isEn ? resource.description_en : resource.description_es}
+                                </p>
+                            </div>
+                        </MagicCard>
                     </motion.article>
                 ))}
             </div>
-        </div>
+        </>
     );
 }

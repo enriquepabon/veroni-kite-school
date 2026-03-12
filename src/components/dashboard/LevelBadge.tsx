@@ -91,10 +91,10 @@ export default function LevelBadge({ levelNumber, celebrate = false }: LevelBadg
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: celebrate ? 0.5 : 0, duration: 0.3 }}
             >
-                <p className="text-xs font-bold text-deep-marine-500 uppercase tracking-wider">
+                <p className="text-xs font-bold text-ocean-teal uppercase tracking-wider">
                     {isEn ? 'Level' : 'Nivel'} {level.level}
                 </p>
-                <p className="text-sm font-heading font-bold text-night-tide mt-0.5">
+                <p className="text-sm font-heading font-bold text-salt-white mt-0.5">
                     {name}
                 </p>
             </motion.div>
@@ -110,8 +110,8 @@ export function BadgeGrid({ completedLevels }: { completedLevels: number[] }) {
     const isEn = locale === 'en';
 
     return (
-        <div className="bg-white rounded-2xl p-6 shadow-card">
-            <h3 className="font-heading font-bold text-night-tide text-lg mb-4">
+        <div className="dark-card p-6">
+            <h3 className="font-heading font-bold text-salt-white text-lg mb-4">
                 {isEn ? 'My Badges' : 'Mis Insignias'} ({completedLevels.length}/6)
             </h3>
             <div className="flex flex-wrap gap-6 justify-center md:justify-start">

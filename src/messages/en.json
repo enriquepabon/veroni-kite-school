@@ -191,7 +191,19 @@
         "noAccount": "Don't have an account?",
         "hasAccount": "Already have an account?",
         "forgotPassword": "Forgot your password?",
-        "checkEmail": "Check your email to confirm your account."
+        "checkEmail": "Check your email to confirm your account.",
+        "loginSubtitle": "Access your account to continue your progress.",
+        "registerSubtitle": "Create your account and start your kitesurfing adventure.",
+        "passwordMismatch": "Passwords do not match",
+        "emailPlaceholder": "email@example.com",
+        "passwordPlaceholder": "Your password",
+        "namePlaceholder": "Your full name",
+        "trustIKO": "IKO Certified",
+        "trustLevels": "6 Levels",
+        "trustStudents": "500+ Students",
+        "heroTagline": "Your kitesurfing adventure starts here. Salinas del Rey, Colombia.",
+        "confirmationSent": "We sent a confirmation link to",
+        "checkEmailTitle": "Check your email"
     },
     "dashboard": {
         "welcome": "Welcome",
@@ -205,7 +217,15 @@
         "weather": "Weather Center",
         "resources": "Resources",
         "profile": "Profile",
-        "noBookings": "You have no upcoming bookings"
+        "noBookings": "You have no upcoming bookings",
+        "recentActivity": "Recent Activity",
+        "myBadges": "My Badges",
+        "goodMorning": "Good morning",
+        "goodAfternoon": "Good afternoon",
+        "goodEvening": "Good evening",
+        "complete": "complete",
+        "knots": "knots",
+        "dashboardSubtitle": "Here's your kitesurfing dashboard"
     },
     "booking": {
         "title": "Book a Class",

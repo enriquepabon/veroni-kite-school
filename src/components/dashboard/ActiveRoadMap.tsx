@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import { roadmapLevels } from '@/lib/roadmap-data';
+import { BorderBeam } from '@/components/ui/border-beam';
 
 type SkillStatus = 'completed' | 'in_progress' | 'locked';
 
@@ -15,17 +16,10 @@ interface SkillProgress {
 }
 
 interface ActiveRoadMapProps {
-    /** Student progress keyed by skill_id */
     progress?: Record<string, SkillProgress>;
-    /** Current student level (1-6) */
     currentLevel?: number;
 }
 
-/**
- * ActiveRoadMap — Student dashboard view of their kitesurf progression.
- * Skills are read-only (only instructors can mark completions).
- * Shows ✅ Completed, 🔄 In Progress, 🔒 Locked states.
- */
 export default function ActiveRoadMap({ progress = {}, currentLevel = 1 }: ActiveRoadMapProps) {
     const locale = useLocale();
     const t = useTranslations('roadmap');
@@ -50,18 +44,18 @@ export default function ActiveRoadMap({ progress = {}, currentLevel = 1 }: Activ
     const statusConfig: Record<SkillStatus, { badge: string; badgeClass: string; bgClass: string }> = {
         completed: {
             badge: t('completed'),
-            badgeClass: 'bg-green-100 text-green-700',
-            bgClass: 'bg-green-50 border-green-200',
+            badgeClass: 'bg-green-500/20 text-green-400',
+            bgClass: 'bg-green-500/5 border-green-500/20',
         },
         in_progress: {
             badge: t('inProgress'),
-            badgeClass: 'bg-deep-marine-100 text-deep-marine-700',
-            bgClass: 'bg-deep-marine-50 border-deep-marine-200',
+            badgeClass: 'bg-ocean-teal/20 text-ocean-teal',
+            bgClass: 'bg-ocean-teal/5 border-ocean-teal/20',
         },
         locked: {
             badge: t('locked'),
-            badgeClass: 'bg-gray-100 text-gray-400',
-            bgClass: 'bg-gray-50 border-gray-200 opacity-60',
+            badgeClass: 'bg-white/5 text-caribbean-aqua/40',
+            bgClass: 'bg-white/[0.02] border-white/5 opacity-60',
         },
     };
 
@@ -76,27 +70,38 @@ export default function ActiveRoadMap({ progress = {}, currentLevel = 1 }: Activ
                 const totalSkills = level.skills.length;
                 const progressPct = Math.round((completedSkills / totalSkills) * 100);
                 const name = isEn ? level.name_en : level.name_es;
+                const isCurrentLevel = levelStatus === 'in_progress';
 
                 return (
                     <motion.div
                         key={level.id}
-                        className="rounded-2xl border border-salt-white bg-white shadow-card overflow-hidden"
+                        className="rounded-2xl border border-white/5 bg-surface-card/80 backdrop-blur-sm overflow-hidden relative"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3 }}
                     >
+                        {isCurrentLevel && <BorderBeam duration={8} colorFrom="#2A9D8F" colorTo="#E9C46A" />}
+
                         {/* Level header */}
                         <button
                             onClick={() => setExpandedLevel(isExpanded ? null : level.id)}
-                            className="w-full flex items-center gap-4 p-4 md:p-5 text-left hover:bg-salt-white transition-colors duration-200"
+                            className="w-full flex items-center gap-4 p-4 md:p-5 text-left hover:bg-white/[0.03] transition-colors duration-200"
                         >
-                            {/* Icon circle */}
                             <div
-                                className={`w-12 h-12 rounded-xl flex items-center justify-center text-xl flex-shrink-0 shadow-sm ${levelStatus === 'locked' ? 'grayscale opacity-50' : ''
-                                    }`}
+                                className={`w-12 h-12 rounded-xl flex items-center justify-center text-xl flex-shrink-0 ${levelStatus === 'locked' ? 'grayscale opacity-50' : ''}`}
                                 style={{ backgroundColor: level.color + '22' }}
                             >
-                                {levelStatus === 'completed' ? '✅' : levelStatus === 'in_progress' ? level.icon : '🔒'}
+                                {levelStatus === 'completed' ? (
+                                    <svg className="w-6 h-6 text-green-400" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                    </svg>
+                                ) : levelStatus === 'in_progress' ? (
+                                    <span className="text-xl">{level.icon}</span>
+                                ) : (
+                                    <svg className="w-6 h-6 text-caribbean-aqua/40" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                                    </svg>
+                                )}
                             </div>
 
                             <div className="flex-1 min-w-0">
@@ -105,29 +110,30 @@ export default function ActiveRoadMap({ progress = {}, currentLevel = 1 }: Activ
                                         {statusConfig[levelStatus].badge}
                                     </span>
                                 </div>
-                                <h3 className="font-heading font-bold text-night-tide truncate">
+                                <h3 className="font-heading font-bold text-salt-white truncate">
                                     {level.icon} {name}
                                 </h3>
-                                {/* Progress bar */}
                                 <div className="mt-2 flex items-center gap-2">
-                                    <div className="flex-1 h-1.5 bg-salt-white rounded-full overflow-hidden">
+                                    <div className="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
                                         <motion.div
                                             className="h-full rounded-full"
-                                            style={{ backgroundColor: level.color }}
+                                            style={{
+                                                backgroundColor: level.color,
+                                                boxShadow: isCurrentLevel ? `0 0 8px ${level.color}60` : 'none',
+                                            }}
                                             initial={{ width: 0 }}
                                             animate={{ width: `${progressPct}%` }}
                                             transition={{ duration: 0.6, delay: 0.2 }}
                                         />
                                     </div>
-                                    <span className="text-xs text-deep-marine-500 font-medium tabular-nums">
+                                    <span className="text-xs text-caribbean-aqua/60 font-medium tabular-nums">
                                         {completedSkills}/{totalSkills}
                                     </span>
                                 </div>
                             </div>
 
-                            {/* Chevron */}
                             <motion.svg
-                                className="w-5 h-5 text-caribbean-aqua flex-shrink-0"
+                                className="w-5 h-5 text-caribbean-aqua/40 flex-shrink-0"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
                                 animate={{ rotate: isExpanded ? 180 : 0 }}
@@ -147,7 +153,7 @@ export default function ActiveRoadMap({ progress = {}, currentLevel = 1 }: Activ
                                     transition={{ duration: 0.3 }}
                                     className="overflow-hidden"
                                 >
-                                    <div className="px-4 md:px-5 pb-4 md:pb-5 space-y-2 border-t border-salt-white pt-3">
+                                    <div className="px-4 md:px-5 pb-4 md:pb-5 space-y-2 border-t border-white/5 pt-3">
                                         {level.skills.map((skill) => {
                                             const status = getSkillStatus(skill.id);
                                             const skillProgress = progress[skill.id];
@@ -159,19 +165,30 @@ export default function ActiveRoadMap({ progress = {}, currentLevel = 1 }: Activ
                                                     key={skill.id}
                                                     className={`flex items-start gap-3 p-3 rounded-xl border ${config.bgClass} transition-opacity duration-300`}
                                                 >
-                                                    {/* Status icon */}
-                                                    <span className="text-lg mt-0.5 flex-shrink-0">
-                                                        {status === 'completed' && '✅'}
-                                                        {status === 'in_progress' && '🔄'}
-                                                        {status === 'locked' && '🔒'}
+                                                    <span className="mt-0.5 flex-shrink-0">
+                                                        {status === 'completed' && (
+                                                            <svg className="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                                            </svg>
+                                                        )}
+                                                        {status === 'in_progress' && (
+                                                            <svg className="w-5 h-5 text-ocean-teal animate-spin" style={{ animationDuration: '3s' }} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182M21.015 4.356v4.992" />
+                                                            </svg>
+                                                        )}
+                                                        {status === 'locked' && (
+                                                            <svg className="w-5 h-5 text-caribbean-aqua/30" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                                                            </svg>
+                                                        )}
                                                     </span>
 
                                                     <div className="flex-1 min-w-0">
-                                                        <p className="font-medium text-sm text-night-tide">
+                                                        <p className="font-medium text-sm text-salt-white">
                                                             {skillName}
                                                         </p>
                                                         {status === 'completed' && skillProgress?.completed_at && (
-                                                            <p className="text-xs text-green-600 mt-0.5">
+                                                            <p className="text-xs text-green-400/70 mt-0.5">
                                                                 {t('completedOn')} {new Date(skillProgress.completed_at).toLocaleDateString(locale)}
                                                                 {skillProgress.validated_by_name && (
                                                                     <> · {t('validatedBy')} {skillProgress.validated_by_name}</>

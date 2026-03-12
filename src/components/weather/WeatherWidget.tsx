@@ -2,17 +2,17 @@
 
 import { useTranslations, useLocale } from 'next-intl';
 import { motion } from 'framer-motion';
+import { NumberTicker } from '@/components/ui/number-ticker';
 
 interface WindData {
-    speed: number; // knots
+    speed: number;
     gusts: number;
-    direction: number; // degrees
+    direction: number;
     directionLabel: string;
-    temperature: number; // °C
+    temperature: number;
     condition: 'optimal' | 'moderate' | 'notRecommended';
 }
 
-// Mock data — will come from Windy API via /api/weather proxy
 const mockWindData: WindData = {
     speed: 18,
     gusts: 24,
@@ -25,11 +25,11 @@ const mockWindData: WindData = {
 function getConditionConfig(condition: WindData['condition'], isEn: boolean) {
     switch (condition) {
         case 'optimal':
-            return { bg: 'bg-green-50', border: 'border-green-200', dot: 'bg-green-500', label: isEn ? 'Optimal for Kite' : 'Óptimo para Kite', emoji: '🟢' };
+            return { bg: 'bg-green-500/10', border: 'border-green-500/20', dot: 'bg-green-400', label: isEn ? 'Optimal for Kite' : 'Óptimo para Kite' };
         case 'moderate':
-            return { bg: 'bg-yellow-50', border: 'border-yellow-200', dot: 'bg-yellow-500', label: isEn ? 'Moderate' : 'Moderado', emoji: '🟡' };
+            return { bg: 'bg-yellow-500/10', border: 'border-yellow-500/20', dot: 'bg-yellow-400', label: isEn ? 'Moderate' : 'Moderado' };
         case 'notRecommended':
-            return { bg: 'bg-red-50', border: 'border-red-200', dot: 'bg-red-500', label: isEn ? 'Not Recommended' : 'No Recomendado', emoji: '🔴' };
+            return { bg: 'bg-red-500/10', border: 'border-red-500/20', dot: 'bg-red-400', label: isEn ? 'Not Recommended' : 'No Recomendado' };
     }
 }
 
@@ -42,48 +42,44 @@ export default function WeatherWidget() {
 
     return (
         <motion.div
-            className="bg-white rounded-2xl shadow-card p-6"
+            className="dark-card p-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
         >
-            <h3 className="font-heading font-bold text-night-tide text-lg mb-4">
+            <h3 className="font-heading font-bold text-salt-white text-lg mb-4">
                 {t('currentConditions')}
             </h3>
 
             {/* Condition banner */}
             <div className={`${config.bg} ${config.border} border rounded-xl p-3 mb-5 flex items-center gap-3`}>
-                <span className="text-xl">{config.emoji}</span>
-                <span className="font-medium text-sm">{config.label}</span>
+                <span className={`w-3 h-3 rounded-full ${config.dot} animate-pulse`} />
+                <span className="font-medium text-sm text-salt-white">{config.label}</span>
             </div>
 
             {/* Stats grid */}
             <div className="grid grid-cols-2 gap-4">
-                {/* Wind speed */}
-                <div className="text-center p-4 rounded-xl bg-deep-marine-50">
-                    <p className="text-xs text-deep-marine-500 uppercase font-bold tracking-wider mb-1">
+                <div className="text-center p-4 rounded-xl bg-white/[0.03] border border-white/5">
+                    <p className="text-xs text-ocean-teal uppercase font-bold tracking-wider mb-1">
                         {t('windSpeed')}
                     </p>
-                    <p className="text-3xl font-bold text-night-tide">{data.speed}</p>
-                    <p className="text-xs text-caribbean-aqua">{isEn ? 'knots' : 'nudos'}</p>
+                    <NumberTicker value={data.speed} className="text-3xl font-bold text-salt-white" />
+                    <p className="text-xs text-caribbean-aqua/40">{isEn ? 'knots' : 'nudos'}</p>
                 </div>
 
-                {/* Gusts */}
-                <div className="text-center p-4 rounded-xl bg-sand-gold-50">
-                    <p className="text-xs text-deep-marine-500 uppercase font-bold tracking-wider mb-1">
+                <div className="text-center p-4 rounded-xl bg-white/[0.03] border border-white/5">
+                    <p className="text-xs text-sand-gold uppercase font-bold tracking-wider mb-1">
                         {t('gusts')}
                     </p>
-                    <p className="text-3xl font-bold text-night-tide">{data.gusts}</p>
-                    <p className="text-xs text-caribbean-aqua">{isEn ? 'knots' : 'nudos'}</p>
+                    <NumberTicker value={data.gusts} className="text-3xl font-bold text-salt-white" />
+                    <p className="text-xs text-caribbean-aqua/40">{isEn ? 'knots' : 'nudos'}</p>
                 </div>
 
-                {/* Direction */}
-                <div className="text-center p-4 rounded-xl bg-ocean-teal-50">
-                    <p className="text-xs text-deep-marine-500 uppercase font-bold tracking-wider mb-1">
+                <div className="text-center p-4 rounded-xl bg-white/[0.03] border border-white/5">
+                    <p className="text-xs text-ocean-teal uppercase font-bold tracking-wider mb-1">
                         {t('direction')}
                     </p>
                     <div className="flex items-center justify-center gap-2">
-                        {/* Compass arrow */}
                         <svg
                             className="w-8 h-8 text-ocean-teal"
                             style={{ transform: `rotate(${data.direction}deg)` }}
@@ -93,17 +89,17 @@ export default function WeatherWidget() {
                             <path d="M12 2l3 9h-6l3-9z" />
                             <path d="M12 22l-3-9h6l-3 9z" opacity={0.3} />
                         </svg>
-                        <span className="text-lg font-bold text-night-tide">{data.directionLabel}</span>
+                        <span className="text-lg font-bold text-salt-white">{data.directionLabel}</span>
                     </div>
                 </div>
 
-                {/* Temperature */}
-                <div className="text-center p-4 rounded-xl bg-yellow-50">
-                    <p className="text-xs text-deep-marine-500 uppercase font-bold tracking-wider mb-1">
+                <div className="text-center p-4 rounded-xl bg-white/[0.03] border border-white/5">
+                    <p className="text-xs text-sand-gold uppercase font-bold tracking-wider mb-1">
                         {t('temperature')}
                     </p>
-                    <p className="text-3xl font-bold text-night-tide">{data.temperature}°</p>
-                    <p className="text-xs text-caribbean-aqua">°C</p>
+                    <NumberTicker value={data.temperature} className="text-3xl font-bold text-salt-white" />
+                    <span className="text-3xl font-bold text-salt-white">°</span>
+                    <p className="text-xs text-caribbean-aqua/40">°C</p>
                 </div>
             </div>
         </motion.div>

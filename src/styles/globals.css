@@ -203,3 +203,9 @@
     text-wrap: balance;
   }
 }
+
+/* Shine border animation */
+@keyframes shine-border-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

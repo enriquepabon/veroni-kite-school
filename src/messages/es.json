@@ -191,7 +191,19 @@
         "noAccount": "¿No tienes cuenta?",
         "hasAccount": "¿Ya tienes cuenta?",
         "forgotPassword": "¿Olvidaste tu contraseña?",
-        "checkEmail": "Revisa tu correo electrónico para confirmar tu cuenta."
+        "checkEmail": "Revisa tu correo electrónico para confirmar tu cuenta.",
+        "loginSubtitle": "Accede a tu cuenta para continuar tu progreso.",
+        "registerSubtitle": "Crea tu cuenta y comienza tu aventura en el kitesurf.",
+        "passwordMismatch": "Las contraseñas no coinciden",
+        "emailPlaceholder": "correo@ejemplo.com",
+        "passwordPlaceholder": "Tu contraseña",
+        "namePlaceholder": "Tu nombre completo",
+        "trustIKO": "Certificados IKO",
+        "trustLevels": "6 Niveles",
+        "trustStudents": "500+ Alumnos",
+        "heroTagline": "Tu aventura en el kitesurf comienza aquí. Salinas del Rey, Colombia.",
+        "confirmationSent": "Enviamos un enlace de confirmación a",
+        "checkEmailTitle": "Revisa tu correo"
     },
     "dashboard": {
         "welcome": "Bienvenido",
@@ -205,7 +217,15 @@
         "weather": "Centro Meteorológico",
         "resources": "Recursos",
         "profile": "Perfil",
-        "noBookings": "No tienes reservas próximas"
+        "noBookings": "No tienes reservas próximas",
+        "recentActivity": "Actividad Reciente",
+        "myBadges": "Mis Insignias",
+        "goodMorning": "Buenos días",
+        "goodAfternoon": "Buenas tardes",
+        "goodEvening": "Buenas noches",
+        "complete": "completado",
+        "knots": "nudos",
+        "dashboardSubtitle": "Aquí está tu panel de kitesurf"
     },
     "booking": {
         "title": "Reservar una Clase",

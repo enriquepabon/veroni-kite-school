@@ -26,29 +26,27 @@ export default function MyRoadmapPage() {
     const t = useTranslations('roadmap');
 
     return (
-        <div className="min-h-screen bg-salt-white pt-24 pb-16">
-            <div className="container-main">
-                {/* Header */}
-                <motion.div
-                    className="mb-8"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                >
-                    <h1 className="text-3xl md:text-4xl font-heading font-bold text-night-tide mb-2">
-                        {t('title')}
-                    </h1>
-                    <p className="text-deep-marine-600">
-                        {t('subtitle')}
-                    </p>
-                </motion.div>
+        <>
+            {/* Header */}
+            <motion.div
+                className="mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+            >
+                <h1 className="text-2xl md:text-3xl font-heading font-bold text-salt-white mb-2">
+                    {t('title')}
+                </h1>
+                <p className="text-caribbean-aqua/60">
+                    {t('subtitle')}
+                </p>
+            </motion.div>
 
-                {/* Active Road Map */}
-                <ActiveRoadMap
-                    progress={mockProgress}
-                    currentLevel={2}
-                />
-            </div>
-        </div>
+            {/* Active Road Map */}
+            <ActiveRoadMap
+                progress={mockProgress}
+                currentLevel={2}
+            />
+        </>
     );
 }
