@@ -1,9 +1,16 @@
 'use client';
 
+import { useRef, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { motion } from 'framer-motion';
 import { Link } from '@/i18n/routing';
 import Image from 'next/image';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { TextReveal } from '@/components/ui/text-reveal';
+import { Reveal } from '@/components/ui/reveal';
+import { LineReveal } from '@/components/ui/line-reveal';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const previewCourses = [
     {
@@ -49,43 +56,90 @@ const highlightKeys: Record<string, string[]> = {
 
 export default function CoursePreview() {
     const t = useTranslations('courses');
+    const gridRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const el = gridRef.current;
+        if (!el) return;
+
+        const cards = el.querySelectorAll('.course-card');
+        const tweens: gsap.core.Tween[] = [];
+
+        cards.forEach((card, idx) => {
+            // Staggered card entrance
+            const tween = gsap.fromTo(card,
+                { opacity: 0, y: 60, rotateY: 5 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    rotateY: 0,
+                    duration: 0.8,
+                    delay: idx * 0.15,
+                    ease: 'power3.out',
+                    scrollTrigger: { trigger: el, start: 'top 75%' },
+                }
+            );
+            tweens.push(tween);
+
+            // Image reveal with clip-path
+            const img = card.querySelector('.course-img');
+            if (img) {
+                const imgTween = gsap.fromTo(img,
+                    { clipPath: 'inset(0 100% 0 0)' },
+                    {
+                        clipPath: 'inset(0 0% 0 0)',
+                        duration: 1.2,
+                        delay: idx * 0.15 + 0.2,
+                        ease: 'power3.inOut',
+                        scrollTrigger: { trigger: el, start: 'top 75%' },
+                    }
+                );
+                tweens.push(imgTween);
+            }
+        });
+
+        return () => {
+            tweens.forEach(t => { t.scrollTrigger?.kill(); t.kill(); });
+        };
+    }, []);
 
     return (
-        <section id="cursos" className="section-padding bg-white relative">
-            <div className="container-main">
-                <motion.div
-                    className="text-center mb-14"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <h2 className="text-3xl md:text-4xl lg:text-display-sm font-heading font-bold text-night-tide mb-4">
-                        {t('title')}
-                    </h2>
-                    <p className="text-lg text-deep-marine-600 max-w-xl mx-auto">
-                        {t('subtitle')}
-                    </p>
-                </motion.div>
+        <section id="cursos" className="section-padding bg-white relative overflow-hidden">
+            {/* Noise texture */}
+            <div className="noise-overlay" />
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            <div className="container-main relative">
+                <div className="text-center mb-14">
+                    <TextReveal
+                        as="h2"
+                        className="text-3xl md:text-4xl lg:text-display-sm font-heading font-bold text-night-tide mb-4"
+                    >
+                        {t('title')}
+                    </TextReveal>
+                    <Reveal delay={0.2}>
+                        <p className="text-lg text-deep-marine-600 max-w-xl mx-auto">
+                            {t('subtitle')}
+                        </p>
+                    </Reveal>
+                </div>
+
+                <LineReveal className="bg-deep-marine/10 mb-12" />
+
+                <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
                     {previewCourses.map((course, idx) => (
-                        <motion.div
+                        <div
                             key={course.id}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: idx * 0.1 }}
-                            className="group relative bg-salt-white rounded-[16px] overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 flex flex-col"
+                            className="course-card group relative bg-salt-white rounded-[16px] overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-500 hover:-translate-y-2 flex flex-col"
+                            style={{ opacity: 0 }}
                         >
                             {/* Course Image */}
-                            <div className="relative h-52 overflow-hidden">
+                            <div className="course-img relative h-52 overflow-hidden">
                                 <Image
                                     src={course.image}
                                     alt={t(`${course.level}Name`)}
                                     fill
                                     sizes="(max-width: 768px) 100vw, 33vw"
-                                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-deep-marine-900/50 to-transparent" />
                                 <div className="absolute top-4 left-4">
@@ -124,12 +178,7 @@ export default function CoursePreview() {
                                                 viewBox="0 0 24 24"
                                                 aria-hidden="true"
                                             >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth={2}
-                                                    d="M5 13l4 4L19 7"
-                                                />
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                             </svg>
                                             <span>{t(key)}</span>
                                         </li>
@@ -137,7 +186,7 @@ export default function CoursePreview() {
                                 </ul>
 
                                 {/* Price & CTA */}
-                                <div className="flex items-end justify-between mt-auto">
+                                <div className="flex items-end justify-between mt-auto pt-4 border-t border-deep-marine-100">
                                     <div>
                                         <span className="text-2xl font-heading font-bold text-night-tide">
                                             ${(course.price / 1000).toFixed(0)}K
@@ -146,13 +195,16 @@ export default function CoursePreview() {
                                     </div>
                                     <Link
                                         href={`/reservar?curso=${course.slug}`}
-                                        className="btn-primary text-sm px-4 py-2"
+                                        className="btn-primary text-sm px-4 py-2 hover:scale-105 transition-transform duration-300"
                                     >
                                         {t('bookThis')}
                                     </Link>
                                 </div>
                             </div>
-                        </motion.div>
+
+                            {/* Bottom accent line */}
+                            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-ocean-teal to-caribbean-aqua scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                        </div>
                     ))}
                 </div>
             </div>

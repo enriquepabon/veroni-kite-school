@@ -1,9 +1,11 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Link } from '@/i18n/routing';
+import { TextReveal } from '@/components/ui/text-reveal';
+import { LineReveal } from '@/components/ui/line-reveal';
+import { StaggerReveal } from '@/components/ui/stagger-reveal';
 
 const cards = [
     {
@@ -42,64 +44,46 @@ const cards = [
     },
 ];
 
-const containerVariants = {
-    hidden: {},
-    visible: {
-        transition: { staggerChildren: 0.15 },
-    },
-};
-
-const cardVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const },
-    },
-};
-
 export default function ValueProposition() {
     const t = useTranslations('valueProp');
 
     return (
         <section className="section-padding bg-salt-white relative overflow-hidden">
+            {/* Noise texture */}
+            <div className="noise-overlay" />
+
             {/* Subtle background decoration */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-ocean-teal/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
             <div className="container-main relative">
-                <motion.div
-                    className="text-center mb-14"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <h2 className="text-3xl md:text-4xl lg:text-display-sm font-heading font-bold text-night-tide mb-4">
+                <div className="text-center mb-14">
+                    <TextReveal
+                        as="h2"
+                        className="text-3xl md:text-4xl lg:text-display-sm font-heading font-bold text-night-tide mb-4"
+                    >
                         {t('title')}
-                    </h2>
-                </motion.div>
+                    </TextReveal>
+                </div>
 
-                <motion.div
+                <LineReveal className="bg-ocean-teal/20 mb-12" />
+
+                <StaggerReveal
                     className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8"
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.2 }}
+                    stagger={0.15}
                 >
                     {cards.map(({ key, icon, gradient, image, href }) => (
-                        <motion.div
+                        <div
                             key={key}
-                            variants={cardVariants}
-                            className="group relative bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1"
+                            className="group relative bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-500 hover:-translate-y-2"
                         >
-                            {/* Card image */}
+                            {/* Card image with clip-path reveal effect */}
                             {image && (
                                 <div className="relative h-44 w-full overflow-hidden">
                                     <Image
                                         src={image}
                                         alt={t(`${key}Title`)}
                                         fill
-                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                        className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                                         sizes="(max-width: 768px) 100vw, 33vw"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
@@ -107,30 +91,33 @@ export default function ValueProposition() {
                             )}
 
                             <div className="p-8">
-                                {/* Icon */}
-                                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${gradient} text-white flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
+                                {/* Icon with hover rotation */}
+                                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${gradient} text-white flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
                                     {icon}
                                 </div>
-                                <h3 className="text-xl font-heading font-bold text-night-tide mb-3">
+                                <h3 className="text-xl font-heading font-bold text-night-tide mb-3 group-hover:text-ocean-teal transition-colors duration-500">
                                     {t(`${key}Title`)}
                                 </h3>
                                 <p className="text-deep-marine-600 leading-relaxed mb-4">
                                     {t(`${key}Description`)}
                                 </p>
-                                {/* Micro-CTA */}
+                                {/* Micro-CTA with animated arrow */}
                                 <Link
                                     href={href}
                                     className="inline-flex items-center text-sm font-medium text-ocean-teal hover:text-ocean-teal-600 transition-colors group/link"
                                 >
                                     {t(`${key}Cta`)}
-                                    <svg className="w-4 h-4 ml-1 group-hover/link:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <svg className="w-4 h-4 ml-1 group-hover/link:translate-x-2 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                                     </svg>
                                 </Link>
                             </div>
-                        </motion.div>
+
+                            {/* Bottom accent line on hover */}
+                            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-ocean-teal to-sand-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                        </div>
                     ))}
-                </motion.div>
+                </StaggerReveal>
             </div>
         </section>
     );

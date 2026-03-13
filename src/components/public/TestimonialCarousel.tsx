@@ -1,15 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import { gsap } from 'gsap';
+import { TextReveal } from '@/components/ui/text-reveal';
+import { Reveal } from '@/components/ui/reveal';
 
 const testimonials = [
     {
         id: 1,
         name: 'María González',
-        country: '🇨🇴 Colombia',
+        country: 'Colombia',
+        flag: '🇨🇴',
         date: '2026-01',
         text: 'En solo 3 días ya estaba haciendo mi primer waterstart. Los instructores son increíbles y el spot es perfecto para aprender.',
         rating: 5,
@@ -20,7 +23,8 @@ const testimonials = [
     {
         id: 2,
         name: 'James Mitchell',
-        country: '🇺🇸 USA',
+        country: 'USA',
+        flag: '🇺🇸',
         date: '2025-12',
         text: 'Best kitesurf school I have been to. The wind conditions are perfect and the instructors really know how to teach.',
         rating: 5,
@@ -31,7 +35,8 @@ const testimonials = [
     {
         id: 3,
         name: 'Sophie Dupont',
-        country: '🇫🇷 France',
+        country: 'France',
+        flag: '🇫🇷',
         date: '2025-11',
         text: "L'expérience incroyable! Salinas del Rey est un spot magnifique et l'équipe de Veroni est très professionnelle.",
         rating: 5,
@@ -42,7 +47,8 @@ const testimonials = [
     {
         id: 4,
         name: 'Carlos Ruiz',
-        country: '🇲🇽 México',
+        country: 'México',
+        flag: '🇲🇽',
         date: '2025-10',
         text: 'El Road Map de progresión me ayudó mucho a entender en qué nivel estoy y qué me falta por aprender. ¡Muy recomendado!',
         rating: 5,
@@ -89,44 +95,72 @@ export default function TestimonialCarousel() {
     const t = useTranslations('testimonials');
     const locale = useLocale();
     const [current, setCurrent] = useState(0);
+    const cardRef = useRef<HTMLDivElement>(null);
 
-    const next = () => setCurrent((prev) => (prev + 1) % testimonials.length);
-    const prev = () => setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    const animateCard = useCallback((direction: number, callback: () => void) => {
+        const el = cardRef.current;
+        if (!el) { callback(); return; }
+
+        gsap.to(el, {
+            opacity: 0,
+            x: direction * -60,
+            scale: 0.95,
+            duration: 0.3,
+            ease: 'power2.in',
+            onComplete: () => {
+                callback();
+                gsap.set(el, { x: direction * 60, scale: 0.95 });
+                gsap.to(el, {
+                    opacity: 1,
+                    x: 0,
+                    scale: 1,
+                    duration: 0.5,
+                    ease: 'power3.out',
+                });
+            },
+        });
+    }, []);
+
+    const next = () => {
+        animateCard(1, () => setCurrent((prev) => (prev + 1) % testimonials.length));
+    };
+
+    const prev = () => {
+        animateCard(-1, () => setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length));
+    };
+
+    const goTo = (idx: number) => {
+        if (idx === current) return;
+        animateCard(idx > current ? 1 : -1, () => setCurrent(idx));
+    };
 
     return (
         <section className="section-padding bg-deep-marine-900 relative overflow-hidden">
-            {/* Background decoration */}
+            <div className="noise-overlay" />
             <div className="absolute top-0 left-0 w-72 h-72 bg-ocean-teal/5 rounded-full blur-3xl" />
             <div className="absolute bottom-0 right-0 w-96 h-96 bg-sand-gold/5 rounded-full blur-3xl" />
 
             <div className="container-main relative">
-                <motion.div
-                    className="text-center mb-14"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <h2 className="text-3xl md:text-4xl lg:text-display-sm font-heading font-bold text-white mb-4">
+                <div className="text-center mb-14">
+                    <TextReveal
+                        as="h2"
+                        className="text-3xl md:text-4xl lg:text-display-sm font-heading font-bold text-white mb-4"
+                    >
                         {t('title')}
-                    </h2>
-                    <p className="text-lg text-caribbean-aqua max-w-xl mx-auto">
-                        {t('subtitle')}
-                    </p>
-                </motion.div>
+                    </TextReveal>
+                    <Reveal delay={0.2}>
+                        <p className="text-lg text-caribbean-aqua max-w-xl mx-auto">
+                            {t('subtitle')}
+                        </p>
+                    </Reveal>
+                </div>
 
-                {/* Carousel */}
-                <div className="max-w-2xl mx-auto relative">
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={current}
-                            initial={{ opacity: 0, x: 50 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -50 }}
-                            transition={{ duration: 0.4 }}
+                <Reveal>
+                    <div className="max-w-2xl mx-auto relative">
+                        <div
+                            ref={cardRef}
                             className="glass-card p-8 md:p-10 text-center bg-white/5 border-white/10"
                         >
-                            {/* Stars */}
                             <div className="flex justify-center gap-1 mb-6">
                                 {Array.from({ length: testimonials[current].rating }).map((_, i) => (
                                     <svg key={i} className="w-5 h-5 text-sand-gold" fill="currentColor" viewBox="0 0 20 20">
@@ -135,12 +169,10 @@ export default function TestimonialCarousel() {
                                 ))}
                             </div>
 
-                            {/* Quote */}
                             <blockquote className="text-lg md:text-xl text-white leading-relaxed mb-6 font-light italic">
                                 &ldquo;{testimonials[current].text}&rdquo;
                             </blockquote>
 
-                            {/* Author with photo */}
                             <div className="flex flex-col items-center gap-3">
                                 <div className="relative w-16 h-16 rounded-full overflow-hidden ring-2 ring-ocean-teal/50">
                                     <Image
@@ -156,14 +188,13 @@ export default function TestimonialCarousel() {
                                         {testimonials[current].name}
                                     </p>
                                     <p className="text-caribbean-aqua text-sm mt-0.5">
-                                        {testimonials[current].country}
+                                        {testimonials[current].flag} {testimonials[current].country}
                                     </p>
                                     <p className="text-white/50 text-xs mt-1">
                                         {formatDate(testimonials[current].date, locale)}
                                     </p>
                                 </div>
 
-                                {/* Verified review link */}
                                 <a
                                     href={testimonials[current].reviewUrl}
                                     target="_blank"
@@ -180,61 +211,61 @@ export default function TestimonialCarousel() {
                                     </span>
                                 </a>
                             </div>
-                        </motion.div>
-                    </AnimatePresence>
-
-                    {/* Navigation */}
-                    <div className="flex justify-center items-center gap-4 mt-8">
-                        <button
-                            onClick={prev}
-                            className="w-10 h-10 rounded-full border border-white/20 text-white/70 hover:text-white hover:border-ocean-teal transition-all flex items-center justify-center"
-                            aria-label="Previous testimonial"
-                        >
-                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                            </svg>
-                        </button>
-
-                        {/* Dots */}
-                        <div className="flex gap-2">
-                            {testimonials.map((_, idx) => (
-                                <button
-                                    key={idx}
-                                    onClick={() => setCurrent(idx)}
-                                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${idx === current ? 'bg-ocean-teal w-8' : 'bg-white/30 hover:bg-white/50'
-                                        }`}
-                                    aria-label={`Go to testimonial ${idx + 1}`}
-                                />
-                            ))}
                         </div>
 
-                        <button
-                            onClick={next}
-                            className="w-10 h-10 rounded-full border border-white/20 text-white/70 hover:text-white hover:border-ocean-teal transition-all flex items-center justify-center"
-                            aria-label="Next testimonial"
-                        >
-                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
+                        <div className="flex justify-center items-center gap-4 mt-8">
+                            <button
+                                onClick={prev}
+                                className="w-10 h-10 rounded-full border border-white/20 text-white/70 hover:text-white hover:border-ocean-teal hover:bg-ocean-teal/10 transition-all duration-300 flex items-center justify-center"
+                                aria-label="Previous testimonial"
+                            >
+                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
 
-                {/* See all reviews link */}
-                <div className="text-center mt-10">
-                    <a
-                        href="https://g.page/veronikite/review"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-sm font-semibold text-caribbean-aqua hover:text-white transition-colors"
-                    >
-                        <GoogleIcon className="w-4 h-4" />
-                        {t('seeAllReviews')}
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                    </a>
-                </div>
+                            <div className="flex gap-2">
+                                {testimonials.map((_, idx) => (
+                                    <button
+                                        key={idx}
+                                        onClick={() => goTo(idx)}
+                                        className={`h-2.5 rounded-full transition-all duration-500 ${
+                                            idx === current ? 'bg-ocean-teal w-8' : 'bg-white/30 hover:bg-white/50 w-2.5'
+                                        }`}
+                                        aria-label={`Go to testimonial ${idx + 1}`}
+                                    />
+                                ))}
+                            </div>
+
+                            <button
+                                onClick={next}
+                                className="w-10 h-10 rounded-full border border-white/20 text-white/70 hover:text-white hover:border-ocean-teal hover:bg-ocean-teal/10 transition-all duration-300 flex items-center justify-center"
+                                aria-label="Next testimonial"
+                            >
+                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </Reveal>
+
+                <Reveal delay={0.3}>
+                    <div className="text-center mt-10">
+                        <a
+                            href="https://g.page/veronikite/review"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 text-sm font-semibold text-caribbean-aqua hover:text-white transition-colors duration-300"
+                        >
+                            <GoogleIcon className="w-4 h-4" />
+                            {t('seeAllReviews')}
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                        </a>
+                    </div>
+                </Reveal>
             </div>
         </section>
     );

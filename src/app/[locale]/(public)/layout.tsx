@@ -1,6 +1,7 @@
 import Navbar from '@/components/public/Navbar';
 import Footer from '@/components/public/Footer';
 import WhatsAppWidget from '@/components/public/WhatsAppWidget';
+import { SmoothScrollProvider } from '@/components/providers/smooth-scroll';
 import { getLocalBusinessSchema, getCourseSchema } from '@/lib/seo/structured-data';
 import { getLocale } from 'next-intl/server';
 
@@ -15,11 +16,13 @@ export default async function PublicLayout({
 
     return (
         <>
-            <Navbar />
-            <main className="min-h-screen">
-                {children}
-            </main>
-            <Footer />
+            <SmoothScrollProvider>
+                <Navbar />
+                <main className="min-h-screen">
+                    {children}
+                </main>
+                <Footer />
+            </SmoothScrollProvider>
             <WhatsAppWidget />
             <script
                 type="application/ld+json"

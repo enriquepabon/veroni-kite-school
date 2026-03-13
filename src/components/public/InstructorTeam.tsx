@@ -1,8 +1,15 @@
 'use client';
 
+import { useRef, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { TextReveal } from '@/components/ui/text-reveal';
+import { Reveal } from '@/components/ui/reveal';
+import { LineReveal } from '@/components/ui/line-reveal';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Instructor {
     id: string;
@@ -23,82 +30,87 @@ const instructors: Instructor[] = [
     { id: '5', imageKey: 'instructor-5', nameKey: 'name5', roleKey: 'role5', bioKey: 'bio5', yearsKey: 'years5', instagram: '#' },
 ];
 
-const containerVariants = {
-    hidden: {},
-    visible: {
-        transition: { staggerChildren: 0.12 },
-    },
-};
-
-const cardVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const },
-    },
-};
-
 export default function InstructorTeam() {
     const t = useTranslations('instructors');
+    const gridRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const el = gridRef.current;
+        if (!el) return;
+
+        const cards = el.querySelectorAll('.instructor-card');
+        const tweens: gsap.core.Tween[] = [];
+
+        cards.forEach((card, idx) => {
+            const tween = gsap.fromTo(card,
+                { opacity: 0, y: 50, scale: 0.95 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.7,
+                    delay: idx * 0.1,
+                    ease: 'power3.out',
+                    scrollTrigger: { trigger: el, start: 'top 75%' },
+                }
+            );
+            tweens.push(tween);
+        });
+
+        return () => {
+            tweens.forEach(t => { t.scrollTrigger?.kill(); t.kill(); });
+        };
+    }, []);
 
     return (
         <section id="instructores" className="section-padding bg-deep-marine relative overflow-hidden">
-            {/* Background decoration */}
+            <div className="noise-overlay" />
             <div className="absolute top-0 left-0 w-96 h-96 bg-ocean-teal/10 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2" />
             <div className="absolute bottom-0 right-0 w-72 h-72 bg-sand-gold/10 rounded-full blur-3xl translate-y-1/2 translate-x-1/2" />
 
             <div className="container-main relative">
-                {/* Section heading */}
-                <motion.div
-                    className="text-center mb-14"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <h2 className="text-3xl md:text-4xl lg:text-display-sm font-heading font-bold text-white mb-4">
+                <div className="text-center mb-14">
+                    <TextReveal
+                        as="h2"
+                        className="text-3xl md:text-4xl lg:text-display-sm font-heading font-bold text-white mb-4"
+                    >
                         {t('title')}
-                    </h2>
-                    <p className="text-lg text-caribbean-aqua max-w-2xl mx-auto">
-                        {t('subtitle')}
-                    </p>
-                </motion.div>
+                    </TextReveal>
+                    <Reveal delay={0.2}>
+                        <p className="text-lg text-caribbean-aqua max-w-2xl mx-auto">
+                            {t('subtitle')}
+                        </p>
+                    </Reveal>
+                </div>
 
-                {/* Instructor cards grid */}
-                <motion.div
+                <LineReveal className="bg-white/10 mb-12" />
+
+                <div
+                    ref={gridRef}
                     className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto"
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.1 }}
                 >
                     {instructors.map((instructor) => (
-                        <motion.div
+                        <div
                             key={instructor.id}
-                            variants={cardVariants}
-                            className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-ocean-teal/30 transition-all duration-300"
+                            className="instructor-card group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-ocean-teal/30 transition-all duration-500 hover:-translate-y-2"
+                            style={{ opacity: 0 }}
                         >
-                            {/* Photo */}
                             <div className="relative h-64 w-full overflow-hidden">
                                 <Image
                                     src={`/images/instructors/${instructor.imageKey}.webp`}
                                     alt={t(instructor.nameKey)}
                                     fill
-                                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                    className="object-cover group-hover:scale-110 transition-transform duration-700"
                                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-deep-marine/60 to-transparent" />
-
-                                {/* Years badge */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-deep-marine/80 via-deep-marine/20 to-transparent" />
                                 <div className="absolute top-3 right-3 bg-ocean-teal/90 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-full">
                                     {t(instructor.yearsKey)}
                                 </div>
                             </div>
 
-                            {/* Info */}
                             <div className="p-6">
-                                <h3 className="text-lg font-heading font-bold text-white">
+                                <h3 className="text-lg font-heading font-bold text-white group-hover:text-ocean-teal transition-colors duration-500">
                                     {t(instructor.nameKey)}
                                 </h3>
                                 <p className="text-ocean-teal text-sm font-semibold mt-1">
@@ -108,14 +120,13 @@ export default function InstructorTeam() {
                                     {t(instructor.bioKey)}
                                 </p>
 
-                                {/* Social links */}
                                 <div className="flex items-center gap-3 mt-4 pt-4 border-t border-white/10">
                                     {instructor.instagram && (
                                         <a
                                             href={instructor.instagram}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-white/50 hover:text-ocean-teal transition-colors duration-300"
+                                            className="text-white/50 hover:text-ocean-teal transition-all duration-300 hover:scale-110"
                                             aria-label={`Instagram de ${t(instructor.nameKey)}`}
                                         >
                                             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -128,7 +139,7 @@ export default function InstructorTeam() {
                                             href={instructor.socialUrl}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-white/50 hover:text-ocean-teal transition-colors duration-300"
+                                            className="text-white/50 hover:text-ocean-teal transition-all duration-300 hover:scale-110"
                                             aria-label={`Perfil de ${t(instructor.nameKey)}`}
                                         >
                                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -138,9 +149,11 @@ export default function InstructorTeam() {
                                     )}
                                 </div>
                             </div>
-                        </motion.div>
+
+                            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-ocean-teal to-sand-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                        </div>
                     ))}
-                </motion.div>
+                </div>
             </div>
         </section>
     );
