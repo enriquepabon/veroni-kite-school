@@ -11,10 +11,23 @@ export interface Profile {
     full_name: string;
     avatar_url: string | null;
     phone: string | null;
+    weight_kg: number | null;
+    language_preference: string;
     role: UserRole;
+    is_approved: boolean;
     current_level: number; // 1-6 roadmap level
     created_at: string;
     updated_at: string;
+}
+
+export interface InstructorAssignment {
+    id: string;
+    student_id: string;
+    instructor_id: string;
+    assigned_by: string | null;
+    assigned_at: string;
+    is_active: boolean;
+    instructor?: Profile;
 }
 
 // --- Courses ---

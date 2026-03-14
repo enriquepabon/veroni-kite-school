@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { MagicCard } from '@/components/ui/magic-card';
@@ -50,6 +51,24 @@ export default function DashboardPage() {
     const t = useTranslations('dashboard');
     const locale = useLocale();
     const isEn = locale === 'en';
+    const [userName, setUserName] = useState('');
+
+    useEffect(() => {
+        async function fetchName() {
+            try {
+                const res = await fetch('/api/profile');
+                if (res.ok) {
+                    const data = await res.json();
+                    const name = data.full_name || data.email?.split('@')[0] || '';
+                    // Get first name only for greeting
+                    setUserName(name.split(' ')[0]);
+                }
+            } catch {
+                // silently fail
+            }
+        }
+        fetchName();
+    }, []);
 
     const quickActions = [
         { href: `/${locale}/my-roadmap`, icon: quickActionIcons.roadmap, label: t('myRoadmap'), gradient: 'from-ocean-teal to-caribbean-aqua' },
@@ -74,7 +93,7 @@ export default function DashboardPage() {
                 animate={{ opacity: 1, y: 0 }}
             >
                 <h1 className="text-2xl md:text-3xl font-heading font-bold text-salt-white">
-                    {getGreeting(t)} <span className="text-ocean-teal">Student</span>
+                    {getGreeting(t)} {userName && <span className="text-ocean-teal">{userName}</span>}
                 </h1>
                 <p className="text-caribbean-aqua/60 mt-1">
                     {t('dashboardSubtitle')}

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
+import { syncBookingRequest } from '@/lib/google-sheets';
 
 export async function POST(request: NextRequest) {
     try {
@@ -41,6 +42,16 @@ export async function POST(request: NextRequest) {
                 { status: 500 }
             );
         }
+
+        // Sync to Google Sheets CRM (fire-and-forget, non-blocking)
+        syncBookingRequest({
+            name: name.trim(),
+            email: email.trim().toLowerCase(),
+            phone: phone.trim(),
+            course: course.trim(),
+            preferred_date: date || null,
+            message: message?.trim() || null,
+        });
 
         return NextResponse.json({ success: true });
     } catch (error) {

@@ -4,7 +4,16 @@ import { NextResponse } from 'next/server';
 export async function GET(request: Request) {
     const { searchParams, origin } = new URL(request.url);
     const code = searchParams.get('code');
-    const next = searchParams.get('next') ?? '/dashboard';
+    const error_description = searchParams.get('error_description');
+    const next = searchParams.get('next') ?? '/es/dashboard';
+
+    // Handle OAuth error returned by provider
+    if (error_description) {
+        console.error('OAuth error:', error_description);
+        return NextResponse.redirect(
+            `${origin}/es/login?error=auth&message=${encodeURIComponent(error_description)}`
+        );
+    }
 
     if (code) {
         const supabase = await createClient();
@@ -22,8 +31,10 @@ export async function GET(request: Request) {
                 return NextResponse.redirect(`${origin}${next}`);
             }
         }
+
+        console.error('Auth code exchange error:', error.message);
     }
 
     // Auth error — redirect to login with error
-    return NextResponse.redirect(`${origin}/login?error=auth`);
+    return NextResponse.redirect(`${origin}/es/login?error=auth`);
 }

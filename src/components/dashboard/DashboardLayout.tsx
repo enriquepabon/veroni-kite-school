@@ -8,6 +8,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 
+interface UserData {
+    email: string;
+    fullName: string;
+    avatarUrl: string | null;
+    role: string;
+    isApproved: boolean;
+}
+
 interface NavItem {
     href: string;
     labelKey: string;
@@ -75,14 +83,19 @@ const navItems: NavItem[] = [
 
 export default function DashboardLayout({
     children,
+    user,
 }: {
     children: React.ReactNode;
+    user: UserData;
 }) {
     const locale = useLocale();
     const t = useTranslations('dashboard');
     const pathname = usePathname();
     const router = useRouter();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+    const displayName = user.fullName || user.email.split('@')[0];
+    const avatarInitial = displayName.charAt(0).toUpperCase();
 
     function isActive(href: string) {
         const localizedHref = `/${locale}${href}`;
@@ -136,12 +149,20 @@ export default function DashboardLayout({
                 {/* User info + sign out */}
                 <div className="p-4 border-t border-white/5">
                     <div className="flex items-center gap-3 px-3 mb-3">
-                        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-ocean-teal to-caribbean-aqua flex items-center justify-center text-white font-bold text-sm shadow-glow-ocean-teal/30">
-                            S
-                        </div>
+                        {user.avatarUrl ? (
+                            <img
+                                src={user.avatarUrl}
+                                alt={displayName}
+                                className="w-9 h-9 rounded-full object-cover"
+                            />
+                        ) : (
+                            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-ocean-teal to-caribbean-aqua flex items-center justify-center text-white font-bold text-sm shadow-glow-ocean-teal/30">
+                                {avatarInitial}
+                            </div>
+                        )}
                         <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-salt-white truncate">Student</p>
-                            <p className="text-xs text-caribbean-aqua/50 truncate">student@veroni.co</p>
+                            <p className="text-sm font-medium text-salt-white truncate">{displayName}</p>
+                            <p className="text-xs text-caribbean-aqua/50 truncate">{user.email}</p>
                         </div>
                     </div>
                     <button
