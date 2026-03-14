@@ -1,6 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
-import { headers } from 'next/headers';
 import DashboardLayoutClient from '@/components/dashboard/DashboardLayout';
 
 export default async function DashboardGroupLayout({
@@ -30,20 +29,14 @@ export default async function DashboardGroupLayout({
         isApproved: profile?.is_approved ?? false,
     };
 
-    // Gate unapproved students — redirect to pending-approval page
+    // Gate unapproved students — always show pending page
     if (profile && !profile.is_approved && profile.role === 'student') {
-        const headersList = await headers();
-        const pathname = headersList.get('x-next-pathname') || headersList.get('x-invoke-path') || '';
-        if (!pathname.includes('pending-approval')) {
-            // Use a simple check: render the pending page as children instead of redirecting
-            // This avoids infinite redirect loops
-            const PendingPage = (await import('./pending-approval/page')).default;
-            return (
-                <DashboardLayoutClient user={userData}>
-                    <PendingPage />
-                </DashboardLayoutClient>
-            );
-        }
+        const PendingPage = (await import('./pending-approval/page')).default;
+        return (
+            <DashboardLayoutClient user={userData}>
+                <PendingPage />
+            </DashboardLayoutClient>
+        );
     }
 
     return (
