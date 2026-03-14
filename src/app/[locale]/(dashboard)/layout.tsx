@@ -21,9 +21,6 @@ export default async function DashboardGroupLayout({
         .eq('id', user.id)
         .single();
 
-    // DEBUG: Remove after diagnosing approval gate issue
-    console.log('[APPROVAL-GATE] user.id:', user.id, '| profile:', JSON.stringify(profile), '| error:', profileError?.message);
-
     const userData = {
         email: user.email || '',
         fullName: profile?.full_name || user.email?.split('@')[0] || '',
@@ -32,8 +29,9 @@ export default async function DashboardGroupLayout({
         isApproved: profile?.is_approved ?? false,
     };
 
-    // Gate unapproved students — always show pending page
-    if (profile && !profile.is_approved && profile.role === 'student') {
+    // Gate: block if no profile exists OR if student is not approved
+    const isUnapprovedStudent = !profile || (!profile.is_approved && profile.role === 'student');
+    if (isUnapprovedStudent) {
         const PendingPage = (await import('./pending-approval/page')).default;
         return (
             <DashboardLayoutClient user={userData}>
