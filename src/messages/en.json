@@ -225,7 +225,9 @@
         "goodEvening": "Good evening",
         "complete": "complete",
         "knots": "knots",
-        "dashboardSubtitle": "Here's your kitesurfing dashboard"
+        "dashboardSubtitle": "Here's your kitesurfing dashboard",
+        "adminStudents": "Students",
+        "adminCalendar": "Admin Calendar"
     },
     "booking": {
         "title": "Book a Class",

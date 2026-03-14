@@ -225,7 +225,9 @@
         "goodEvening": "Buenas noches",
         "complete": "completado",
         "knots": "nudos",
-        "dashboardSubtitle": "Aquí está tu panel de kitesurf"
+        "dashboardSubtitle": "Aquí está tu panel de kitesurf",
+        "adminStudents": "Estudiantes",
+        "adminCalendar": "Calendario Admin"
     },
     "booking": {
         "title": "Reservar una Clase",
