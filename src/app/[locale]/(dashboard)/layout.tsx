@@ -15,11 +15,14 @@ export default async function DashboardGroupLayout({
     }
 
     // Fetch profile data for sidebar and approval gating
-    const { data: profile } = await supabase
+    const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select('full_name, role, avatar_url, is_approved')
         .eq('id', user.id)
         .single();
+
+    // DEBUG: Remove after diagnosing approval gate issue
+    console.log('[APPROVAL-GATE] user.id:', user.id, '| profile:', JSON.stringify(profile), '| error:', profileError?.message);
 
     const userData = {
         email: user.email || '',

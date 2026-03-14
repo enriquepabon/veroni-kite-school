@@ -33,9 +33,11 @@ yarn-error.log*
 
 # agent / IDE tools
 .agent/
+.mcp.json
 Documents/
 Rules/
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
