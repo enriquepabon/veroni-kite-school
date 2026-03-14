@@ -15,7 +15,7 @@ export default async function DashboardGroupLayout({
     }
 
     // Fetch profile data for sidebar and approval gating
-    const { data: profile, error: profileError } = await supabase
+    const { data: profile } = await supabase
         .from('profiles')
         .select('full_name, role, avatar_url, is_approved')
         .eq('id', user.id)
