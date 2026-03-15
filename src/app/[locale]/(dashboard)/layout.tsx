@@ -30,18 +30,20 @@ export default async function DashboardGroupLayout({
     // Use admin client (bypasses RLS) for profile creation/promotion
     if (!profile || (isAdmin && (profile.role !== 'admin' || !profile.is_approved))) {
         const adminDb = createAdminClient();
-        const { data: fixed } = await adminDb
-            .from('profiles')
-            .upsert({
-                id: user.id,
-                full_name: profile?.full_name || user.user_metadata?.full_name || user.email?.split('@')[0] || '',
-                avatar_url: profile?.avatar_url || user.user_metadata?.avatar_url || null,
-                role: isAdmin ? 'admin' : 'student',
-                is_approved: isAdmin,
-            })
-            .select('full_name, role, avatar_url, is_approved')
-            .single();
-        profile = fixed;
+        if (adminDb) {
+            const { data: fixed } = await adminDb
+                .from('profiles')
+                .upsert({
+                    id: user.id,
+                    full_name: profile?.full_name || user.user_metadata?.full_name || user.email?.split('@')[0] || '',
+                    avatar_url: profile?.avatar_url || user.user_metadata?.avatar_url || null,
+                    role: isAdmin ? 'admin' : 'student',
+                    is_approved: isAdmin,
+                })
+                .select('full_name, role, avatar_url, is_approved')
+                .single();
+            profile = fixed;
+        }
     }
 
     const userData = {
