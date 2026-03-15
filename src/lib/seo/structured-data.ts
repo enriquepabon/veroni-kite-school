@@ -3,7 +3,7 @@
  * Implements LocalBusiness + SportsActivityLocation + Course + AggregateRating.
  */
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://veronikiteschool.com';
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://veronikite.com';
 
 export function getLocalBusinessSchema(locale: string) {
     const isEn = locale === 'en';

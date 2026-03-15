@@ -22,7 +22,7 @@ const caveat = Caveat({
   weight: ['400', '500', '600', '700'],
 });
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://veronikiteschool.com';
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://veronikite.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),

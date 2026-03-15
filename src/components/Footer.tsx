@@ -169,10 +169,10 @@ export function Footer() {
                 <div>
                   <p className="text-gray-400 text-sm">Email</p>
                   <a
-                    href="mailto:info@veronikiteschool.com"
+                    href="mailto:info@veronikite.com"
                     className="text-cyan-400 hover:text-cyan-300 transition-colors text-sm"
                   >
-                    info@veronikiteschool.com
+                    info@veronikite.com
                   </a>
                 </div>
               </li>
