@@ -1,5 +1,20 @@
 import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 import { NextResponse } from 'next/server';
+
+async function verifyAdmin(supabase: Awaited<ReturnType<typeof createClient>>) {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return null;
+
+    const { data: profile } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', user.id)
+        .single();
+
+    if (profile?.role !== 'admin') return null;
+    return user;
+}
 
 export async function POST(
     request: Request,
@@ -7,21 +22,15 @@ export async function POST(
 ) {
     const { id: studentId } = await params;
     const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
+    const admin = await verifyAdmin(supabase);
 
-    if (!user) {
+    if (!admin) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Verify admin role
-    const { data: adminProfile } = await supabase
-        .from('profiles')
-        .select('role')
-        .eq('id', user.id)
-        .single();
-
-    if (adminProfile?.role !== 'admin') {
-        return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    const adminDb = createAdminClient();
+    if (!adminDb) {
+        return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
     }
 
     const { instructor_id } = await request.json();
@@ -30,13 +39,13 @@ export async function POST(
         return NextResponse.json({ error: 'instructor_id is required' }, { status: 400 });
     }
 
-    const { data, error } = await supabase
+    const { data, error } = await adminDb
         .from('instructor_assignments')
         .upsert(
             {
                 student_id: studentId,
                 instructor_id,
-                assigned_by: user.id,
+                assigned_by: admin.id,
                 is_active: true,
             },
             { onConflict: 'student_id,instructor_id' }
@@ -57,25 +66,20 @@ export async function DELETE(
 ) {
     const { id: studentId } = await params;
     const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
+    const admin = await verifyAdmin(supabase);
 
-    if (!user) {
+    if (!admin) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { data: adminProfile } = await supabase
-        .from('profiles')
-        .select('role')
-        .eq('id', user.id)
-        .single();
-
-    if (adminProfile?.role !== 'admin') {
-        return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    const adminDb = createAdminClient();
+    if (!adminDb) {
+        return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
     }
 
     const { instructor_id } = await request.json();
 
-    const { error } = await supabase
+    const { error } = await adminDb
         .from('instructor_assignments')
         .delete()
         .eq('student_id', studentId)

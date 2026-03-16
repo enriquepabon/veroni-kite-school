@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 import { NextResponse } from 'next/server';
 
 export async function POST(
@@ -24,7 +25,13 @@ export async function POST(
         return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
-    const { data, error } = await supabase
+    // Use admin client to bypass RLS (admin can't update other users' profiles with anon key)
+    const adminDb = createAdminClient();
+    if (!adminDb) {
+        return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
+    }
+
+    const { data, error } = await adminDb
         .from('profiles')
         .update({ is_approved: true, updated_at: new Date().toISOString() })
         .eq('id', studentId)
