@@ -47,18 +47,31 @@ export default function LoginPage() {
 
     return (
         <BlurFade delay={0.1} duration={0.5}>
-            <div className="relative rounded-2xl bg-white p-8 shadow-card overflow-hidden">
+            <div className="relative rounded-2xl bg-white p-8 sm:p-10 shadow-card overflow-hidden">
                 <ShineBorder shineColor={['#2A9D8F', '#76C7C0', '#E9C46A']} duration={10} />
 
-                <h1 className="text-3xl font-heading font-bold text-deep-marine-800 mb-2">
-                    {t('loginTitle')}
-                </h1>
-                <p className="text-caribbean-aqua mb-8">
-                    {t('loginSubtitle')}
-                </p>
+                {/* Header with decorative accent */}
+                <div className="relative mb-8">
+                    <div className="absolute -top-10 -left-10 w-24 h-24 bg-ocean-teal/5 rounded-full blur-2xl" />
+                    <div className="absolute -top-6 -right-6 w-16 h-16 bg-golden-sand/10 rounded-full blur-xl" />
+                    <div className="w-12 h-12 bg-gradient-to-br from-ocean-teal to-caribbean-aqua rounded-xl flex items-center justify-center mb-4 shadow-lg shadow-ocean-teal/20">
+                        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z" />
+                        </svg>
+                    </div>
+                    <h1 className="text-3xl font-heading font-bold text-deep-marine-800 mb-1.5">
+                        {t('loginTitle')}
+                    </h1>
+                    <p className="text-caribbean-aqua">
+                        {t('loginSubtitle')}
+                    </p>
+                </div>
 
                 {error && (
-                    <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl mb-6 text-sm">
+                    <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl mb-6 text-sm flex items-center gap-2">
+                        <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                        </svg>
                         {error}
                     </div>
                 )}
@@ -66,7 +79,7 @@ export default function LoginPage() {
                 {/* Google button */}
                 <button
                     onClick={handleGoogleLogin}
-                    className="w-full py-3.5 rounded-xl border-2 border-deep-marine-100 bg-white text-deep-marine-700 font-semibold hover:bg-deep-marine-50 hover:border-ocean-teal/30 transition-all duration-300 flex items-center justify-center gap-3"
+                    className="w-full py-3.5 rounded-xl border-2 border-deep-marine-100 bg-white text-deep-marine-700 font-semibold hover:bg-deep-marine-50 hover:border-ocean-teal/30 hover:shadow-md transition-all duration-300 flex items-center justify-center gap-3"
                 >
                     <svg className="w-5 h-5" viewBox="0 0 24 24">
                         <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4" />
@@ -92,9 +105,9 @@ export default function LoginPage() {
                         <label htmlFor="email" className="block text-sm font-medium text-deep-marine-600 mb-1.5">
                             {t('email')}
                         </label>
-                        <div className="relative">
+                        <div className="relative group">
                             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <svg className="w-5 h-5 text-caribbean-aqua/50" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                                <svg className="w-5 h-5 text-caribbean-aqua/50 group-focus-within:text-ocean-teal transition-colors" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
                                 </svg>
                             </div>
@@ -104,19 +117,24 @@ export default function LoginPage() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
-                                className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-salt-white border border-deep-marine-100 text-deep-marine-800 placeholder-caribbean-aqua/40 focus:outline-none focus:ring-2 focus:ring-ocean-teal/40 focus:border-ocean-teal/30 transition-all"
+                                className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-salt-white border border-deep-marine-100 text-deep-marine-800 placeholder-caribbean-aqua/40 focus:outline-none focus:ring-2 focus:ring-ocean-teal/40 focus:border-ocean-teal/30 focus:bg-white transition-all"
                                 placeholder={t('emailPlaceholder')}
                             />
                         </div>
                     </div>
 
                     <div>
-                        <label htmlFor="password" className="block text-sm font-medium text-deep-marine-600 mb-1.5">
-                            {t('password')}
-                        </label>
-                        <div className="relative">
+                        <div className="flex items-center justify-between mb-1.5">
+                            <label htmlFor="password" className="block text-sm font-medium text-deep-marine-600">
+                                {t('password')}
+                            </label>
+                            <a href="#" className="text-xs text-ocean-teal hover:text-ocean-teal-600 font-medium transition-colors">
+                                {t('forgotPassword')}
+                            </a>
+                        </div>
+                        <div className="relative group">
                             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <svg className="w-5 h-5 text-caribbean-aqua/50" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                                <svg className="w-5 h-5 text-caribbean-aqua/50 group-focus-within:text-ocean-teal transition-colors" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
                                 </svg>
                             </div>
@@ -126,7 +144,7 @@ export default function LoginPage() {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
-                                className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-salt-white border border-deep-marine-100 text-deep-marine-800 placeholder-caribbean-aqua/40 focus:outline-none focus:ring-2 focus:ring-ocean-teal/40 focus:border-ocean-teal/30 transition-all"
+                                className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-salt-white border border-deep-marine-100 text-deep-marine-800 placeholder-caribbean-aqua/40 focus:outline-none focus:ring-2 focus:ring-ocean-teal/40 focus:border-ocean-teal/30 focus:bg-white transition-all"
                                 placeholder="••••••••"
                             />
                         </div>
@@ -135,20 +153,29 @@ export default function LoginPage() {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="btn-primary w-full py-3.5 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="btn-primary w-full py-3.5 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group"
                     >
-                        {loading ? (
-                            <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                            </svg>
-                        ) : t('loginButton')}
+                        <span className="relative z-10 flex items-center justify-center gap-2">
+                            {loading ? (
+                                <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                                </svg>
+                            ) : (
+                                <>
+                                    {t('loginButton')}
+                                    <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                    </svg>
+                                </>
+                            )}
+                        </span>
                     </button>
                 </form>
 
                 <p className="text-center text-caribbean-aqua text-sm mt-8">
                     {t('noAccount')}{' '}
-                    <a href="/registro" className="text-ocean-teal hover:text-ocean-teal-600 font-semibold transition-colors">
+                    <a href="/registro" className="text-ocean-teal hover:text-ocean-teal-600 font-semibold transition-colors underline underline-offset-2 decoration-ocean-teal/30 hover:decoration-ocean-teal">
                         {t('registerButton')}
                     </a>
                 </p>

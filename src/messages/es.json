@@ -223,7 +223,8 @@
         "trustStudents": "500+ Alumnos",
         "heroTagline": "Tu aventura en el kitesurf comienza aquí. Salinas del Rey, Colombia.",
         "confirmationSent": "Enviamos un enlace de confirmación a",
-        "checkEmailTitle": "Revisa tu correo"
+        "checkEmailTitle": "Revisa tu correo",
+        "backToHome": "Volver al inicio"
     },
     "dashboard": {
         "welcome": "Bienvenido",
