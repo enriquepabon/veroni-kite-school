@@ -2,6 +2,8 @@ import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { NextResponse } from 'next/server';
 
+const ADMIN_EMAILS = ['kikep008@gmail.com'];
+
 export async function POST(
     _request: Request,
     { params }: { params: Promise<{ id: string }> }
@@ -14,18 +16,20 @@ export async function POST(
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Verify admin role
+    // Verify admin role OR email whitelist
     const { data: adminProfile } = await supabase
         .from('profiles')
         .select('role')
         .eq('id', user.id)
         .single();
 
-    if (adminProfile?.role !== 'admin') {
+    const isAdmin = adminProfile?.role === 'admin' || ADMIN_EMAILS.includes(user.email || '');
+
+    if (!isAdmin) {
         return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
-    // Use admin client to bypass RLS (admin can't update other users' profiles with anon key)
+    // Use admin client to bypass RLS
     const adminDb = createAdminClient();
     if (!adminDb) {
         return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });

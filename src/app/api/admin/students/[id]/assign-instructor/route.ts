@@ -2,6 +2,8 @@ import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { NextResponse } from 'next/server';
 
+const ADMIN_EMAILS = ['kikep008@gmail.com'];
+
 async function verifyAdmin(supabase: Awaited<ReturnType<typeof createClient>>) {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return null;
@@ -12,7 +14,8 @@ async function verifyAdmin(supabase: Awaited<ReturnType<typeof createClient>>) {
         .eq('id', user.id)
         .single();
 
-    if (profile?.role !== 'admin') return null;
+    const isAdmin = profile?.role === 'admin' || ADMIN_EMAILS.includes(user.email || '');
+    if (!isAdmin) return null;
     return user;
 }
 
