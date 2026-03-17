@@ -62,13 +62,17 @@ export default function AdminStudentsPage() {
         setActionLoading(studentId);
         try {
             const res = await fetch(`/api/admin/students/${studentId}/approve`, { method: 'POST' });
+            const data = await res.json();
             if (res.ok) {
                 setStudents(prev => prev.map(s =>
                     s.id === studentId ? { ...s, is_approved: true } : s
                 ));
+                setError(null);
+            } else {
+                setError(`Approve error: ${res.status} - ${JSON.stringify(data)}`);
             }
-        } catch {
-            // silently fail
+        } catch (e) {
+            setError(`Approve fetch error: ${e instanceof Error ? e.message : 'Unknown'}`);
         } finally {
             setActionLoading(null);
         }

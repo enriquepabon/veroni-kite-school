@@ -2,6 +2,8 @@ import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 const ADMIN_EMAILS = ['kikep008@gmail.com'];
 
 export async function POST(
@@ -10,10 +12,13 @@ export async function POST(
 ) {
     const { id: studentId } = await params;
     const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
 
     if (!user) {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        return NextResponse.json({
+            error: 'Unauthorized',
+            debug: { step: 'auth', authError: authError?.message }
+        }, { status: 401 });
     }
 
     // Verify admin role OR email whitelist
@@ -26,13 +31,19 @@ export async function POST(
     const isAdmin = adminProfile?.role === 'admin' || ADMIN_EMAILS.includes(user.email || '');
 
     if (!isAdmin) {
-        return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+        return NextResponse.json({
+            error: 'Forbidden',
+            debug: { step: 'role', email: user.email, role: adminProfile?.role }
+        }, { status: 403 });
     }
 
     // Use admin client to bypass RLS
     const adminDb = createAdminClient();
     if (!adminDb) {
-        return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
+        return NextResponse.json({
+            error: 'Server configuration error',
+            debug: { step: 'admin_client', hasServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY }
+        }, { status: 500 });
     }
 
     const { data, error } = await adminDb
@@ -43,7 +54,10 @@ export async function POST(
         .single();
 
     if (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return NextResponse.json({
+            error: error.message,
+            debug: { step: 'update', studentId }
+        }, { status: 500 });
     }
 
     return NextResponse.json(data);
