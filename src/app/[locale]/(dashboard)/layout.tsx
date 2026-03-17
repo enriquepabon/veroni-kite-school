@@ -21,53 +21,22 @@ export default async function DashboardGroupLayout({
         redirect('/login');
     }
 
-    // Admin email whitelist is the ultimate authority — survives DB failures
     const isAdminByEmail = ADMIN_EMAILS.includes(user.email || '');
 
-    // ===== DEBUG: Step 1 — Raw profile query =====
-    // eslint-disable-next-line prefer-const
-    let { data: profile, error: profileError } = await supabase
+    // Use admin client (bypasses RLS) for ALL profile operations.
+    // The profiles table has a recursive RLS policy that breaks anon-key queries.
+    const adminDb = createAdminClient();
+    const db = adminDb || supabase;
+
+    let { data: profile } = await db
         .from('profiles')
         .select('full_name, role, avatar_url, is_approved')
         .eq('id', user.id)
         .single();
 
-    console.log('[DASHBOARD DEBUG] Step 1 — Profile query:', {
-        email: user.email,
-        userId: user.id,
-        profile: profile ? { role: profile.role, is_approved: profile.is_approved } : null,
-        profileError: profileError?.message || null,
-        isAdminByEmail,
-    });
-
-    // If query failed (e.g. is_approved column missing), retry without it
-    if (profileError && !profile) {
-        const { data: fallback, error: fallbackError } = await supabase
-            .from('profiles')
-            .select('full_name, role, avatar_url')
-            .eq('id', user.id)
-            .single();
-
-        console.log('[DASHBOARD DEBUG] Step 1b — Fallback query:', {
-            fallback: fallback ? { role: fallback.role } : null,
-            fallbackError: fallbackError?.message || null,
-        });
-
-        if (fallback) {
-            profile = { ...fallback, is_approved: isAdminByEmail ? true : false };
-        }
-    }
-
-    // Use admin client (bypasses RLS) for profile creation/promotion
-    const adminDb = createAdminClient();
-
-    console.log('[DASHBOARD DEBUG] Step 2 — Admin client:', {
-        hasAdminDb: !!adminDb,
-        hasServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
-    });
-
     if (!profile && adminDb) {
-        const { data: created, error: createError } = await adminDb
+        // Profile doesn't exist yet — create it
+        const { data: created } = await adminDb
             .from('profiles')
             .insert({
                 id: user.id,
@@ -78,30 +47,18 @@ export default async function DashboardGroupLayout({
             })
             .select('full_name, role, avatar_url, is_approved')
             .single();
-
-        console.log('[DASHBOARD DEBUG] Step 2a — Profile INSERT:', {
-            created: created ? { role: created.role, is_approved: created.is_approved } : null,
-            createError: createError?.message || null,
-        });
-
         profile = created;
     } else if (profile && isAdminByEmail && (profile.role !== 'admin' || !profile.is_approved) && adminDb) {
-        const { data: promoted, error: promoteError } = await adminDb
+        // Admin email needs promotion
+        const { data: promoted } = await adminDb
             .from('profiles')
             .update({ role: 'admin', is_approved: true })
             .eq('id', user.id)
             .select('full_name, role, avatar_url, is_approved')
             .single();
-
-        console.log('[DASHBOARD DEBUG] Step 2b — Admin PROMOTE:', {
-            promoted: promoted ? { role: promoted.role, is_approved: promoted.is_approved } : null,
-            promoteError: promoteError?.message || null,
-        });
-
         if (promoted) profile = promoted;
     }
 
-    // For admin email users, force admin role in userData regardless of DB state
     const effectiveRole = isAdminByEmail ? 'admin' : ((profile?.role as string) || 'student');
     const effectiveApproved = isAdminByEmail ? true : (profile?.is_approved ?? false);
 
@@ -113,17 +70,8 @@ export default async function DashboardGroupLayout({
         isApproved: effectiveApproved,
     };
 
-    // ===== DEBUG: Step 3 — Gate decision =====
-    const gateBlocked = !isAdminByEmail && effectiveRole !== 'admin' && !effectiveApproved;
-    console.log('[DASHBOARD DEBUG] Step 3 — Gate decision:', {
-        isAdminByEmail,
-        effectiveRole,
-        effectiveApproved,
-        gateBlocked,
-        finalUserData: { role: userData.role, isApproved: userData.isApproved },
-    });
-
-    if (gateBlocked) {
+    // Gate: admin email users ALWAYS pass; everyone else needs approval
+    if (!isAdminByEmail && effectiveRole !== 'admin' && !effectiveApproved) {
         const PendingPage = (await import('./pending-approval/page')).default;
         return (
             <DashboardLayoutClient user={userData}>
