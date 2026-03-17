@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { motion } from 'framer-motion';
 import { NumberTicker } from '@/components/ui/number-ticker';
@@ -13,13 +14,13 @@ interface WindData {
     condition: 'optimal' | 'moderate' | 'notRecommended';
 }
 
-const mockWindData: WindData = {
-    speed: 18,
-    gusts: 24,
-    direction: 45,
-    directionLabel: 'NE',
-    temperature: 28,
-    condition: 'optimal',
+const fallbackData: WindData = {
+    speed: 0,
+    gusts: 0,
+    direction: 0,
+    directionLabel: '--',
+    temperature: 0,
+    condition: 'notRecommended',
 };
 
 function getConditionConfig(condition: WindData['condition'], isEn: boolean) {
@@ -37,7 +38,30 @@ export default function WeatherWidget() {
     const t = useTranslations('weather');
     const locale = useLocale();
     const isEn = locale === 'en';
-    const data = mockWindData;
+    const [data, setData] = useState<WindData>(fallbackData);
+    const [loading, setLoading] = useState(true);
+    const [updatedAt, setUpdatedAt] = useState<string | null>(null);
+
+    useEffect(() => {
+        async function fetchWeather() {
+            try {
+                const res = await fetch('/api/weather');
+                if (!res.ok) throw new Error('Failed to fetch');
+                const json = await res.json();
+                setData(json.current);
+                setUpdatedAt(json.updatedAt);
+            } catch {
+                // Keep fallback data on error
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchWeather();
+        // Refresh every 15 minutes
+        const interval = setInterval(fetchWeather, 15 * 60 * 1000);
+        return () => clearInterval(interval);
+    }, []);
+
     const config = getConditionConfig(data.condition, isEn);
 
     return (
@@ -47,9 +71,14 @@ export default function WeatherWidget() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
         >
-            <h3 className="font-heading font-bold text-salt-white text-lg mb-4">
-                {t('currentConditions')}
-            </h3>
+            <div className="flex items-center justify-between mb-4">
+                <h3 className="font-heading font-bold text-salt-white text-lg">
+                    {t('currentConditions')}
+                </h3>
+                {loading && (
+                    <div className="w-4 h-4 border-2 border-ocean-teal/30 border-t-ocean-teal rounded-full animate-spin" />
+                )}
+            </div>
 
             {/* Condition banner */}
             <div className={`${config.bg} ${config.border} border rounded-xl p-3 mb-5 flex items-center gap-3`}>
@@ -102,6 +131,12 @@ export default function WeatherWidget() {
                     <p className="text-xs text-caribbean-aqua/40">°C</p>
                 </div>
             </div>
+
+            {updatedAt && (
+                <p className="text-xs text-caribbean-aqua/30 mt-4 text-center">
+                    {isEn ? 'Updated' : 'Actualizado'}: {new Date(updatedAt).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })}
+                </p>
+            )}
         </motion.div>
     );
 }

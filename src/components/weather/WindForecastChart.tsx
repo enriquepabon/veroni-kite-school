@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { motion } from 'framer-motion';
 
@@ -9,17 +10,6 @@ interface ForecastHour {
     gusts: number;
     direction: string;
 }
-
-const mockForecast: ForecastHour[] = Array.from({ length: 24 }, (_, i) => {
-    const h = (6 + i) % 24;
-    const baseSpeed = 12 + Math.sin(i * 0.3) * 8 + Math.random() * 4;
-    return {
-        hour: `${String(h).padStart(2, '0')}:00`,
-        speed: Math.round(baseSpeed),
-        gusts: Math.round(baseSpeed + 3 + Math.random() * 5),
-        direction: ['N', 'NE', 'NE', 'E', 'NE', 'N'][i % 6],
-    };
-});
 
 function getBarColor(speed: number): string {
     if (speed >= 20) return 'bg-green-400';
@@ -32,7 +22,28 @@ export default function WindForecastChart() {
     const t = useTranslations('weather');
     const locale = useLocale();
     const isEn = locale === 'en';
-    const maxSpeed = Math.max(...mockForecast.map((f) => f.gusts));
+    const [forecast, setForecast] = useState<ForecastHour[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchForecast() {
+            try {
+                const res = await fetch('/api/weather');
+                if (!res.ok) throw new Error('Failed to fetch');
+                const json = await res.json();
+                setForecast(json.forecast ?? []);
+            } catch {
+                // Keep empty on error
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchForecast();
+        const interval = setInterval(fetchForecast, 15 * 60 * 1000);
+        return () => clearInterval(interval);
+    }, []);
+
+    const maxSpeed = forecast.length > 0 ? Math.max(...forecast.map((f) => f.gusts)) : 1;
 
     return (
         <motion.div
@@ -69,9 +80,20 @@ export default function WindForecastChart() {
             </div>
 
             {/* Chart */}
+            {loading && (
+                <div className="flex items-center justify-center h-[200px]">
+                    <div className="w-6 h-6 border-2 border-ocean-teal/30 border-t-ocean-teal rounded-full animate-spin" />
+                </div>
+            )}
+            {!loading && forecast.length === 0 && (
+                <div className="flex items-center justify-center h-[200px] text-sm text-caribbean-aqua/40">
+                    {isEn ? 'No forecast data available' : 'Sin datos de pronóstico disponibles'}
+                </div>
+            )}
+            {!loading && forecast.length > 0 && (
             <div className="overflow-x-auto -mx-6 px-6">
                 <div className="flex gap-1 items-end min-w-[700px]" style={{ height: 200 }}>
-                    {mockForecast.map((f, idx) => {
+                    {forecast.map((f, idx) => {
                         const height = (f.speed / maxSpeed) * 100;
                         const gustHeight = (f.gusts / maxSpeed) * 100;
 
@@ -112,6 +134,7 @@ export default function WindForecastChart() {
                     })}
                 </div>
             </div>
+            )}
         </motion.div>
     );
 }
