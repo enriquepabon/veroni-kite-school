@@ -1,29 +1,62 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import ActiveRoadMap from '@/components/dashboard/ActiveRoadMap';
 
-// Mock progress data — will be fetched from Supabase via student_progress table
-const mockProgress: Record<string, {
+interface ProgressRecord {
     skill_id: string;
-    status: 'completed' | 'in_progress' | 'locked';
-    completed_at: string | null;
-    validated_by_name: string | null;
-}> = {
-    'skill-1-1': { skill_id: 'skill-1-1', status: 'completed', completed_at: '2024-12-10', validated_by_name: 'Carlos Veroni' },
-    'skill-1-2': { skill_id: 'skill-1-2', status: 'completed', completed_at: '2024-12-10', validated_by_name: 'Carlos Veroni' },
-    'skill-1-3': { skill_id: 'skill-1-3', status: 'completed', completed_at: '2024-12-11', validated_by_name: 'Carlos Veroni' },
-    'skill-1-4': { skill_id: 'skill-1-4', status: 'completed', completed_at: '2024-12-12', validated_by_name: 'Ana García' },
-    'skill-1-5': { skill_id: 'skill-1-5', status: 'completed', completed_at: '2024-12-13', validated_by_name: 'Ana García' },
-    'skill-2-1': { skill_id: 'skill-2-1', status: 'completed', completed_at: '2024-12-15', validated_by_name: 'Carlos Veroni' },
-    'skill-2-2': { skill_id: 'skill-2-2', status: 'in_progress', completed_at: null, validated_by_name: null },
-    'skill-2-3': { skill_id: 'skill-2-3', status: 'locked', completed_at: null, validated_by_name: null },
-    'skill-2-4': { skill_id: 'skill-2-4', status: 'locked', completed_at: null, validated_by_name: null },
-};
+    status: 'locked' | 'in-progress' | 'completed';
+    last_updated: string | null;
+    instructor: { full_name: string } | null;
+}
 
 export default function MyRoadmapPage() {
     const t = useTranslations('roadmap');
+    const [progress, setProgress] = useState<Record<string, {
+        skill_id: string;
+        status: 'completed' | 'in_progress' | 'locked';
+        completed_at: string | null;
+        validated_by_name: string | null;
+    }>>({});
+    const [currentLevel, setCurrentLevel] = useState(1);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchProgress() {
+            try {
+                const res = await fetch('/api/progress');
+                if (res.ok) {
+                    const data = await res.json();
+                    const mapped: typeof progress = {};
+                    let maxLevel = 1;
+
+                    (data.progress || []).forEach((p: ProgressRecord) => {
+                        // Map DB status 'in-progress' to component's 'in_progress'
+                        const status = p.status === 'in-progress' ? 'in_progress' : p.status as 'completed' | 'locked';
+                        mapped[p.skill_id] = {
+                            skill_id: p.skill_id,
+                            status,
+                            completed_at: p.status === 'completed' ? p.last_updated : null,
+                            validated_by_name: p.instructor?.full_name || null,
+                        };
+                        // Track highest level with activity
+                        const levelNum = parseInt(p.skill_id.split('-')[1]);
+                        if (levelNum > maxLevel) maxLevel = levelNum;
+                    });
+
+                    setProgress(mapped);
+                    setCurrentLevel(maxLevel);
+                }
+            } catch {
+                // Fall back to empty progress
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchProgress();
+    }, []);
 
     return (
         <>
@@ -42,11 +75,18 @@ export default function MyRoadmapPage() {
                 </p>
             </motion.div>
 
-            {/* Active Road Map */}
-            <ActiveRoadMap
-                progress={mockProgress}
-                currentLevel={2}
-            />
+            {loading ? (
+                <div className="space-y-4">
+                    {[1, 2, 3].map(i => (
+                        <div key={i} className="h-24 rounded-2xl bg-white/5 animate-pulse" />
+                    ))}
+                </div>
+            ) : (
+                <ActiveRoadMap
+                    progress={progress}
+                    currentLevel={currentLevel}
+                />
+            )}
         </>
     );
 }

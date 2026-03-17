@@ -248,6 +248,7 @@
         "knots": "knots",
         "dashboardSubtitle": "Here's your kitesurfing dashboard",
         "adminStudents": "Students",
+        "adminProgress": "Progress",
         "adminCalendar": "Admin Calendar"
     },
     "booking": {
