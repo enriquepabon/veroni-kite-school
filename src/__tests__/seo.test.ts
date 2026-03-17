@@ -73,7 +73,7 @@ describe("SEO - sitemap.xml", () => {
     const sitemapPath = path.join(publicDir, "sitemap.xml");
     const content = fs.readFileSync(sitemapPath, "utf-8");
     assert.ok(
-      content.includes("https://veronikite.com/"),
+      content.includes("https://veronikites.com/"),
       "Sitemap should include homepage URL"
     );
   });

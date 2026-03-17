@@ -3,7 +3,7 @@
  * Implements LocalBusiness + SportsActivityLocation + Course + AggregateRating.
  */
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://veronikite.com';
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://veronikites.com';
 
 export function getLocalBusinessSchema(locale: string) {
     const isEn = locale === 'en';
@@ -18,7 +18,7 @@ export function getLocalBusinessSchema(locale: string) {
             : 'Academia de kitesurf premium en Salinas del Rey, Colombia. Instructores certificados IKO, progresión garantizada.',
         url: `${BASE_URL}/${locale}`,
         telephone: '+57-300-000-0000',
-        email: 'info@veronikite.com',
+        email: 'info@veronikites.com',
         address: {
             '@type': 'PostalAddress',
             addressLocality: 'Salinas del Rey',
@@ -39,8 +39,8 @@ export function getLocalBusinessSchema(locale: string) {
             closes: '18:00',
         },
         sameAs: [
-            'https://www.instagram.com/veronikite',
-            'https://www.facebook.com/veronikite',
+            'https://www.instagram.com/veronikites',
+            'https://www.facebook.com/veronikites',
         ],
         sport: 'Kitesurfing',
         aggregateRating: {

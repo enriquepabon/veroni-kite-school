@@ -14,4 +14,4 @@ Disallow: /api
 Disallow: /auth
 
 # Sitemap location
-Sitemap: https://veronikiteschool.com/sitemap.xml
+Sitemap: https://veronikites.com/sitemap.xml

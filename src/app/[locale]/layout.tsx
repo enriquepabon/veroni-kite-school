@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import type { Metadata } from 'next';
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://veronikite.com';
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://veronikites.com';
 
 type Props = {
     children: React.ReactNode;

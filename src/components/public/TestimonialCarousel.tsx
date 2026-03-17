@@ -18,7 +18,7 @@ const testimonials = [
         rating: 5,
         image: '/images/testimonios/testimonio-1.webp',
         reviewPlatform: 'google' as const,
-        reviewUrl: 'https://g.page/veronikite/review',
+        reviewUrl: 'https://g.page/veronikites/review',
     },
     {
         id: 2,
@@ -30,7 +30,7 @@ const testimonials = [
         rating: 5,
         image: '/images/testimonios/testimonio-2.webp',
         reviewPlatform: 'google' as const,
-        reviewUrl: 'https://g.page/veronikite/review',
+        reviewUrl: 'https://g.page/veronikites/review',
     },
     {
         id: 3,
@@ -42,7 +42,7 @@ const testimonials = [
         rating: 5,
         image: '/images/testimonios/testimonio-3.webp',
         reviewPlatform: 'tripadvisor' as const,
-        reviewUrl: 'https://www.tripadvisor.com/veronikite',
+        reviewUrl: 'https://www.tripadvisor.com/veronikites',
     },
     {
         id: 4,
@@ -54,7 +54,7 @@ const testimonials = [
         rating: 5,
         image: '/images/testimonios/testimonio-4.webp',
         reviewPlatform: 'google' as const,
-        reviewUrl: 'https://g.page/veronikite/review',
+        reviewUrl: 'https://g.page/veronikites/review',
     },
 ];
 
@@ -253,7 +253,7 @@ export default function TestimonialCarousel() {
                 <Reveal delay={0.3}>
                     <div className="text-center mt-10">
                         <a
-                            href="https://g.page/veronikite/review"
+                            href="https://g.page/veronikites/review"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 text-sm font-semibold text-caribbean-aqua hover:text-white transition-colors duration-300"

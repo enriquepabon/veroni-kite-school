@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://veronikite.com';
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://veronikites.com';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const locales = ['es', 'en'];
