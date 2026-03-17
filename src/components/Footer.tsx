@@ -150,7 +150,7 @@ export function Footer() {
                 <div>
                   <p className="text-gray-400 text-sm">WhatsApp</p>
                   <a
-                    href="https://wa.me/573001234567?text=Hola%20Veroni%20Kite%20School"
+                    href="https://wa.me/573001234567?text=Hola%20Veronikites%20Kite%20School"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-cyan-400 hover:text-cyan-300 transition-colors text-sm"

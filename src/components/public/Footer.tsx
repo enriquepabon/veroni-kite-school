@@ -30,7 +30,7 @@ export default function Footer() {
                     <div>
                         <Link href="/" className="inline-block mb-4 group">
                             <span className="text-2xl font-heading font-bold text-white tracking-tight">
-                                Veroni<span className="text-ocean-teal group-hover:text-sand-gold transition-colors duration-500">Kite</span>
+                                Veroni<span className="text-ocean-teal group-hover:text-sand-gold transition-colors duration-500">Kites</span>
                             </span>
                         </Link>
                         <p className="text-sm text-caribbean-aqua-200 leading-relaxed max-w-xs">
