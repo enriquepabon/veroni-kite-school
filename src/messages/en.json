@@ -163,7 +163,15 @@
         "name5": "Instructor 5",
         "role5": "Safety & Rescue",
         "bio5": "Instructor profile coming soon.",
-        "years5": "3+ years"
+        "years5": "3+ years",
+        "name6": "Assistant 1",
+        "role6": "Teaching Assistant",
+        "bio6": "Support in discovery and kite control classes. IKO training in progress.",
+        "years6": "1+ year",
+        "name7": "Assistant 2",
+        "role7": "Teaching Assistant",
+        "bio7": "Support in logistics, water safety and equipment preparation.",
+        "years7": "1+ year"
     },
     "testimonials": {
         "title": "What Our Students Say",

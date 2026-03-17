@@ -21,6 +21,7 @@ const previewCourses = [
         duration: 3,
         image: '/images/cursos/curso-descubrimiento.webp',
         slug: 'descubrimiento',
+        imagePosition: 'object-center',
     },
     {
         id: '2',
@@ -30,6 +31,7 @@ const previewCourses = [
         duration: 6,
         image: '/images/cursos/curso-control-kite.webp',
         slug: 'control-de-kite',
+        imagePosition: 'object-left',
     },
     {
         id: '3',
@@ -39,6 +41,7 @@ const previewCourses = [
         duration: 9,
         image: '/images/cursos/curso-waterstart.webp',
         slug: 'waterstart',
+        imagePosition: 'object-bottom',
     },
 ];
 
@@ -139,7 +142,7 @@ export default function CoursePreview() {
                                     alt={t(`${course.level}Name`)}
                                     fill
                                     sizes="(max-width: 768px) 100vw, 33vw"
-                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                    className={`object-cover transition-transform duration-700 group-hover:scale-110 ${course.imagePosition || ''}`}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-deep-marine-900/50 to-transparent" />
                                 <div className="absolute top-4 left-4">

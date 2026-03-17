@@ -28,6 +28,8 @@ const instructors: Instructor[] = [
     { id: '3', imageKey: 'instructor-3', nameKey: 'name3', roleKey: 'role3', bioKey: 'bio3', yearsKey: 'years3', instagram: '#' },
     { id: '4', imageKey: 'instructor-4', nameKey: 'name4', roleKey: 'role4', bioKey: 'bio4', yearsKey: 'years4', instagram: '#' },
     { id: '5', imageKey: 'instructor-5', nameKey: 'name5', roleKey: 'role5', bioKey: 'bio5', yearsKey: 'years5', instagram: '#' },
+    { id: '6', imageKey: 'instructor-6', nameKey: 'name6', roleKey: 'role6', bioKey: 'bio6', yearsKey: 'years6', instagram: '#' },
+    { id: '7', imageKey: 'instructor-7', nameKey: 'name7', roleKey: 'role7', bioKey: 'bio7', yearsKey: 'years7', instagram: '#' },
 ];
 
 export default function InstructorTeam() {

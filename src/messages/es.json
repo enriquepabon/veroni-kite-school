@@ -163,7 +163,15 @@
         "name5": "Instructor 5",
         "role5": "Safety & Rescue",
         "bio5": "Perfil del instructor próximamente.",
-        "years5": "3+ años"
+        "years5": "3+ años",
+        "name6": "Asistente 1",
+        "role6": "Asistente de Instrucción",
+        "bio6": "Apoyo en clases de descubrimiento y control de kite. En formación IKO.",
+        "years6": "1+ año",
+        "name7": "Asistente 2",
+        "role7": "Asistente de Instrucción",
+        "bio7": "Apoyo en logística, seguridad en el agua y preparación de equipos.",
+        "years7": "1+ año"
     },
     "testimonials": {
         "title": "Lo Que Dicen Nuestros Estudiantes",

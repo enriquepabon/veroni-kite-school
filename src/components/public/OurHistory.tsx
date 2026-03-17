@@ -121,7 +121,7 @@ export default function OurHistory() {
                                     aria-label={t('watchVideo')}
                                 >
                                     <Image
-                                        src={`https://img.youtube.com/vi/${YOUTUBE_VIDEO_ID}/maxresdefault.jpg`}
+                                        src="/images/documental-thumbnail.jpg"
                                         alt={t('videoTitle')}
                                         fill
                                         className="object-cover group-hover:scale-105 transition-transform duration-700"

@@ -39,7 +39,7 @@ const cards = [
             </svg>
         ),
         gradient: 'from-deep-marine-500 to-ocean-teal',
-        image: null,
+        image: '/images/cursos/curso-waterstart.webp',
         href: '/roadmap' as const,
     },
 ];
