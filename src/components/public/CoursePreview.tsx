@@ -15,32 +15,33 @@ gsap.registerPlugin(ScrollTrigger);
 const previewCourses = [
     {
         id: '1',
-        level: 'discovery',
+        level: 'individual',
         levelColor: 'ocean-teal',
-        price: 350000,
-        duration: 3,
+        price: 250000,
+        duration: 1,
         image: '/images/cursos/curso-descubrimiento.webp',
-        slug: 'descubrimiento',
+        slug: 'clase-individual',
         imagePosition: 'object-center',
+        priceUnit: 'hour',
     },
     {
         id: '2',
-        level: 'kite_control',
+        level: 'basic',
         levelColor: 'deep-marine',
-        price: 650000,
-        duration: 6,
+        price: 1300000,
+        duration: 5,
         image: '/images/cursos/curso-control-kite.webp',
-        slug: 'control-de-kite',
+        slug: 'curso-basico',
         imagePosition: 'object-left',
     },
     {
         id: '3',
-        level: 'waterstart',
+        level: 'complete',
         levelColor: 'sand-gold',
-        price: 900000,
-        duration: 9,
+        price: 2500000,
+        duration: 10,
         image: '/images/cursos/curso-waterstart.webp',
-        slug: 'waterstart',
+        slug: 'curso-completo',
         imagePosition: 'object-bottom',
     },
 ];
@@ -52,9 +53,9 @@ const levelColors: Record<string, string> = {
 };
 
 const highlightKeys: Record<string, string[]> = {
-    discovery: ['discoveryH1', 'discoveryH2', 'discoveryH3', 'discoveryH4'],
-    kite_control: ['kiteControlH1', 'kiteControlH2', 'kiteControlH3', 'kiteControlH4'],
-    waterstart: ['waterstartH1', 'waterstartH2', 'waterstartH3', 'waterstartH4'],
+    individual: ['individualH1', 'individualH2', 'individualH3', 'individualH4'],
+    basic: ['basicH1', 'basicH2', 'basicH3', 'basicH4'],
+    complete: ['completeH1', 'completeH2', 'completeH3', 'completeH4'],
 };
 
 export default function CoursePreview() {
@@ -129,7 +130,7 @@ export default function CoursePreview() {
                 <LineReveal className="bg-deep-marine/10 mb-12" />
 
                 <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-                    {previewCourses.map((course, idx) => (
+                    {previewCourses.map((course) => (
                         <div
                             key={course.id}
                             className="course-card group relative bg-salt-white rounded-[16px] overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-500 hover:-translate-y-2 flex flex-col"
@@ -164,9 +165,9 @@ export default function CoursePreview() {
                                     </span>
                                     <span className="flex items-center gap-1">
                                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75z" />
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0" />
                                         </svg>
-                                        {t('level')} {idx + 1}
+                                        {t(`${course.level}Tag`)}
                                     </span>
                                 </div>
 
@@ -192,9 +193,13 @@ export default function CoursePreview() {
                                 <div className="flex items-end justify-between mt-auto pt-4 border-t border-deep-marine-100">
                                     <div>
                                         <span className="text-2xl font-heading font-bold text-night-tide">
-                                            ${(course.price / 1000).toFixed(0)}K
+                                            {course.price >= 1000000
+                                                ? `$${(course.price / 1000000).toFixed(1).replace('.0', '')}M`
+                                                : `$${(course.price / 1000).toFixed(0)}K`}
                                         </span>
-                                        <span className="text-sm text-caribbean-aqua ml-1">COP</span>
+                                        <span className="text-sm text-caribbean-aqua ml-1">
+                                            COP{course.priceUnit === 'hour' ? `/${t('perHour')}` : ''}
+                                        </span>
                                     </div>
                                     <Link
                                         href={`/reservar?curso=${course.slug}`}
