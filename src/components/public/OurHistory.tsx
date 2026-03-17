@@ -94,11 +94,13 @@ export default function OurHistory() {
                                 {t('paragraph1')}
                             </p>
                         </Reveal>
-                        <Reveal direction="left" distance={50} delay={0.15}>
-                            <p className="text-deep-marine-600 leading-relaxed mb-6">
-                                {t('paragraph2')}
-                            </p>
-                        </Reveal>
+                        {t('paragraph2') && (
+                            <Reveal direction="left" distance={50} delay={0.15}>
+                                <p className="text-deep-marine-600 leading-relaxed mb-6">
+                                    {t('paragraph2')}
+                                </p>
+                            </Reveal>
+                        )}
 
                         {/* Pull quote with animated border */}
                         <Reveal delay={0.3}>
