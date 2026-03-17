@@ -46,7 +46,7 @@ export default function AdminStudentsPage() {
                 setError(null);
             } else {
                 console.error('Admin students API error:', res.status, data);
-                setError(`API error: ${res.status} - ${data.error || 'Unknown'}`);
+                setError(`API error: ${res.status} - ${data.error || 'Unknown'} | Debug: ${JSON.stringify(data.debug || {})}`);
             }
         } catch (e) {
             console.error('Admin students fetch error:', e);

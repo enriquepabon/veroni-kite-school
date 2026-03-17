@@ -4,29 +4,50 @@ import { NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 
-async function verifyAdmin(supabase: Awaited<ReturnType<typeof createClient>>) {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return null;
+const ADMIN_EMAILS = ['kikep008@gmail.com'];
 
-    const { data: profile } = await supabase
+export async function GET() {
+    const supabase = await createClient();
+
+    // Step 1: Get authenticated user
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+
+    if (!user || authError) {
+        return NextResponse.json({
+            error: 'Unauthorized',
+            debug: {
+                step: 'auth',
+                hasUser: !!user,
+                authError: authError?.message || null,
+            }
+        }, { status: 401 });
+    }
+
+    // Step 2: Check admin role via profile OR email whitelist
+    const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select('role')
         .eq('id', user.id)
         .single();
 
-    if (profile?.role !== 'admin') return null;
-    return user;
-}
+    const isAdminByEmail = ADMIN_EMAILS.includes(user.email || '');
+    const isAdminByRole = profile?.role === 'admin';
 
-export async function GET() {
-    const supabase = await createClient();
-    const admin = await verifyAdmin(supabase);
-
-    if (!admin) {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    if (!isAdminByRole && !isAdminByEmail) {
+        return NextResponse.json({
+            error: 'Unauthorized',
+            debug: {
+                step: 'role_check',
+                email: user.email,
+                profileRole: profile?.role || null,
+                profileError: profileError?.message || null,
+                isAdminByEmail,
+                isAdminByRole,
+            }
+        }, { status: 401 });
     }
 
-    // Use admin client to bypass RLS and see all profiles
+    // Step 3: Use admin client to bypass RLS and see all profiles
     const adminDb = createAdminClient();
     const db = adminDb || supabase;
 
@@ -37,7 +58,10 @@ export async function GET() {
         .order('created_at', { ascending: false });
 
     if (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return NextResponse.json({
+            error: error.message,
+            debug: { step: 'query', hasAdminClient: !!adminDb }
+        }, { status: 500 });
     }
 
     // Also fetch all instructors for the assignment dropdown
