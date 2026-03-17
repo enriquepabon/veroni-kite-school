@@ -30,7 +30,7 @@ export async function GET() {
 
     const { data: students, error } = await db
         .from('profiles')
-        .select('*, instructor_assignments(id, instructor_id, is_active, instructor:instructor_id(id, full_name))')
+        .select('*, instructor_assignments!instructor_assignments_student_id_fkey(id, instructor_id, is_active, instructor:instructor_id(id, full_name))')
         .eq('role', 'student')
         .order('created_at', { ascending: false });
 
