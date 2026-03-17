@@ -3,6 +3,9 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { redirect } from 'next/navigation';
 import DashboardLayoutClient from '@/components/dashboard/DashboardLayout';
 
+// Force dynamic rendering — profile/approval status must always be fresh
+export const dynamic = 'force-dynamic';
+
 // Admin emails that bypass approval and get admin role automatically
 const ADMIN_EMAILS = ['kikep008@gmail.com'];
 
@@ -18,17 +21,32 @@ export default async function DashboardGroupLayout({
         redirect('/login');
     }
 
+    // Admin email whitelist is the ultimate authority — survives DB failures
+    const isAdminByEmail = ADMIN_EMAILS.includes(user.email || '');
+
     // Fetch profile data for sidebar and approval gating
-    let { data: profile } = await supabase
+    // eslint-disable-next-line prefer-const
+    let { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select('full_name, role, avatar_url, is_approved')
         .eq('id', user.id)
         .single();
 
-    const isAdmin = ADMIN_EMAILS.includes(user.email || '');
+    // If query failed (e.g. is_approved column missing), retry without it
+    if (profileError && !profile) {
+        const { data: fallback } = await supabase
+            .from('profiles')
+            .select('full_name, role, avatar_url')
+            .eq('id', user.id)
+            .single();
+        if (fallback) {
+            profile = { ...fallback, is_approved: isAdminByEmail ? true : false };
+        }
+    }
 
     // Use admin client (bypasses RLS) for profile creation/promotion
     const adminDb = createAdminClient();
+
     if (!profile && adminDb) {
         // Profile doesn't exist yet — create it
         const { data: created } = await adminDb
@@ -37,13 +55,13 @@ export default async function DashboardGroupLayout({
                 id: user.id,
                 full_name: user.user_metadata?.full_name || user.email?.split('@')[0] || '',
                 avatar_url: user.user_metadata?.avatar_url || null,
-                role: isAdmin ? 'admin' : 'student',
-                is_approved: isAdmin,
+                role: isAdminByEmail ? 'admin' : 'student',
+                is_approved: isAdminByEmail,
             })
             .select('full_name, role, avatar_url, is_approved')
             .single();
         profile = created;
-    } else if (profile && isAdmin && (profile.role !== 'admin' || !profile.is_approved) && adminDb) {
+    } else if (profile && isAdminByEmail && (profile.role !== 'admin' || !profile.is_approved) && adminDb) {
         // Admin email needs promotion — only update role and approval
         const { data: promoted } = await adminDb
             .from('profiles')
@@ -51,19 +69,23 @@ export default async function DashboardGroupLayout({
             .eq('id', user.id)
             .select('full_name, role, avatar_url, is_approved')
             .single();
-        profile = promoted;
+        if (promoted) profile = promoted;
     }
+
+    // For admin email users, force admin role in userData regardless of DB state
+    const effectiveRole = isAdminByEmail ? 'admin' : ((profile?.role as string) || 'student');
+    const effectiveApproved = isAdminByEmail ? true : (profile?.is_approved ?? false);
 
     const userData = {
         email: user.email || '',
         fullName: profile?.full_name || user.email?.split('@')[0] || '',
         avatarUrl: profile?.avatar_url || null,
-        role: (profile?.role as string) || 'student',
-        isApproved: profile?.is_approved ?? false,
+        role: effectiveRole,
+        isApproved: effectiveApproved,
     };
 
-    // Gate: only block unapproved students
-    if (profile?.role === 'student' && !profile?.is_approved) {
+    // Gate: admin email users ALWAYS pass; everyone else needs approval
+    if (!isAdminByEmail && effectiveRole !== 'admin' && !effectiveApproved) {
         const PendingPage = (await import('./pending-approval/page')).default;
         return (
             <DashboardLayoutClient user={userData}>
