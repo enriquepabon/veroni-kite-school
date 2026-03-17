@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 import { syncBookingRequest } from '@/lib/google-sheets';
 
 export async function POST(request: NextRequest) {
@@ -24,7 +24,15 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        const supabase = await createClient();
+        // Use admin client to bypass RLS for public booking inserts
+        const supabase = createAdminClient();
+        if (!supabase) {
+            console.error('Missing SUPABASE_SERVICE_ROLE_KEY');
+            return NextResponse.json(
+                { error: 'Server configuration error' },
+                { status: 500 }
+            );
+        }
 
         const { error } = await supabase.from('booking_requests').insert({
             name: name.trim(),
