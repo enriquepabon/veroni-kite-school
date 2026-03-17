@@ -34,16 +34,23 @@ export default function AdminStudentsPage() {
     const [loading, setLoading] = useState(true);
     const [actionLoading, setActionLoading] = useState<string | null>(null);
 
+    const [error, setError] = useState<string | null>(null);
+
     async function fetchData() {
         try {
             const res = await fetch('/api/admin/students');
+            const data = await res.json();
             if (res.ok) {
-                const data = await res.json();
                 setStudents(data.students || []);
                 setInstructors(data.instructors || []);
+                setError(null);
+            } else {
+                console.error('Admin students API error:', res.status, data);
+                setError(`API error: ${res.status} - ${data.error || 'Unknown'}`);
             }
-        } catch {
-            // silently fail
+        } catch (e) {
+            console.error('Admin students fetch error:', e);
+            setError(`Fetch error: ${e instanceof Error ? e.message : 'Unknown'}`);
         } finally {
             setLoading(false);
         }
@@ -134,6 +141,13 @@ export default function AdminStudentsPage() {
                     }
                 </p>
             </motion.div>
+
+            {/* Error display */}
+            {error && (
+                <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
+                    {error}
+                </div>
+            )}
 
             {/* Pending Approval Section */}
             {pendingStudents.length > 0 && (
