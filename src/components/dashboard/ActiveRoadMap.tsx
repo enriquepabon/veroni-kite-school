@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import { roadmapLevels } from '@/lib/roadmap-data';
 import { BorderBeam } from '@/components/ui/border-beam';
+import RoadmapVideoCard from './RoadmapVideoCard';
 
 type SkillStatus = 'completed' | 'in_progress' | 'locked';
 
@@ -153,56 +154,80 @@ export default function ActiveRoadMap({ progress = {}, currentLevel = 1 }: Activ
                                     transition={{ duration: 0.3 }}
                                     className="overflow-hidden"
                                 >
-                                    <div className="px-4 md:px-5 pb-4 md:pb-5 space-y-2 border-t border-white/5 pt-3">
-                                        {level.skills.map((skill) => {
-                                            const status = getSkillStatus(skill.id);
-                                            const skillProgress = progress[skill.id];
-                                            const config = statusConfig[status];
-                                            const skillName = isEn ? skill.name_en : skill.name_es;
+                                    <div className="px-4 md:px-5 pb-4 md:pb-5 border-t border-white/5 pt-3">
+                                        <div className="space-y-2">
+                                            {level.skills.map((skill) => {
+                                                const status = getSkillStatus(skill.id);
+                                                const skillProgress = progress[skill.id];
+                                                const config = statusConfig[status];
+                                                const skillName = isEn ? skill.name_en : skill.name_es;
 
-                                            return (
-                                                <div
-                                                    key={skill.id}
-                                                    className={`flex items-start gap-3 p-3 rounded-xl border ${config.bgClass} transition-opacity duration-300`}
-                                                >
-                                                    <span className="mt-0.5 flex-shrink-0">
-                                                        {status === 'completed' && (
-                                                            <svg className="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                                                                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                                            </svg>
-                                                        )}
-                                                        {status === 'in_progress' && (
-                                                            <svg className="w-5 h-5 text-ocean-teal animate-spin" style={{ animationDuration: '3s' }} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182M21.015 4.356v4.992" />
-                                                            </svg>
-                                                        )}
-                                                        {status === 'locked' && (
-                                                            <svg className="w-5 h-5 text-caribbean-aqua/30" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-                                                            </svg>
-                                                        )}
-                                                    </span>
+                                                return (
+                                                    <div
+                                                        key={skill.id}
+                                                        className={`flex items-start gap-3 p-3 rounded-xl border ${config.bgClass} transition-opacity duration-300`}
+                                                    >
+                                                        <span className="mt-0.5 flex-shrink-0">
+                                                            {status === 'completed' && (
+                                                                <svg className="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                                                </svg>
+                                                            )}
+                                                            {status === 'in_progress' && (
+                                                                <svg className="w-5 h-5 text-ocean-teal animate-spin" style={{ animationDuration: '3s' }} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182M21.015 4.356v4.992" />
+                                                                </svg>
+                                                            )}
+                                                            {status === 'locked' && (
+                                                                <svg className="w-5 h-5 text-caribbean-aqua/30" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                                                                </svg>
+                                                            )}
+                                                        </span>
 
-                                                    <div className="flex-1 min-w-0">
-                                                        <p className="font-medium text-sm text-salt-white">
-                                                            {skillName}
-                                                        </p>
-                                                        {status === 'completed' && skillProgress?.completed_at && (
-                                                            <p className="text-xs text-green-400/70 mt-0.5">
-                                                                {t('completedOn')} {new Date(skillProgress.completed_at).toLocaleDateString(locale)}
-                                                                {skillProgress.validated_by_name && (
-                                                                    <> · {t('validatedBy')} {skillProgress.validated_by_name}</>
-                                                                )}
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className="font-medium text-sm text-salt-white">
+                                                                {skillName}
                                                             </p>
-                                                        )}
-                                                    </div>
+                                                            {status === 'completed' && skillProgress?.completed_at && (
+                                                                <p className="text-xs text-green-400/70 mt-0.5">
+                                                                    {t('completedOn')} {new Date(skillProgress.completed_at).toLocaleDateString(locale)}
+                                                                    {skillProgress.validated_by_name && (
+                                                                        <> · {t('validatedBy')} {skillProgress.validated_by_name}</>
+                                                                    )}
+                                                                </p>
+                                                            )}
+                                                        </div>
 
-                                                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${config.badgeClass} flex-shrink-0`}>
-                                                        {config.badge}
-                                                    </span>
+                                                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${config.badgeClass} flex-shrink-0`}>
+                                                            {config.badge}
+                                                        </span>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+
+                                        {/* Videos section */}
+                                        {level.videos.length > 0 && (
+                                            <div className="mt-4 pt-4 border-t border-white/5">
+                                                <h4 className="text-sm font-bold text-salt-white mb-3 flex items-center gap-2">
+                                                    <svg className="w-4 h-4" style={{ color: level.color }} viewBox="0 0 20 20" fill="currentColor">
+                                                        <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+                                                    </svg>
+                                                    {isEn ? 'Tutorial Videos' : 'Videos Tutoriales'}
+                                                </h4>
+                                                <div className="flex gap-4 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+                                                    {level.videos.map((video) => (
+                                                        <RoadmapVideoCard
+                                                            key={video.id}
+                                                            video={video}
+                                                            isEn={isEn}
+                                                            accentColor={level.color}
+                                                        />
+                                                    ))}
                                                 </div>
-                                            );
-                                        })}
+                                            </div>
+                                        )}
                                     </div>
                                 </motion.div>
                             )}

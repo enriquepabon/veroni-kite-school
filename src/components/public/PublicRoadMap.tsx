@@ -40,11 +40,12 @@ export default function PublicRoadMap() {
                         </div>
 
                         {/* Card */}
-                        <button
-                            onClick={() => setExpandedLevel(isExpanded ? null : level.id)}
-                            className="w-full text-left bg-white rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden group"
-                        >
-                            <div className="p-5 md:p-6">
+                        <div className="w-full bg-white rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden">
+                            {/* Clickable header */}
+                            <button
+                                onClick={() => setExpandedLevel(isExpanded ? null : level.id)}
+                                className="w-full text-left p-5 md:p-6 group cursor-pointer"
+                            >
                                 <div className="flex items-center justify-between gap-3">
                                     <div className="flex-1 min-w-0">
                                         <span className={`inline-block px-2.5 py-0.5 rounded-full bg-gradient-to-r ${level.gradient} text-white text-xs font-bold mb-2`}>
@@ -68,7 +69,7 @@ export default function PublicRoadMap() {
                                         <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
                                     </motion.svg>
                                 </div>
-                            </div>
+                            </button>
 
                             {/* Expanded skills + videos */}
                             <AnimatePresence>
@@ -115,7 +116,6 @@ export default function PublicRoadMap() {
                                                     <div
                                                         ref={(el) => { scrollContainerRefs.current[level.id] = el; }}
                                                         className="flex gap-4 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
-                                                        onClick={(e) => e.stopPropagation()}
                                                     >
                                                         {level.videos.map((video) => (
                                                             <RoadmapVideoCard
@@ -132,7 +132,7 @@ export default function PublicRoadMap() {
                                     </motion.div>
                                 )}
                             </AnimatePresence>
-                        </button>
+                        </div>
                     </motion.div>
                 );
             })}
