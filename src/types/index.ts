@@ -49,6 +49,14 @@ export interface Course {
 }
 
 // --- Roadmap (UI-enriched types for components) ---
+export interface RoadMapVideo {
+    id: string;
+    youtube_id: string;
+    title_es: string;
+    title_en: string;
+    channel: string;
+}
+
 export interface RoadMapSkill {
     id: string;
     name_es: string;
@@ -68,6 +76,7 @@ export interface RoadMapLevel {
     color: string;
     gradient: string;
     skills: RoadMapSkill[];
+    videos: RoadMapVideo[];
 }
 
 // --- Roadmap (Supabase row types) ---

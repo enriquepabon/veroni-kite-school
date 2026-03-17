@@ -1,14 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useLocale } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import { roadmapLevels } from '@/lib/roadmap-data';
+import RoadmapVideoCard from './RoadmapVideoCard';
 
 export default function PublicRoadMap() {
     const locale = useLocale();
     const isEn = locale === 'en';
     const [expandedLevel, setExpandedLevel] = useState<string | null>(null);
+    const scrollContainerRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
     return (
         <div className="max-w-3xl mx-auto relative">
@@ -68,7 +70,7 @@ export default function PublicRoadMap() {
                                 </div>
                             </div>
 
-                            {/* Expanded skills */}
+                            {/* Expanded skills + videos */}
                             <AnimatePresence>
                                 {isExpanded && (
                                     <motion.div
@@ -79,6 +81,7 @@ export default function PublicRoadMap() {
                                         className="overflow-hidden"
                                     >
                                         <div className="px-5 md:px-6 pb-5 md:pb-6 border-t border-salt-white">
+                                            {/* Skills list */}
                                             <ul className="mt-4 space-y-3">
                                                 {level.skills.map((skill, sIdx) => (
                                                     <li key={skill.id} className="flex items-start gap-3">
@@ -99,6 +102,32 @@ export default function PublicRoadMap() {
                                                     </li>
                                                 ))}
                                             </ul>
+
+                                            {/* Videos section */}
+                                            {level.videos.length > 0 && (
+                                                <div className="mt-5 pt-4 border-t border-gray-100">
+                                                    <h4 className="text-sm font-bold text-night-tide mb-3 flex items-center gap-2">
+                                                        <svg className="w-4 h-4" style={{ color: level.color }} viewBox="0 0 20 20" fill="currentColor">
+                                                            <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+                                                        </svg>
+                                                        {isEn ? 'Recommended Videos' : 'Videos Recomendados'}
+                                                    </h4>
+                                                    <div
+                                                        ref={(el) => { scrollContainerRefs.current[level.id] = el; }}
+                                                        className="flex gap-4 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
+                                                        onClick={(e) => e.stopPropagation()}
+                                                    >
+                                                        {level.videos.map((video) => (
+                                                            <RoadmapVideoCard
+                                                                key={video.id}
+                                                                video={video}
+                                                                isEn={isEn}
+                                                                accentColor={level.color}
+                                                            />
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            )}
                                         </div>
                                     </motion.div>
                                 )}

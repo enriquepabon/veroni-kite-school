@@ -2,9 +2,13 @@ import { RoadMapLevel } from '@/types';
 
 /**
  * Kitesurf Road Map — Seed Data
- * 6 levels with sub-skills, bilingual.
+ * 6 levels with sub-skills and curated tutorial videos, bilingual.
  * This data is used by both PublicRoadMap and ActiveRoadMap components.
  * When Supabase is connected, this will be fetched from the `skills` table.
+ *
+ * Video sources:
+ * - Kitesurf College (youtube.com/@kitesurfco) — 126K+ subs, clearest beginner tutorials
+ * - Progression Sports (youtube.com/@learnwithprogression) — 10M+ views, professional instruction
  */
 export const roadmapLevels: RoadMapLevel[] = [
     {
@@ -54,6 +58,36 @@ export const roadmapLevels: RoadMapLevel[] = [
                 description_en: 'Be dragged by the kite in the water in a controlled manner.',
             },
         ],
+        videos: [
+            {
+                id: 'vid-1-1',
+                youtube_id: 'Vaa3RMTyxEg',
+                title_es: 'Control del Kite 101 — Tips para tu primera clase',
+                title_en: 'Kite Control 101 — Tips for your first lesson',
+                channel: 'Kitesurf College',
+            },
+            {
+                id: 'vid-1-2',
+                youtube_id: 'JCG0hk1X8XA',
+                title_es: 'Introduccion al Kiteboarding para principiantes',
+                title_en: 'Introduction to Kiteboarding for beginners',
+                channel: 'Progression',
+            },
+            {
+                id: 'vid-1-3',
+                youtube_id: '0IvY3Nqxwpg',
+                title_es: 'Errores comunes en clase de kitesurf y como evitarlos',
+                title_en: 'Kitesurf lesson mistakes & tips for avoiding them',
+                channel: 'Kitesurf College',
+            },
+            {
+                id: 'vid-1-4',
+                youtube_id: 'pECl31cvLCg',
+                title_es: 'Como arreglar lineas cruzadas o invertidas',
+                title_en: 'How to fix crossed or inverted lines',
+                channel: 'Kitesurf College',
+            },
+        ],
     },
     {
         id: 'level-2',
@@ -93,6 +127,22 @@ export const roadmapLevels: RoadMapLevel[] = [
                 name_en: 'Board introduction',
                 description_es: 'Primer contacto con la tabla: posición del cuerpo y pies.',
                 description_en: 'First contact with the board: body and foot position.',
+            },
+        ],
+        videos: [
+            {
+                id: 'vid-2-1',
+                youtube_id: 'wsLt1ZXxXoI',
+                title_es: 'Aumentos repentinos de viento — como evitarlos y manejarlos',
+                title_en: 'Sudden wind increases — how to avoid and handle them',
+                channel: 'Kitesurf College',
+            },
+            {
+                id: 'vid-2-2',
+                youtube_id: 'uocy0lVUaJY',
+                title_es: 'Tutorial: Foul Hook, Miss Hook y Re-Hook',
+                title_en: 'Foul Hook, Miss Hook and Re-Hook Tutorial',
+                channel: 'Kitesurf College',
             },
         ],
     },
@@ -136,6 +186,29 @@ export const roadmapLevels: RoadMapLevel[] = [
                 description_en: 'Stop safely and in a controlled manner.',
             },
         ],
+        videos: [
+            {
+                id: 'vid-3-1',
+                youtube_id: '4nfy-5FZGJE',
+                title_es: 'Waterstart — Tips esenciales (version actualizada)',
+                title_en: 'Waterstart — Top Tips (updated version)',
+                channel: 'Progression',
+            },
+            {
+                id: 'vid-3-2',
+                youtube_id: 'JlNpmAiPQIE',
+                title_es: 'Waterstart — Tips esenciales',
+                title_en: 'Waterstart — Top Tips',
+                channel: 'Progression',
+            },
+            {
+                id: 'vid-3-3',
+                youtube_id: 'hyj7Lrk1Jds',
+                title_es: 'Errores comunes en el waterstart y primeras navegaciones',
+                title_en: 'Common mistakes in waterstarts & first runs',
+                channel: 'Progression',
+            },
+        ],
     },
     {
         id: 'level-4',
@@ -175,6 +248,22 @@ export const roadmapLevels: RoadMapLevel[] = [
                 name_en: 'Riding in different conditions',
                 description_es: 'Adaptarse a diferentes intensidades de viento, olas y corrientes.',
                 description_en: 'Adapt to different wind intensities, waves and currents.',
+            },
+        ],
+        videos: [
+            {
+                id: 'vid-4-1',
+                youtube_id: '0SJ-a_gffVs',
+                title_es: 'Giro deslizado — cambio de direccion basico',
+                title_en: 'Sliding Turn — basic direction change',
+                channel: 'Progression',
+            },
+            {
+                id: 'vid-4-2',
+                youtube_id: 'MfbNHYNIUC0',
+                title_es: 'Rueda de trucos — Transiciones e inspiracion',
+                title_en: 'Trick Wheel — Transitions & inspiration',
+                channel: 'Progression',
             },
         ],
     },
@@ -218,6 +307,43 @@ export const roadmapLevels: RoadMapLevel[] = [
                 description_en: 'Ride with the opposite foot forward.',
             },
         ],
+        videos: [
+            {
+                id: 'vid-5-1',
+                youtube_id: 'udcdK6Fr6Rc',
+                title_es: 'Saltos — Tips esenciales',
+                title_en: 'Jumping — Top Tips',
+                channel: 'Progression',
+            },
+            {
+                id: 'vid-5-2',
+                youtube_id: '976-5neat-A',
+                title_es: 'Backroll — Tips esenciales',
+                title_en: 'Back Rolls — Top Tips',
+                channel: 'Progression',
+            },
+            {
+                id: 'vid-5-3',
+                youtube_id: 'cVUqcels4-M',
+                title_es: 'Pop con pre-carga — Tecnica de despegue',
+                title_en: 'Pre-Load Pop Take Off technique',
+                channel: 'Kitesurf College',
+            },
+            {
+                id: 'vid-5-4',
+                youtube_id: 'ui1JuioIc5c',
+                title_es: 'Kite Loop Late Backroll y todos los pasos de entrenamiento',
+                title_en: 'Kite Loop Late Backroll & all training steps',
+                channel: 'Kitesurf College',
+            },
+            {
+                id: 'vid-5-5',
+                youtube_id: '7tsSjtpdSLg',
+                title_es: 'Cuando meter la barra al saltar',
+                title_en: 'When to sheet the bar in when jumping',
+                channel: 'Progression',
+            },
+        ],
     },
     {
         id: 'level-6',
@@ -257,6 +383,36 @@ export const roadmapLevels: RoadMapLevel[] = [
                 name_en: 'Competition and coaching',
                 description_es: 'Preparación para competencias y desarrollo como instructor.',
                 description_en: 'Competition preparation and instructor development.',
+            },
+        ],
+        videos: [
+            {
+                id: 'vid-6-1',
+                youtube_id: 'nbNFM7ZL5e4',
+                title_es: 'Pop desenganchado (Unhooked) — Tips esenciales',
+                title_en: 'Popping (Unhooked) — Top Tips',
+                channel: 'Progression',
+            },
+            {
+                id: 'vid-6-2',
+                youtube_id: 'GuRsWppsFeE',
+                title_es: 'F16 — Backroll desenganchado con Kiteloop',
+                title_en: 'F16 — Unhooked Back Roll with a Kiteloop',
+                channel: 'Progression',
+            },
+            {
+                id: 'vid-6-3',
+                youtube_id: 'aB7rtHYZLZs',
+                title_es: 'S-Bend — Tips esenciales',
+                title_en: 'S-Bend — Top Tips',
+                channel: 'Progression',
+            },
+            {
+                id: 'vid-6-4',
+                youtube_id: '6hr3hBQsnvA',
+                title_es: 'Surface Pass — Tips esenciales',
+                title_en: 'Surface Pass — Top Tips',
+                channel: 'Progression',
             },
         ],
     },
