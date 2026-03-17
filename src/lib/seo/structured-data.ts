@@ -1,6 +1,6 @@
 /**
  * JSON-LD Structured Data for Veroni Kite Academy.
- * Implements LocalBusiness + SportsActivityLocation + Course + AggregateRating.
+ * Implements LocalBusiness + SportsActivityLocation + Course + AggregateRating + FAQPage.
  */
 
 const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://veronikites.com';
@@ -39,8 +39,11 @@ export function getLocalBusinessSchema(locale: string) {
             closes: '18:00',
         },
         sameAs: [
-            'https://www.instagram.com/veronikites',
+            'https://www.instagram.com/veronikiteschool',
             'https://www.facebook.com/veronikites',
+            'https://www.youtube.com/@veronikites',
+            'https://www.tiktok.com/@veronikites',
+            'https://twitter.com/veronikites',
         ],
         sport: 'Kitesurfing',
         aggregateRating: {
@@ -163,4 +166,65 @@ export function getCourseSchema(locale: string) {
             educationalLevel: isEn ? 'Intermediate' : 'Intermedio',
         },
     ];
+}
+
+export function getFAQSchema(locale: string) {
+    const isEn = locale === 'en';
+
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+            {
+                '@type': 'Question',
+                name: isEn ? 'Do I need to know how to swim?' : '¿Necesito saber nadar para hacer kitesurf?',
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: isEn
+                        ? 'Yes, you need to be a confident swimmer. You don\'t need to be an Olympic swimmer, but you should feel comfortable in the water.'
+                        : 'Sí, es necesario saber nadar con confianza. No necesitas ser un nadador olímpico, pero debes sentirte cómodo en el agua.',
+                },
+            },
+            {
+                '@type': 'Question',
+                name: isEn ? 'How long does it take to learn kitesurfing?' : '¿Cuánto tiempo toma aprender kitesurf?',
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: isEn
+                        ? 'With 6-12 hours of lessons (3-4 days), most students achieve their first waterstart. For independent riding, we recommend at least 20 hours of practice.'
+                        : 'Con 6-12 horas de clases (3-4 días), la mayoría de estudiantes logran su primer waterstart. Para navegar de forma independiente, recomendamos al menos 20 horas de práctica.',
+                },
+            },
+            {
+                '@type': 'Question',
+                name: isEn ? 'Is kitesurfing dangerous?' : '¿Es peligroso el kitesurf?',
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: isEn
+                        ? 'Like any extreme sport, it has risks. But with professional instruction and respect for weather conditions, it\'s a safe sport. Our IKO-certified instructors prioritize your safety.'
+                        : 'Como todo deporte extremo, tiene riesgos. Pero con instrucción profesional y respeto por las condiciones meteorológicas, es un deporte seguro. Nuestros instructores certificados IKO priorizan tu seguridad.',
+                },
+            },
+            {
+                '@type': 'Question',
+                name: isEn ? 'What equipment do I need?' : '¿Qué equipo necesito?',
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: isEn
+                        ? 'For lessons, we provide everything: kite, board, harness, helmet and life vest. You just need sunscreen, sunglasses with a strap, and comfortable clothing.'
+                        : 'Para las clases, nosotros proporcionamos todo: kite, tabla, arnés, casco y chaleco. Solo necesitas traer protector solar, gafas de sol con cinta, y ropa cómoda.',
+                },
+            },
+            {
+                '@type': 'Question',
+                name: isEn ? 'What is the best season for kitesurfing in Salinas del Rey?' : '¿Cuál es la mejor temporada para hacer kitesurf en Salinas del Rey?',
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: isEn
+                        ? 'The main season runs from December to April, with consistent 15-25 knot winds. However, there are also good conditions from June to August.'
+                        : 'La temporada principal va de diciembre a abril, con vientos constantes de 15-25 nudos. Sin embargo, también hay buenas condiciones de junio a agosto.',
+                },
+            },
+        ],
+    };
 }

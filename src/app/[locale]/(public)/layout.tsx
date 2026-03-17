@@ -2,7 +2,7 @@ import Navbar from '@/components/public/Navbar';
 import Footer from '@/components/public/Footer';
 import WhatsAppWidget from '@/components/public/WhatsAppWidget';
 import { SmoothScrollProvider } from '@/components/providers/smooth-scroll';
-import { getLocalBusinessSchema, getCourseSchema } from '@/lib/seo/structured-data';
+import { getLocalBusinessSchema, getCourseSchema, getFAQSchema } from '@/lib/seo/structured-data';
 import { getLocale } from 'next-intl/server';
 
 export default async function PublicLayout({
@@ -13,6 +13,7 @@ export default async function PublicLayout({
     const locale = await getLocale();
     const businessSchema = getLocalBusinessSchema(locale);
     const courseSchema = getCourseSchema(locale);
+    const faqSchema = getFAQSchema(locale);
 
     return (
         <>
@@ -40,6 +41,10 @@ export default async function PublicLayout({
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
                 />
             )}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+            />
         </>
     );
 }

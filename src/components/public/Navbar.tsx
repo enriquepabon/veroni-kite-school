@@ -11,6 +11,7 @@ const navLinks = [
     { href: '/cursos', key: 'courses' },
     { href: '/roadmap', key: 'roadmap' },
     { href: '/ubicacion', key: 'location' },
+    { href: '/blog', key: 'blog' },
 ] as const;
 
 export default function Navbar() {

@@ -1,7 +1,15 @@
 {
     "metadata": {
         "title": "Veroni Kite — Kitesurf Academy in Salinas del Rey",
-        "description": "Learn kitesurfing with IKO-certified instructors at one of Colombia's best spots. Book your class today."
+        "description": "Learn kitesurfing with IKO-certified instructors at one of Colombia's best spots. Book your class today.",
+        "cursosTitle": "Kitesurf Courses | Prices & Levels — Veroni Kite",
+        "cursosDescription": "Discover our kitesurf courses in Salinas del Rey, Colombia. From beginner to advanced, with IKO-certified instructors. Prices from $85 USD.",
+        "roadmapTitle": "Kitesurfer Road Map — Veroni Kite",
+        "roadmapDescription": "Explore the 6 levels of kitesurf progression: from your first flight to freestyle tricks. Track your progress step by step with IKO instructors.",
+        "ubicacionTitle": "Location — Salinas del Rey, Colombia | Veroni Kite",
+        "ubicacionDescription": "Salinas del Rey: one of the best kitesurf spots in the Colombian Caribbean. 20-35 knot winds, flat water and waves. How to get there and accommodation.",
+        "sobreKitesurfTitle": "What is Kitesurfing? Complete Guide — Veroni Kite",
+        "sobreKitesurfDescription": "Everything about kitesurfing: what it is, how it works, how much it costs to learn, what equipment you need and the best season in Salinas del Rey, Colombia."
     },
     "nav": {
         "home": "Home",
