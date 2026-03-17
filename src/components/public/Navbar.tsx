@@ -18,13 +18,19 @@ export default function Navbar() {
     const t = useTranslations('nav');
     const pathname = usePathname();
     const [mobileOpen, setMobileOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
+    const isHome = pathname === '/';
+    const [scrolled, setScrolled] = useState(!isHome);
 
     useEffect(() => {
+        if (!isHome) {
+            setScrolled(true);
+            return;
+        }
         const handleScroll = () => setScrolled(window.scrollY > 50);
+        handleScroll(); // check initial position
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [isHome]);
 
     // Entrance animation
     useEffect(() => {
