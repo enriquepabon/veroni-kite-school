@@ -17,7 +17,7 @@ export function getLocalBusinessSchema(locale: string) {
             ? 'Premium kitesurf academy in Salinas del Rey, Colombia. IKO-certified instructors, guaranteed progression.'
             : 'Academia de kitesurf premium en Salinas del Rey, Colombia. Instructores certificados IKO, progresión garantizada.',
         url: `${BASE_URL}/${locale}`,
-        telephone: '+57-300-000-0000',
+        telephone: '+57-301-746-4927',
         email: 'info@veronikites.com',
         address: {
             '@type': 'PostalAddress',

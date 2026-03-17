@@ -56,8 +56,7 @@ const pricingOptions: PricingCard[] = [
 ];
 
 export function Classes() {
-  // Placeholder WhatsApp number - replace with actual number
-  const whatsappNumber = "573001234567";
+  const whatsappNumber = "573017464927";
 
   const getWhatsAppLink = (courseName: string) => {
     const message = encodeURIComponent(

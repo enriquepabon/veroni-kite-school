@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 
-const WHATSAPP_NUMBER = '573001234567';
+const WHATSAPP_NUMBER = '573017464927';
 
 export default function BookingForm({ preselectedCourse }: { preselectedCourse?: string }) {
     const t = useTranslations('bookingForm');

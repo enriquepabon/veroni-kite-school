@@ -3,8 +3,7 @@
 import Link from "next/link";
 
 export function Hero() {
-  // Placeholder WhatsApp number - replace with actual number
-  const whatsappNumber = "573001234567";
+  const whatsappNumber = "573017464927";
   const whatsappMessage = encodeURIComponent(
     "¡Hola! Quiero información sobre clases de kitesurf"
   );

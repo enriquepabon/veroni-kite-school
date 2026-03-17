@@ -158,7 +158,7 @@ export function FAQ() {
             ¿No encontraste la respuesta que buscabas?
           </p>
           <a
-            href="https://wa.me/573001234567?text=Hola,%20tengo%20una%20pregunta%20sobre%20las%20clases%20de%20kitesurf"
+            href="https://wa.me/573017464927?text=Hola,%20tengo%20una%20pregunta%20sobre%20las%20clases%20de%20kitesurf"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-full transition-colors shadow-lg"
