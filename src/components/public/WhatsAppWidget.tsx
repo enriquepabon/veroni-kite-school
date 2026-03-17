@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function WhatsAppWidget() {
     const phoneNumber = '573001234567'; // Replace with actual number
-    const message = encodeURIComponent('Hola! Me interesa aprender kitesurf con Veroni Kite. ¿Pueden darme más información?');
+    const message = encodeURIComponent('Hola! Me interesa aprender kitesurf con Veronikites. ¿Pueden darme más información?');
     const href = `https://wa.me/${phoneNumber}?text=${message}`;
 
     return (

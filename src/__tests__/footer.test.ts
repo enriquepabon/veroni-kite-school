@@ -242,7 +242,7 @@ describe("US-009: Footer Component", () => {
     test("contains school name", () => {
       const content = fs.readFileSync(footerPath, "utf-8");
       assert.ok(
-        content.includes("Veroni Kite School"),
+        content.includes("Veronikites School"),
         "Footer should contain school name"
       );
     });

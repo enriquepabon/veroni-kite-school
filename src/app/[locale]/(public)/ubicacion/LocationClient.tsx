@@ -49,7 +49,7 @@ export default function LocationClient() {
                             allowFullScreen
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
-                            title="Veroni Kite - Salinas del Rey"
+                            title="Veronikites - Salinas del Rey"
                         />
                     </motion.div>
 

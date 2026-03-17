@@ -4,7 +4,7 @@ import BookingForm from '@/components/public/BookingForm';
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
     const t = await getTranslations({ locale, namespace: 'bookingForm' });
     return {
-        title: t('pageTitle') + ' — Veroni Kite',
+        title: t('pageTitle') + ' — Veronikites',
         description: t('pageSubtitle'),
     };
 }

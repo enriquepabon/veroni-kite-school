@@ -10,11 +10,11 @@ Para permitir que los usuarios inicien sesión con Google, necesitas configurar 
 
 ## Paso 2: Crear Proyecto en Google Cloud
 1. Ve a [Google Cloud Console](https://console.cloud.google.com/).
-2. Crea un **Nuevo Proyecto** (nómbralo "Veroni Kite").
+2. Crea un **Nuevo Proyecto** (nómbralo "Veronikites").
 3. Ve a **APIs & Services** -> **OAuth consent screen**.
 4. Selecciona **External** y dale a "Create".
 5. Llena los datos básicos:
-   - **App Name**: Veroni Kite
+   - **App Name**: Veronikites
    - **User support email**: Tu email
    - **Developer contact information**: Tu email
 6. Dale a "Save and Continue" en las siguientes pantallas (no necesitas scopes especiales por ahora).
@@ -23,7 +23,7 @@ Para permitir que los usuarios inicien sesión con Google, necesitas configurar 
 1. Ve a **APIs & Services** -> **Credentials**.
 2. Dale a **+ CREATE CREDENTIALS** -> **OAuth client ID**.
 3. En "Application type" selecciona **Web application**.
-4. En "Name" por "Veroni Kite Web".
+4. En "Name" por "Veronikites Web".
 5. En **Authorized request APIs** (si te pide), ignora por ahora.
 6. En **Authorized JavaScript origins**:
    - Agrega `http://localhost:3000` (para desarrollo).

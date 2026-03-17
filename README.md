@@ -1,6 +1,6 @@
-# Veroni Kite Academy
+# Veronikites Academy
 
-Full-stack kitesurf academy platform for **Veroni Kite** in Salinas del Rey, Colombia. Built with Next.js 15, Supabase, Wompi payments, and bilingual support (ES/EN).
+Full-stack kitesurf academy platform for **Veronikites** in Salinas del Rey, Colombia. Built with Next.js 15, Supabase, Wompi payments, and bilingual support (ES/EN).
 
 ## Tech Stack
 
@@ -115,4 +115,4 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 
 ## License
 
-© 2026 Veroni Kite Academy. All rights reserved.
+© 2026 Veronikites Academy. All rights reserved.

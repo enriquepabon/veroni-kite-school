@@ -12,7 +12,7 @@ export function AboutUs() {
             className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4"
             data-testid="about-headline"
           >
-            Sobre Veroni Kite School
+            Sobre Veronikites Kite School
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
             Tu escuela de kitesurf certificada en el corazón de la costa colombiana
@@ -88,7 +88,7 @@ export function AboutUs() {
                 Pasión por el Kitesurf desde 2015
               </h3>
               <p className="text-gray-600 leading-relaxed mb-4" data-testid="about-description">
-                En Veroni Kite School, combinamos años de experiencia con una pasión 
+                En Veronikites Kite School, combinamos años de experiencia con una pasión 
                 inquebrantable por el kitesurf. Nuestros instructores están certificados 
                 por la <strong>International Kiteboarding Organization (IKO)</strong>, 
                 garantizando que recibirás la mejor formación siguiendo los estándares 

@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
     const t = await getTranslations({ locale, namespace: 'privacy' });
     return {
-        title: t('title') + ' — Veroni Kite',
+        title: t('title') + ' — Veronikites',
         description: t('metaDescription'),
     };
 }

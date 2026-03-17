@@ -1,6 +1,6 @@
 # Progress Log
 Run: a2ff940a-2d5d-42e7-a129-cd77b1623e15
-Task: Crear landing page para Veroni Kite School
+Task: Crear landing page para Veronikites School
 Started: 2026-02-11T21:22:00-05:00
 
 ## Codebase Patterns
@@ -37,7 +37,7 @@ Started: 2026-02-11T21:22:00-05:00
 ## 2026-02-11 21:42 - US-002: Create root layout with SEO metadata and Spanish language config
 - Created app/layout.tsx with html lang='es' for Spanish
 - Added comprehensive Metadata export with:
-  - Title: "Veroni Kite School | Escuela de Kitesurf en Salinas del Rey, Colombia"
+  - Title: "Veronikites School | Escuela de Kitesurf en Salinas del Rey, Colombia"
   - Description with keywords: kitesurf, Colombia, Salinas del Rey, IKO
   - Keywords array with target SEO terms
   - metadataBase for absolute URL resolution
@@ -54,7 +54,7 @@ Started: 2026-02-11T21:22:00-05:00
 ## 2026-02-12 02:25 - US-003: Create Header component with logo placeholder and mobile navigation
 - Created src/components/Header.tsx as a client component ("use client")
 - Implemented responsive header with:
-  - Logo placeholder: SVG icon + "Veroni Kite School" text
+  - Logo placeholder: SVG icon + "Veronikites School" text
   - Desktop navigation with 6 links: Inicio, Clases, Nosotros, Testimonios, FAQ, Contacto
   - Mobile hamburger menu hidden above md breakpoint (768px)
   - Mobile menu with slide-down animation controlled by isMenuOpen state
@@ -245,7 +245,7 @@ Started: 2026-02-11T21:22:00-05:00
   - Copyright bar with dynamic year and legal links
 - Contact information includes:
   - WhatsApp: +57 300 123 4567 with wa.me link
-  - Email: info@veronikiteschool.com (placeholder)
+  - Email: info@veronikites.com (placeholder)
   - Location: Salinas del Rey, Colombia
 - Social media icons: Instagram and Facebook with aria-labels
 - Dynamic copyright year using `new Date().getFullYear()`

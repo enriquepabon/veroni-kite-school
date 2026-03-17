@@ -32,7 +32,7 @@ describe("US-003: Header Component", () => {
     test("contains logo placeholder element", () => {
       const content = fs.readFileSync(headerPath, "utf-8");
       const hasLogoTestId = content.includes('data-testid="logo"');
-      const hasLogoText = content.includes("Veroni Kite School");
+      const hasLogoText = content.includes("Veronikites School");
       assert.ok(
         hasLogoTestId && hasLogoText,
         "Header should have logo placeholder with school name"

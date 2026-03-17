@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Integrar Google Sheets como CRM liviano y automatizado para sincronizar leads, solicitudes de reserva y bookings confirmados desde Supabase, dándole al equipo de VeronikIte una vista de seguimiento comercial sin salir de Google Sheets.
+**Goal:** Integrar Google Sheets como CRM liviano y automatizado para sincronizar leads, solicitudes de reserva y bookings confirmados desde Supabase, dándole al equipo de Veronikites una vista de seguimiento comercial sin salir de Google Sheets.
 
 **Architecture:** Los API routes existentes (`/api/leads`, `/api/booking`, `/api/bookings`) se modifican para que, después de insertar en Supabase, también escriban una fila en la hoja correspondiente de Google Sheets vía la API de Google. Se crea un módulo `src/lib/google-sheets.ts` que encapsula toda la lógica de autenticación (Service Account) y escritura. Supabase sigue siendo la fuente de verdad; el Sheet es una vista de seguimiento.
 
@@ -60,19 +60,19 @@ git commit -m "chore: add googleapis dependency for Google Sheets CRM integratio
 - [ ] **Step 1: Crear proyecto en Google Cloud Console**
 
 1. Ir a https://console.cloud.google.com/
-2. Crear proyecto: `veronikite-crm`
+2. Crear proyecto: `veronikites-crm`
 3. Habilitar API: **Google Sheets API**
 
 - [ ] **Step 2: Crear Service Account**
 
 1. IAM & Admin → Service Accounts → Create
-2. Nombre: `veronikite-sheets-writer`
+2. Nombre: `veronikites-sheets-writer`
 3. Crear clave JSON → descargar archivo
 4. Del archivo JSON extraer: `client_email` y `private_key`
 
 - [ ] **Step 3: Crear el Google Sheet**
 
-1. Crear un Google Sheet nuevo llamado: `VeronikIte CRM`
+1. Crear un Google Sheet nuevo llamado: `Veronikites CRM`
 2. Crear 3 hojas (tabs):
    - `Leads` con headers: `Fecha | Nombre | Email | Estado | Notas`
    - `Solicitudes` con headers: `Fecha | Nombre | Email | Teléfono | Curso | Fecha Preferida | Mensaje | Estado | Notas`
@@ -86,7 +86,7 @@ Agregar al archivo `.env.local`:
 
 ```env
 GOOGLE_SHEETS_SPREADSHEET_ID=tu-sheet-id-aqui
-GOOGLE_SHEETS_CLIENT_EMAIL=veronikite-sheets-writer@veronikite-crm.iam.gserviceaccount.com
+GOOGLE_SHEETS_CLIENT_EMAIL=veronikites-sheets-writer@veronikites-crm.iam.gserviceaccount.com
 GOOGLE_SHEETS_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
 ```
 
@@ -539,7 +539,7 @@ Expected: Build exitoso sin errores
 
 ```bash
 git add -A
-git commit -m "feat: complete Google Sheets CRM integration for VeronikIte"
+git commit -m "feat: complete Google Sheets CRM integration for Veronikites"
 ```
 
 ---
@@ -563,7 +563,7 @@ git commit -m "feat: complete Google Sheets CRM integration for VeronikIte"
                              ▼
                     ┌──────────────────┐
                     │  Google Sheet    │
-                    │  "VeronikIte CRM"│
+                    │  "Veronikites CRM"│
                     │  ├── Leads       │
                     │  ├── Solicitudes │
                     │  └── Bookings    │

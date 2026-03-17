@@ -31,7 +31,7 @@ export function Footer() {
                 </svg>
               </div>
               <span className="font-bold text-lg text-white">
-                Veroni Kite School
+                Veronikites Kite School
               </span>
             </div>
             <p className="text-gray-400 text-sm mb-6">
@@ -169,10 +169,10 @@ export function Footer() {
                 <div>
                   <p className="text-gray-400 text-sm">Email</p>
                   <a
-                    href="mailto:info@veronikite.com"
+                    href="mailto:info@veronikites.com"
                     className="text-cyan-400 hover:text-cyan-300 transition-colors text-sm"
                   >
-                    info@veronikite.com
+                    info@veronikites.com
                   </a>
                 </div>
               </li>
@@ -238,7 +238,7 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-gray-800" data-testid="copyright-bar">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-gray-400 text-sm text-center md:text-left" data-testid="copyright-text">
-              © {currentYear} Veroni Kite School. Todos los derechos reservados.
+              © {currentYear} Veronikites Kite School. Todos los derechos reservados.
             </p>
             <div className="flex gap-6">
               <Link

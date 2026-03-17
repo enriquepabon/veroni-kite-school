@@ -1,8 +1,8 @@
-# 📄 PRD — Veroni Kite: Plataforma Web para Academia de Kitesurf
+# 📄 PRD — Veronikites: Plataforma Web para Academia de Kitesurf
 
 > **Versión:** 1.0  
 > **Fecha:** 12 de Febrero, 2026  
-> **Autor:** Equipo de Producto – Veroni Kite  
+> **Autor:** Equipo de Producto – Veronikites  
 > **Estado:** Borrador para Revisión  
 > **Stack Tecnológico:** Next.js (App Router) · Tailwind CSS · Supabase · Wompi · Windy API
 
@@ -16,7 +16,7 @@ Construir una plataforma web de clase mundial, moderna y bilingüe (ES/EN) que c
 
 ### 1.2 Propuesta de Valor
 
-Veroni Kite no es solo una escuela — es una **experiencia completa de progresión**. La plataforma será el eje central donde el estudiante:
+Veronikites no es solo una escuela — es una **experiencia completa de progresión**. La plataforma será el eje central donde el estudiante:
 
 - Descubre el deporte y la escuela a través de un storytelling visual premium.
 - Se registra, reserva y paga sus clases de forma autónoma.
@@ -61,7 +61,7 @@ Veroni Kite no es solo una escuela — es una **experiencia completa de progresi
 
 | Aspecto | Descripción |
 |---|---|
-| **Perfil** | Staff de Veroni Kite (dueño, instructores certificados IKO) |
+| **Perfil** | Staff de Veronikites (dueño, instructores certificados IKO) |
 | **Necesidades** | Gestionar calendario, validar progreso de estudiantes, subir contenido |
 | **Acciones** | CRUD de cursos y slots, marcar niveles completados en el Road Map del estudiante, gestionar biblioteca de contenido, ver reservas y pagos |
 

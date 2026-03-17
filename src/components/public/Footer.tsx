@@ -111,7 +111,7 @@ export default function Footer() {
                 <Reveal delay={0.2}>
                     <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
                         <p className="text-xs text-salt-white/60">
-                            © {new Date().getFullYear()} Veroni Kite. {t('rights')}
+                            © {new Date().getFullYear()} Veronikites. {t('rights')}
                         </p>
                         <div className="flex gap-6 text-xs text-salt-white/60">
                             <Link href="/privacidad" className="hover:text-ocean-teal transition-colors duration-300">{t('privacy')}</Link>

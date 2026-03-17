@@ -1,5 +1,5 @@
 /**
- * JSON-LD Structured Data for Veroni Kite Academy.
+ * JSON-LD Structured Data for Veronikites Academy.
  * Implements LocalBusiness + SportsActivityLocation + Course + AggregateRating + FAQPage.
  */
 
@@ -12,7 +12,7 @@ export function getLocalBusinessSchema(locale: string) {
         '@context': 'https://schema.org',
         '@type': ['LocalBusiness', 'SportsActivityLocation'],
         name: 'VERONIKITES Kite School',
-        alternateName: 'Veroni Kite Academy',
+        alternateName: 'Veronikites Academy',
         description: isEn
             ? 'Premium kitesurf academy in Salinas del Rey, Colombia. IKO-certified instructors, guaranteed progression.'
             : 'Academia de kitesurf premium en Salinas del Rey, Colombia. Instructores certificados IKO, progresión garantizada.',

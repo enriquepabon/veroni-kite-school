@@ -1,4 +1,4 @@
-# Tasks: PRD Rediseño Visual y Mejora de Contenido — Veroni Kite
+# Tasks: PRD Rediseño Visual y Mejora de Contenido — Veronikites
 
 > Generado desde: `tasks/prd-redesign-contenido.md`
 
@@ -11,7 +11,7 @@
 - `src/components/Hero.tsx` - Hero section. Agregar video de fondo, mejorar H1, badge IKO, corregir contraste subtítulo, diferenciar CTAs, reposicionar elemento decorativo.
 - `src/components/Classes.tsx` - Tarjetas de cursos. Agregar fotos reales, descripción de contenido, diferenciar CTA de reserva.
 - `src/components/Testimonials.tsx` - Testimonios. Agregar fotos reales, fechas, enlaces a Google Reviews/TripAdvisor.
-- `src/components/AboutUs.tsx` - Sección "¿Por Qué Veroni Kite?". Agregar micro-CTAs, imágenes de spot e instructores.
+- `src/components/AboutUs.tsx` - Sección "¿Por Qué Veronikites?". Agregar micro-CTAs, imágenes de spot e instructores.
 - `src/components/Footer.tsx` - Footer. Consolidar íconos sociales, arreglar enlaces Privacidad/Términos.
 - `src/components/Header.tsx` - Header/Nav. Diferenciar ruta "Cursos" vs "Reservar".
 - `src/app/[locale]/(public)/privacidad/page.tsx` - **[NEW]** Página de Política de Privacidad (Ley 1581/2012).
@@ -60,7 +60,7 @@
   - [x] 2.9 Reposicionar elemento decorativo (mouse/scroll indicator) para que NO se superponga con el área de clic del CTA. Colocarlo debajo de los botones.
 
 - [x] 3.0 SEO Técnico — Meta Tags, Canonical, Hreflang, Schema.org y Open Graph
-  - [x] 3.1 Agregar `<link rel="canonical" href="https://veronikite.com/">` en el layout raíz. Cada subpágina debe generar su propio canonical dinámicamente.
+  - [x] 3.1 Agregar `<link rel="canonical" href="https://veronikites.com/">` en el layout raíz. Cada subpágina debe generar su propio canonical dinámicamente.
   - [x] 3.2 Agregar meta tags de Open Graph en `layout.tsx` o metadata export de Next.js: `og:image`, `og:url`, `og:type`, `og:title`, `og:description` con contenido del Brand Guidelines.
   - [x] 3.3 Cambiar Twitter card a `summary_large_image` y agregar `twitter:image`, `twitter:title`, `twitter:description`.
   - [x] 3.4 Agregar `<meta name="keywords" content="kitesurf Colombia, academia kitesurf Salinas del Rey, clases kitesurf Barranquilla, kitesurf certificación IKO, aprender kitesurf caribe, kiteboarding Colombia">`.
@@ -104,7 +104,7 @@
   - [x] 8.2 En `Header.tsx`, agregar enlace "Reservar" en la navegación que apunte a `/reservar`, diferenciado visualmente del enlace "Cursos".
   - [x] 8.3 Verificar que el menú hamburguesa en mobile incluya el nuevo enlace "Reservar" y funcione correctamente.
 
-- [x] 9.0 Sección "¿Por Qué Veroni Kite?" — Micro-CTAs e Imágenes
+- [x] 9.0 Sección "¿Por Qué Veronikites?" — Micro-CTAs e Imágenes
   - [x] 9.1 Agregar micro-CTA debajo de cada tarjeta de propuesta de valor en `AboutUs.tsx`: "Conoce a nuestros instructores →", "Descubre Salinas del Rey →", "Explora nuestro roadmap →". Actualizar `es.json` y `en.json`.
   - [x] 9.2 Agregar imágenes de apoyo a las tarjetas: `instructores.webp` para la tarjeta de instructores, `spot-salinas.webp` para la tarjeta de spot. Usar `<Image>` de Next.js.
   - [x] 9.3 Los micro-CTAs deben enlazar a secciones relevantes: instructores → ancla en la misma página o `/sobre-kitesurf`, spot → `/ubicacion`, roadmap → `/roadmap`.

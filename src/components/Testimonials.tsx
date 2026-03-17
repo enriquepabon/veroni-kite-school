@@ -24,7 +24,7 @@ const testimonials = [
     name: "Carlos Martínez",
     location: "Bogotá, Colombia",
     rating: 5,
-    quote: "Increíble experiencia en Veroni Kite School. Los instructores son muy profesionales y pacientes. En solo una semana ya estaba navegando de forma independiente. ¡100% recomendado!",
+    quote: "Increíble experiencia en Veronikites Kite School. Los instructores son muy profesionales y pacientes. En solo una semana ya estaba navegando de forma independiente. ¡100% recomendado!",
     avatar: "CM",
   },
   {

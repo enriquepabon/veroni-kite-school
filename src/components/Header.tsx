@@ -71,7 +71,7 @@ export function Header() {
               </svg>
             </div>
             <span className="font-bold text-lg text-cyan-700">
-              Veroni Kite School
+              Veronikites Kite School
             </span>
           </a>
 

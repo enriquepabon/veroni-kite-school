@@ -1036,7 +1036,7 @@ git commit -m "fix(security): atomic slot booking via Supabase RPC to prevent ra
 
 Run:
 ```bash
-cd "/Users/enriquepabon/Documents/Veroni Kite Website" && npm audit fix
+cd "/Users/enriquepabon/Documents/Veronikites Website" && npm audit fix
 ```
 
 - [ ] **Step 2: Verify the fix results**

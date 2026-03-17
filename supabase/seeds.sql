@@ -1,5 +1,5 @@
 -- SEED DATA FOR COURSES
--- Based on Veroni Kite Roadmap & Pricing
+-- Based on Veronikites Roadmap & Pricing
 
 insert into public.courses (title_es, title_en, description_es, description_en, level_required, duration_hours, price_cop, image_url)
 values
@@ -38,8 +38,8 @@ values
 insert into public.content (title_es, title_en, slug, type, content_html_es, content_html_en, is_public, published_at)
 values
 (
-  'Bienvenidos a Veroni Kite',
-  'Welcome to Veroni Kite',
+  'Bienvenidos a Veronikites',
+  'Welcome to Veronikites',
   'welcome-veroni-kite',
   'blog',
   '<p>Estamos emocionados de lanzar nuestra nueva plataforma web.</p>',

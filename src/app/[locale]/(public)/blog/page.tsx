@@ -5,7 +5,7 @@ import BlogListClient from './BlogListClient';
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
     const isEn = locale === 'en';
     return {
-        title: isEn ? 'Blog — Kitesurf Tips & Guides | Veroni Kite' : 'Blog — Tips y Guías de Kitesurf | Veroni Kite',
+        title: isEn ? 'Blog — Kitesurf Tips & Guides | Veronikites' : 'Blog — Tips y Guías de Kitesurf | Veronikites',
         description: isEn
             ? 'Kitesurf guides, tips for beginners, wind conditions in Salinas del Rey and everything about kitesurfing in Colombia.'
             : 'Guías de kitesurf, consejos para principiantes, condiciones de viento en Salinas del Rey y todo sobre el kitesurf en Colombia.',

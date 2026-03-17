@@ -1,11 +1,11 @@
-# Supabase Setup for Veroni Kite
+# Supabase Setup for Veronikites
 
 Follow these steps to set up your Supabase project backend.
 
 ## 1. Create Project
 1. Go to [Supabase Dashboard](https://supabase.com/dashboard)
 2. Click "New Project"
-3. Enter Name: `Veroni Kite`
+3. Enter Name: `Veronikites`
 4. Set a safe password
 5. Choose a region close to Colombia users if possible (e.g., US East)
 

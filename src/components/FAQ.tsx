@@ -32,7 +32,7 @@ const faqItems = [
     id: 5,
     question: "¿Es seguro el kitesurf? ¿Qué medidas de seguridad tienen?",
     answer:
-      "El kitesurf es seguro cuando se practica con instructores certificados y siguiendo los protocolos adecuados. En Veroni Kite School todos nuestros instructores tienen certificación IKO (International Kiteboarding Organization), el estándar internacional de seguridad. Utilizamos equipos con sistemas de liberación rápida, cascos y chalecos obligatorios, y siempre hay supervisión en el agua. Además, la zona de Salinas del Rey tiene aguas poco profundas ideales para principiantes.",
+      "El kitesurf es seguro cuando se practica con instructores certificados y siguiendo los protocolos adecuados. En Veronikites Kite School todos nuestros instructores tienen certificación IKO (International Kiteboarding Organization), el estándar internacional de seguridad. Utilizamos equipos con sistemas de liberación rápida, cascos y chalecos obligatorios, y siempre hay supervisión en el agua. Además, la zona de Salinas del Rey tiene aguas poco profundas ideales para principiantes.",
   },
   {
     id: 6,

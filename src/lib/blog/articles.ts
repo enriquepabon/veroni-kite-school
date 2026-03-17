@@ -130,7 +130,7 @@ If you're reading this, you probably already have the curiosity. Don't let it di
         },
         image: '/og-image.jpg',
         date: '2026-03-01',
-        author: 'Veroni Kite',
+        author: 'Veronikites',
         tags: ['kitesurf', 'colombia', 'principiantes', 'guía'],
         readTime: 10,
     },
@@ -189,7 +189,7 @@ Toma la vía hacia Barranquilla. En el peaje de Bayunca sigue derecho. Después 
 **Desde Barranquilla (Aeropuerto Ernesto Cortissoz):**
 Toma la vía hacia Cartagena y desvía hacia Juan de Acosta / Santa Verónica. Son unos 80 km, hora y media aproximadamente.
 
-**¿Necesitas transporte?** En Veroni Kite coordinamos tu transporte desde ambas ciudades. Solo [escríbenos](/reservar).
+**¿Necesitas transporte?** En Veronikites coordinamos tu transporte desde ambas ciudades. Solo [escríbenos](/reservar).
 
 ### Dónde quedarse
 
@@ -250,7 +250,7 @@ Take the road toward Barranquilla. At the Bayunca toll, continue straight. After
 **From Barranquilla (Ernesto Cortissoz Airport):**
 Take the road toward Cartagena and turn off toward Juan de Acosta / Santa Verónica. It's about 80 km, roughly an hour and a half.
 
-**Need transportation?** At Veroni Kite we coordinate your transport from both cities. Just [write to us](/reservar).
+**Need transportation?** At Veronikites we coordinate your transport from both cities. Just [write to us](/reservar).
 
 ### Where to stay
 
@@ -272,7 +272,7 @@ Ready to visit Salinas? [See how to get there](/ubicacion) or [book your class](
         },
         image: '/og-image.jpg',
         date: '2026-03-05',
-        author: 'Veroni Kite',
+        author: 'Veronikites',
         tags: ['salinas del rey', 'spot', 'GKA', 'colombia'],
         readTime: 9,
     },
@@ -347,7 +347,7 @@ Lo escucho todo el tiempo: "Mi amigo hace kite, me va a enseñar." Es la peor id
 
 4. **Tu amigo no tiene seguro.** Si algo sale mal, no hay cobertura de responsabilidad civil.
 
-### En Veroni Kite
+### En Veronikites
 
 Todos nuestros instructores están certificados IKO. Al terminar tu curso, recibes tu Kite Card oficial. Si después viajas a Brasil, España o Indonesia y quieres seguir tu progresión, cualquier escuela IKO sabe exactamente dónde retomar.
 
@@ -410,7 +410,7 @@ I hear it all the time: "My friend kites, they'll teach me." It's the worst poss
 
 4. **Your friend doesn't have insurance.** If something goes wrong, there's no liability coverage.
 
-### At Veroni Kite
+### At Veronikites
 
 All our instructors are IKO certified. When you finish your course, you receive your official Kite Card. If you later travel to Brazil, Spain, or Indonesia and want to continue your progression, any IKO school knows exactly where to pick up.
 
@@ -418,7 +418,7 @@ All our instructors are IKO certified. When you finish your course, you receive 
         },
         image: '/og-image.jpg',
         date: '2026-03-08',
-        author: 'Veroni Kite',
+        author: 'Veronikites',
         tags: ['IKO', 'certificación', 'seguridad', 'instructores'],
         readTime: 7,
     },
@@ -520,7 +520,7 @@ If you can only come during high season (Dec-Mar), no problem — your lessons w
         },
         image: '/og-image.jpg',
         date: '2026-03-10',
-        author: 'Veroni Kite',
+        author: 'Veronikites',
         tags: ['viento', 'temporada', 'salinas del rey', 'clima'],
         readTime: 7,
     },
@@ -556,7 +556,7 @@ Esto varía enormemente según el país. Aquí va la comparación real:
 
 **Colombia es de los destinos más accesibles del mundo**, y con condiciones de primer nivel (literal: sede del campeonato mundial).
 
-### En Veroni Kite, nuestros precios
+### En Veronikites, nuestros precios
 
 - **Descubrimiento (3h):** $350.000 COP (~$85 USD) — Tu primer contacto con el kite.
 - **Control de Kite (6h):** $650.000 COP (~$160 USD) — Dominas el kite en agua.
@@ -625,7 +625,7 @@ This varies enormously by country. Here's the real comparison:
 
 **Colombia is one of the most affordable destinations in the world**, with top-tier conditions (literally: world championship venue).
 
-### At Veroni Kite, our prices
+### At Veronikites, our prices
 
 - **Discovery (3h):** ~$85 USD — Your first contact with the kite.
 - **Kite Control (6h):** ~$160 USD — Master the kite in water.
@@ -678,7 +678,7 @@ Let's do the complete math for a week in Salinas del Rey:
         },
         image: '/og-image.jpg',
         date: '2026-03-12',
-        author: 'Veroni Kite',
+        author: 'Veronikites',
         tags: ['precios', 'costos', 'principiantes', 'equipo'],
         readTime: 8,
     },
@@ -816,7 +816,7 @@ Don't give up in the first 3 hours. Give it at least 6. If after that it's not f
         },
         image: '/og-image.jpg',
         date: '2026-03-14',
-        author: 'Veroni Kite',
+        author: 'Veronikites',
         tags: ['principiantes', 'errores', 'seguridad', 'consejos'],
         readTime: 9,
     },
@@ -952,7 +952,7 @@ There's no "better" sport. There's the right sport for you at this point in your
         },
         image: '/og-image.jpg',
         date: '2026-03-15',
-        author: 'Veroni Kite',
+        author: 'Veronikites',
         tags: ['kitesurf', 'surf', 'comparación', 'principiantes'],
         readTime: 7,
     },
@@ -975,7 +975,7 @@ Tranquilo — no necesitas comprar nada especial. La escuela proporciona todo el
 
 ### Lo que la escuela te proporciona
 
-En Veroni Kite (y en cualquier escuela seria) te dan:
+En Veronikites (y en cualquier escuela seria) te dan:
 
 - Kite apropiado para tu peso y las condiciones del día
 - Tabla
@@ -1018,7 +1018,7 @@ Tú no tienes que preocuparte por nada de esto. Tu instructor elige todo basado 
 
 - **Joyería.** Anillos, cadenas, pulseras — TODO se queda en casa. El arnés puede engancharse en cadenas (peligroso) y los anillos se pierden en el agua.
 
-- **GoPro (en tu primera clase).** Sé que quieres el video. Pero en tu primera clase necesitas concentrarte en aprender, no en filmar. Tus manos estarán ocupadas con la barra. Si quieres video, pregunta si el instructor puede grabarte — en Veroni Kite incluimos video en el curso de Waterstart.
+- **GoPro (en tu primera clase).** Sé que quieres el video. Pero en tu primera clase necesitas concentrarte en aprender, no en filmar. Tus manos estarán ocupadas con la barra. Si quieres video, pregunta si el instructor puede grabarte — en Veronikites incluimos video en el curso de Waterstart.
 
 - **Ropa holgada o suelta.** Nada que el viento pueda inflar o que se enganche en las líneas. Nada de camisetas sueltas, sombreros sin cinta, o pareos.
 
@@ -1049,7 +1049,7 @@ Relax — you don't need to buy anything special. The school provides all the ki
 
 ### What the school provides
 
-At Veroni Kite (and any serious school) you get:
+At Veronikites (and any serious school) you get:
 
 - Kite appropriate for your weight and the day's conditions
 - Board
@@ -1092,7 +1092,7 @@ You don't have to worry about any of this. Your instructor chooses everything ba
 
 - **Jewelry.** Rings, chains, bracelets — ALL stay at home. The harness can catch on chains (dangerous) and rings get lost in the water.
 
-- **GoPro (on your first class).** I know you want the video. But on your first class you need to focus on learning, not filming. Your hands will be busy with the bar. If you want video, ask if the instructor can film you — at Veroni Kite we include video in the Waterstart course.
+- **GoPro (on your first class).** I know you want the video. But on your first class you need to focus on learning, not filming. Your hands will be busy with the bar. If you want video, ask if the instructor can film you — at Veronikites we include video in the Waterstart course.
 
 - **Loose or baggy clothing.** Nothing the wind can inflate or that can catch on the lines. No loose t-shirts, hats without straps, or sarongs.
 
@@ -1120,7 +1120,7 @@ Ready? [Book your class](/reservar) and we'll see you on the beach.`,
         },
         image: '/og-image.jpg',
         date: '2026-03-16',
-        author: 'Veroni Kite',
+        author: 'Veronikites',
         tags: ['primera clase', 'equipaje', 'consejos', 'principiantes'],
         readTime: 8,
     },

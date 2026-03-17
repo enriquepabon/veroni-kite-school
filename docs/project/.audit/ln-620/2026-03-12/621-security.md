@@ -2,7 +2,7 @@
 
 **Category:** Security
 **Date:** 2026-03-12
-**Project:** Veroni Kite School Website
+**Project:** Veronikites School Website
 **Tech Stack:** Next.js 14.2.35, React 18, TypeScript, Supabase, Wompi, Resend, Tailwind CSS
 **Score: 5.2/10**
 

@@ -27,11 +27,11 @@ describe("US-002: Root Layout with SEO Metadata", () => {
   });
 
   describe("Metadata Title", () => {
-    it("should have correct title with Veroni Kite School", () => {
+    it("should have correct title with Veronikites School", () => {
       assert.match(
         layoutContent,
-        /title:\s*["']Veroni Kite School/,
-        "Metadata title should start with 'Veroni Kite School'"
+        /title:\s*["']Veronikites School/,
+        "Metadata title should start with 'Veronikites School'"
       );
     });
 

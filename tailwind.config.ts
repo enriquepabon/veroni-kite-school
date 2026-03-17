@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Veroni Kite — Brand Guidelines Official Palette
+        // Veronikites — Brand Guidelines Official Palette
         'ocean-teal': {
           DEFAULT: '#2A9D8F', // Primary brand color
           50: '#E8F5F3',

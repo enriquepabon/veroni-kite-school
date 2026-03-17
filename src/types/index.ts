@@ -1,5 +1,5 @@
 // ============================================
-// Veroni Kite — TypeScript Type Definitions
+// Veronikites — TypeScript Type Definitions
 // ============================================
 
 // --- User & Auth ---

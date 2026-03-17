@@ -1,8 +1,8 @@
-# PRD: Rediseño Visual y Mejora de Contenido — Veroni Kite
+# PRD: Rediseño Visual y Mejora de Contenido — Veronikites
 
 ## 1. Introducción / Overview
 
-La landing page de Veroni Kite (academia de kitesurf en Salinas del Rey, Colombia) tiene una base técnica sólida en Next.js, pero presenta deficiencias críticas en contenido visual, SEO técnico y flujo de conversión que limitan su puntuación actual a **6.2/10**.
+La landing page de Veronikites (academia de kitesurf en Salinas del Rey, Colombia) tiene una base técnica sólida en Next.js, pero presenta deficiencias críticas en contenido visual, SEO técnico y flujo de conversión que limitan su puntuación actual a **6.2/10**.
 
 Este PRD documenta los **20 hallazgos** de la auditoría 360° y establece los requisitos para llevar la efectividad de la página a **8.5+/10**, enfocándose en tres pilares:
 
@@ -69,8 +69,8 @@ Los requisitos están agrupados por los 20 hallazgos de la auditoría, organizad
 2. Colores de la composición: Deep Marine (`#264653`) + Ocean Teal (`#2A9D8F`) + Sand Gold (`#E9C46A`) para acentos
 3. Agregar en `<head>`:
    ```html
-   <meta property="og:image" content="https://veronikite.com/og-image.jpg" />
-   <meta property="og:url" content="https://veronikite.com/" />
+   <meta property="og:image" content="https://veronikites.com/og-image.jpg" />
+   <meta property="og:url" content="https://veronikites.com/" />
    <meta property="og:type" content="website" />
    <meta property="og:title" content="VERONIKITES Kite School — Ride the Caribbean Soul" />
    <meta property="og:description" content="Aprende kitesurf con instructores certificados IKO en Salinas del Rey, Caribe Colombiano. Donde el viento te encuentra." />
@@ -80,7 +80,7 @@ Los requisitos están agrupados por los 20 hallazgos de la auditoría, organizad
 
 #### RF-03: Canonical URL (Auditoría #3 — Sev. 8)
 
-1. Agregar en `<head>`: `<link rel="canonical" href="https://veronikite.com/" />`
+1. Agregar en `<head>`: `<link rel="canonical" href="https://veronikites.com/" />`
 2. Cada subpágina DEBE tener su propio canonical apuntando a sí misma
 
 #### RF-04: Arreglar Enlaces Rotos — Privacidad y Términos (Auditoría #4 — Sev. 8)
@@ -124,9 +124,9 @@ Los requisitos están agrupados por los 20 hallazgos de la auditoría, organizad
 
 1. En TODAS las páginas, agregar en `<head>`:
    ```html
-   <link rel="alternate" hreflang="es" href="https://veronikite.com/es/..." />
-   <link rel="alternate" hreflang="en" href="https://veronikite.com/en/..." />
-   <link rel="alternate" hreflang="x-default" href="https://veronikite.com/" />
+   <link rel="alternate" hreflang="es" href="https://veronikites.com/es/..." />
+   <link rel="alternate" hreflang="en" href="https://veronikites.com/en/..." />
+   <link rel="alternate" hreflang="x-default" href="https://veronikites.com/" />
    ```
 
 #### RF-08: Schema.org JSON-LD (Auditoría #9 — Sev. 7)
@@ -181,7 +181,7 @@ Los requisitos están agrupados por los 20 hallazgos de la auditoría, organizad
 
 *(Los placeholders ya están definidos en RF-06)*
 
-#### RF-13: Micro-CTAs en "¿Por Qué Veroni Kite?" (Auditoría #12 — Sev. 5)
+#### RF-13: Micro-CTAs en "¿Por Qué Veronikites?" (Auditoría #12 — Sev. 5)
 
 1. Agregar un enlace/micro-CTA en cada tarjeta de propuesta de valor:
    - "Instructores IKO" → "Conoce a nuestros instructores →"
@@ -231,8 +231,8 @@ Los requisitos están agrupados por los 20 hallazgos de la auditoría, organizad
 1. Cambiar:
    ```html
    <meta name="twitter:card" content="summary_large_image" />
-   <meta name="twitter:image" content="https://veronikite.com/og-image.jpg" />
-   <meta name="twitter:title" content="Veroni Kite — Academia de Kitesurf en Salinas del Rey" />
+   <meta name="twitter:image" content="https://veronikites.com/og-image.jpg" />
+   <meta name="twitter:title" content="Veronikites — Academia de Kitesurf en Salinas del Rey" />
    <meta name="twitter:description" content="Aprende kitesurf con instructores certificados IKO en el Caribe Colombiano." />
    ```
 
@@ -345,7 +345,7 @@ background: linear-gradient(135deg, #2A9D8F 0%, #76C7C0 100%);
 | Hablar con autoridad pero sin arrogancia | Prometer sin cumplir |
 | Mezclar contenido educativo con lifestyle | Publicar contenido de baja calidad visual |
 
-**Hashtags Core:** `#VeronikiteSchool` `#RideTheCaribbean` `#SalinasDelRey` `#KitesurfColombia` `#KiteLife`
+**Hashtags Core:** `#VeronikitesSchool` `#RideTheCaribbean` `#SalinasDelRey` `#KitesurfColombia` `#KiteLife`
 
 ### Principios de Diseño para esta Iteración
 
@@ -405,8 +405,8 @@ background: linear-gradient(135deg, #2A9D8F 0%, #76C7C0 100%);
 | 10 | `testimonio-3.webp` | 200×200 (mín.) | WebP | Sección Testimonios — Testimonio 3 | Retrato del tercer estudiante. Puede ser una pareja o grupo pequeño que tomó clases juntos. Energía positiva y felicidad. |
 | 11 | `testimonio-4.webp` | 200×200 (mín.) | WebP | Sección Testimonios — Testimonio 4 | Retrato del cuarto estudiante. Variedad en nacionalidad/género si es posible, para reflejar la diversidad de estudiantes. |
 | 12 | `iko-badge.png` | 120×120 | PNG | Hero Section — Badge junto al H1 | Logo oficial de certificación IKO (International Kiteboarding Organization). Fondo transparente. Se mostrará como badge de confianza junto al headline principal. |
-| 13 | `spot-salinas.webp` | 800×500 (mín.) | WebP | Sección "¿Por Qué Veroni Kite?" — Tarjeta Spot | Vista panorámica de la playa/spot de Salinas del Rey. Agua turquesa, playa amplia, condiciones de viento visibles (kites en el cielo a lo lejos). Muestra por qué es un spot de clase mundial. |
-| 14 | `instructores.webp` | 800×500 (mín.) | WebP | Sección "¿Por Qué Veroni Kite?" — Tarjeta Instructores | Foto grupal o individual de los instructores de Veroni Kite con equipo. Vestidos con branding de la academia, en la playa, actitud profesional pero cercana. |
+| 13 | `spot-salinas.webp` | 800×500 (mín.) | WebP | Sección "¿Por Qué Veronikites?" — Tarjeta Spot | Vista panorámica de la playa/spot de Salinas del Rey. Agua turquesa, playa amplia, condiciones de viento visibles (kites en el cielo a lo lejos). Muestra por qué es un spot de clase mundial. |
+| 14 | `instructores.webp` | 800×500 (mín.) | WebP | Sección "¿Por Qué Veronikites?" — Tarjeta Instructores | Foto grupal o individual de los instructores de Veronikites con equipo. Vestidos con branding de la academia, en la playa, actitud profesional pero cercana. |
 | 15 | `lead-magnet-preview.webp` | 400×300 | WebP | Sección de captura de leads (opcional) | Mockup visual de la guía "5 cosas que debes saber antes de tu primera clase de kitesurf". Diseño editorial con colores de marca. Solo si se implementa el lead magnet como descarga. |
 
 ---
@@ -446,8 +446,8 @@ background: linear-gradient(135deg, #2A9D8F 0%, #76C7C0 100%);
 |---|---------|
 | OQ1 | ¿El video del Hero ya está editado/cortado o necesita post-producción? ¿Cuál es la duración ideal del loop? |
 | OQ2 | ¿Cuáles son los nombres reales de los estudiantes para los testimonios? ¿Se tiene su consentimiento para usar su foto y nombre? |
-| OQ3 | ¿Cuál es el enlace exacto al perfil de Google Reviews de Veroni Kite? |
-| OQ4 | ¿Cuál es el enlace exacto al perfil de TripAdvisor de Veroni Kite? |
+| OQ3 | ¿Cuál es el enlace exacto al perfil de Google Reviews de Veronikites? |
+| OQ4 | ¿Cuál es el enlace exacto al perfil de TripAdvisor de Veronikites? |
 | OQ5 | ¿Los puntos clave de cada curso (RF-06) son correctos o hay que ajustar el contenido? |
 | OQ6 | ¿El lead magnet (guía descargable) se incluye en esta fase o se pospone? |
 | OQ7 | ¿Las coordenadas geográficas exactas del spot para Schema.org LocalBusiness? |

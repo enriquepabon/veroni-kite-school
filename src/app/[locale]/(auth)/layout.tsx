@@ -40,7 +40,7 @@ export default function AuthLayout({
                                     </svg>
                                 </div>
                                 <span className="text-3xl font-heading font-bold text-white tracking-tight">
-                                    Veroni Kite
+                                    Veronikites
                                 </span>
                             </div>
                         </Link>
@@ -88,7 +88,7 @@ export default function AuthLayout({
                                     <path d="M14 6l-3.75 5.36L7.5 8.5 3 15h18l-7-9z" />
                                 </svg>
                             </div>
-                            <span className="text-2xl font-heading font-bold text-deep-marine-800">Veroni Kite</span>
+                            <span className="text-2xl font-heading font-bold text-deep-marine-800">Veronikites</span>
                         </Link>
                     </div>
                     {children}

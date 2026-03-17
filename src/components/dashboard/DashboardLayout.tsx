@@ -142,7 +142,7 @@ export default function DashboardLayout({
                             </svg>
                         </div>
                         <span className="font-heading font-bold text-salt-white text-lg tracking-tight">
-                            Veroni Kite
+                            Veronikites
                         </span>
                     </Link>
                 </div>

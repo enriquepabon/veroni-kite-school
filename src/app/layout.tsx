@@ -27,8 +27,8 @@ const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://veronikites.com';
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: 'Veroni Kite — Academia de Kitesurf en Salinas del Rey',
-    template: '%s | Veroni Kite',
+    default: 'Veronikites — Academia de Kitesurf en Salinas del Rey',
+    template: '%s | Veronikites',
   },
   description:
     'Aprende kitesurf con instructores certificados IKO en Salinas del Rey, Caribe Colombiano. Donde el viento te encuentra.',
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Veroni Kite — Academia de Kitesurf en Salinas del Rey',
+    title: 'Veronikites — Academia de Kitesurf en Salinas del Rey',
     description: 'Aprende kitesurf con instructores certificados IKO en el Caribe Colombiano.',
     images: ['/og-image.jpg'],
   },

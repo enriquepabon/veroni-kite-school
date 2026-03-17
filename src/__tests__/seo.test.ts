@@ -119,7 +119,7 @@ describe("SEO - Structured Data (JSON-LD)", () => {
     const layoutPath = path.join(appDir, "layout.tsx");
     const content = fs.readFileSync(layoutPath, "utf-8");
     assert.ok(
-      content.includes("Veroni Kite School"),
+      content.includes("Veronikites School"),
       "Schema should include business name"
     );
   });
