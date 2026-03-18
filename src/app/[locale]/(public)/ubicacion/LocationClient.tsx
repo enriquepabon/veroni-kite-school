@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
+import SeasonalWindGuide from '@/components/public/SeasonalWindGuide';
 
 export default function LocationClient() {
     const t = useTranslations('location');
@@ -84,28 +85,46 @@ export default function LocationClient() {
                             </div>
                         </div>
 
-                        {/* How to get there */}
+                        {/* How to get there — Two routes */}
                         <div className="bg-white rounded-2xl p-6 shadow-card mb-6">
-                            <h2 className="text-xl font-heading font-bold text-night-tide mb-4 flex items-center gap-2">
+                            <h2 className="text-xl font-heading font-bold text-night-tide mb-1 flex items-center gap-2">
                                 <svg className="w-6 h-6 text-sand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
                                 </svg>
                                 {t('howToGetTitle')}
                             </h2>
-                            <ul className="space-y-3 text-sm text-deep-marine-600">
-                                <li className="flex items-start gap-3">
-                                    <span className="w-6 h-6 bg-ocean-teal-500/10 text-ocean-teal rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span>
-                                    {t('step1')}
-                                </li>
-                                <li className="flex items-start gap-3">
-                                    <span className="w-6 h-6 bg-ocean-teal-500/10 text-ocean-teal rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
-                                    {t('step2')}
-                                </li>
-                                <li className="flex items-start gap-3">
-                                    <span className="w-6 h-6 bg-ocean-teal-500/10 text-ocean-teal rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span>
-                                    {t('step3')}
-                                </li>
-                            </ul>
+                            <p className="text-xs text-deep-marine-500 mb-4">{t('howToGetSubtitle')}</p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                {/* From Cartagena */}
+                                <div className="bg-salt-white rounded-xl p-4">
+                                    <h3 className="font-heading font-bold text-night-tide text-sm mb-2">{t('fromCartagena')}</h3>
+                                    <ul className="space-y-2 text-xs text-deep-marine-600">
+                                        <li className="flex items-start gap-2">
+                                            <span className="w-5 h-5 bg-ocean-teal/10 text-ocean-teal rounded-full flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">1</span>
+                                            {t('step1Cartagena')}
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <span className="w-5 h-5 bg-ocean-teal/10 text-ocean-teal rounded-full flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">2</span>
+                                            {t('step2Cartagena')}
+                                        </li>
+                                    </ul>
+                                </div>
+                                {/* From Barranquilla */}
+                                <div className="bg-salt-white rounded-xl p-4">
+                                    <h3 className="font-heading font-bold text-night-tide text-sm mb-2">{t('fromBarranquilla')}</h3>
+                                    <ul className="space-y-2 text-xs text-deep-marine-600">
+                                        <li className="flex items-start gap-2">
+                                            <span className="w-5 h-5 bg-sand-gold/10 text-sand-gold rounded-full flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">1</span>
+                                            {t('step1Barranquilla')}
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <span className="w-5 h-5 bg-sand-gold/10 text-sand-gold rounded-full flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">2</span>
+                                            {t('step2Barranquilla')}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p className="text-xs text-ocean-teal font-medium text-center">{t('transportNote')}</p>
                         </div>
 
                         {/* Accommodation */}
@@ -121,6 +140,13 @@ export default function LocationClient() {
                             </p>
                         </div>
                     </motion.div>
+                </div>
+            </section>
+
+            {/* Seasonal Wind Guide */}
+            <section className="bg-gradient-dark py-16">
+                <div className="container-main max-w-3xl">
+                    <SeasonalWindGuide />
                 </div>
             </section>
         </div>

@@ -18,18 +18,20 @@ interface Instructor {
     roleKey: string;
     bioKey: string;
     yearsKey: string;
+    languagesKey: string;
+    specialtyKey: string;
     instagram?: string;
     socialUrl?: string;
 }
 
 const instructors: Instructor[] = [
-    { id: '1', imageKey: 'instructor-1', nameKey: 'name1', roleKey: 'role1', bioKey: 'bio1', yearsKey: 'years1', instagram: '#' },
-    { id: '2', imageKey: 'instructor-2', nameKey: 'name2', roleKey: 'role2', bioKey: 'bio2', yearsKey: 'years2', instagram: '#' },
-    { id: '3', imageKey: 'instructor-3', nameKey: 'name3', roleKey: 'role3', bioKey: 'bio3', yearsKey: 'years3', instagram: '#' },
-    { id: '4', imageKey: 'instructor-4', nameKey: 'name4', roleKey: 'role4', bioKey: 'bio4', yearsKey: 'years4', instagram: '#' },
-    { id: '5', imageKey: 'instructor-5', nameKey: 'name5', roleKey: 'role5', bioKey: 'bio5', yearsKey: 'years5', instagram: '#' },
-    { id: '6', imageKey: 'instructor-6', nameKey: 'name6', roleKey: 'role6', bioKey: 'bio6', yearsKey: 'years6', instagram: '#' },
-    { id: '7', imageKey: 'instructor-7', nameKey: 'name7', roleKey: 'role7', bioKey: 'bio7', yearsKey: 'years7', instagram: '#' },
+    { id: '1', imageKey: 'instructor-1', nameKey: 'name1', roleKey: 'role1', bioKey: 'bio1', yearsKey: 'years1', languagesKey: 'languages1', specialtyKey: 'specialty1', instagram: '#' },
+    { id: '2', imageKey: 'instructor-2', nameKey: 'name2', roleKey: 'role2', bioKey: 'bio2', yearsKey: 'years2', languagesKey: 'languages2', specialtyKey: 'specialty2', instagram: '#' },
+    { id: '3', imageKey: 'instructor-3', nameKey: 'name3', roleKey: 'role3', bioKey: 'bio3', yearsKey: 'years3', languagesKey: 'languages3', specialtyKey: 'specialty3', instagram: '#' },
+    { id: '4', imageKey: 'instructor-4', nameKey: 'name4', roleKey: 'role4', bioKey: 'bio4', yearsKey: 'years4', languagesKey: 'languages4', specialtyKey: 'specialty4', instagram: '#' },
+    { id: '5', imageKey: 'instructor-5', nameKey: 'name5', roleKey: 'role5', bioKey: 'bio5', yearsKey: 'years5', languagesKey: 'languages5', specialtyKey: 'specialty5', instagram: '#' },
+    { id: '6', imageKey: 'instructor-6', nameKey: 'name6', roleKey: 'role6', bioKey: 'bio6', yearsKey: 'years6', languagesKey: 'languages6', specialtyKey: 'specialty6', instagram: '#' },
+    { id: '7', imageKey: 'instructor-7', nameKey: 'name7', roleKey: 'role7', bioKey: 'bio7', yearsKey: 'years7', languagesKey: 'languages7', specialtyKey: 'specialty7', instagram: '#' },
 ];
 
 export default function InstructorTeam() {
@@ -121,6 +123,19 @@ export default function InstructorTeam() {
                                 <p className="text-white/70 text-sm mt-3 leading-relaxed">
                                     {t(instructor.bioKey)}
                                 </p>
+
+                                {/* Enhanced profile info */}
+                                <div className="flex flex-wrap gap-1.5 mt-3">
+                                    <span className="inline-flex items-center gap-1 text-[10px] bg-ocean-teal/20 text-ocean-teal px-2 py-0.5 rounded-full font-medium">
+                                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802" />
+                                        </svg>
+                                        {t(instructor.languagesKey)}
+                                    </span>
+                                    <span className="inline-flex items-center gap-1 text-[10px] bg-sand-gold/20 text-sand-gold px-2 py-0.5 rounded-full font-medium">
+                                        {t(instructor.specialtyKey)}
+                                    </span>
+                                </div>
 
                                 <div className="flex items-center gap-3 mt-4 pt-4 border-t border-white/10">
                                     {instructor.instagram && (

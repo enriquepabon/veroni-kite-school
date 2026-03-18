@@ -127,9 +127,22 @@ export default function BookingForm({ preselectedCourse }: { preselectedCourse?:
                     className="w-full rounded-xl border border-deep-marine-200 bg-white px-4 py-3 text-night-tide focus:border-ocean-teal focus:ring-2 focus:ring-ocean-teal/20 outline-none transition-colors"
                 >
                     <option value="">{t('selectCourse')}</option>
-                    <option value="descubrimiento">{t('discovery')}</option>
-                    <option value="control-de-kite">{t('kiteControl')}</option>
-                    <option value="waterstart">{t('waterstart')}</option>
+                    <optgroup label={t('courseGroupLearning')}>
+                        <option value="clase-individual">{t('individual')}</option>
+                        <option value="curso-basico">{t('basic')}</option>
+                        <option value="curso-completo">{t('complete')}</option>
+                    </optgroup>
+                    <optgroup label={t('courseGroupAdvanced')}>
+                        <option value="kitefoil">{t('kitefoil')}</option>
+                        <option value="windfoil">{t('windfoil')}</option>
+                        <option value="saltos-avanzados">{t('jumps')}</option>
+                        <option value="surf-wave">{t('surfWave')}</option>
+                    </optgroup>
+                    <optgroup label={t('courseGroupServices')}>
+                        <option value="renta-equipos">{t('rentalEquipment')}</option>
+                        <option value="asistencia">{t('assistance')}</option>
+                        <option value="downwind">{t('downwindTrip')}</option>
+                    </optgroup>
                 </select>
             </div>
 

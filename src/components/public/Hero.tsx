@@ -6,11 +6,20 @@ import { Link } from '@/i18n/routing';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
+// Add more clips here when Mono sends them:
+const VIDEO_CLIPS = [
+    { webm: '/images/hero-video.webm', mp4: '/images/hero-video.mp4' },
+    // { webm: '/images/hero-video-2.webm', mp4: '/images/hero-video-2.mp4' },
+];
+
 export default function Hero() {
     const t = useTranslations('hero');
     const videoRef = useRef<HTMLVideoElement>(null);
+    const secondVideoRef = useRef<HTMLVideoElement>(null);
     const [videoFailed, setVideoFailed] = useState(false);
     const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+    const [currentClipIndex, setCurrentClipIndex] = useState(0);
+    const [showFirst, setShowFirst] = useState(true);
 
     useEffect(() => {
         // Check prefers-reduced-motion
@@ -39,21 +48,60 @@ export default function Hero() {
             {/* 2.2 — Video Background */}
             <div className="absolute inset-0 z-0">
                 {showVideo ? (
-                    <video
-                        ref={videoRef}
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        poster="/images/hero-fallback.jpg"
-                        className="absolute inset-0 w-full h-full object-cover"
-                        onError={() => setVideoFailed(true)}
-                    >
-                        <source src="/images/hero-video.webm" type="video/webm" />
-                        <source src="/images/hero-video.mp4" type="video/mp4" />
-                    </video>
+                    VIDEO_CLIPS.length === 1 ? (
+                        <video
+                            ref={videoRef}
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            poster="/images/hero-fallback.jpg"
+                            className="absolute inset-0 w-full h-full object-cover"
+                            onError={() => setVideoFailed(true)}
+                        >
+                            <source src={VIDEO_CLIPS[0].webm} type="video/webm" />
+                            <source src={VIDEO_CLIPS[0].mp4} type="video/mp4" />
+                        </video>
+                    ) : (
+                        <>
+                            <video
+                                ref={videoRef}
+                                autoPlay
+                                muted
+                                playsInline
+                                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${showFirst ? 'opacity-100' : 'opacity-0'}`}
+                                onEnded={() => {
+                                    const nextIdx = (currentClipIndex + 1) % VIDEO_CLIPS.length;
+                                    setCurrentClipIndex(nextIdx);
+                                    setShowFirst(false);
+                                    if (secondVideoRef.current) {
+                                        secondVideoRef.current.src = VIDEO_CLIPS[nextIdx].mp4;
+                                        secondVideoRef.current.play();
+                                    }
+                                }}
+                                onError={() => setVideoFailed(true)}
+                            >
+                                <source src={VIDEO_CLIPS[0].webm} type="video/webm" />
+                                <source src={VIDEO_CLIPS[0].mp4} type="video/mp4" />
+                            </video>
+                            <video
+                                ref={secondVideoRef}
+                                muted
+                                playsInline
+                                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${showFirst ? 'opacity-0' : 'opacity-100'}`}
+                                onEnded={() => {
+                                    const nextIdx = (currentClipIndex + 1) % VIDEO_CLIPS.length;
+                                    setCurrentClipIndex(nextIdx);
+                                    setShowFirst(true);
+                                    if (videoRef.current) {
+                                        videoRef.current.src = VIDEO_CLIPS[nextIdx].mp4;
+                                        videoRef.current.play();
+                                    }
+                                }}
+                            />
+                        </>
+                    )
                 ) : (
-                    /* 2.4 — Fallback: static image for reduced-motion or when video fails */
                     <Image
                         src="/images/hero-fallback.jpg"
                         alt=""
@@ -64,7 +112,7 @@ export default function Hero() {
                     />
                 )}
 
-                {/* 2.3 — Dark overlay (Deep Marine #264653 at 45% opacity) */}
+                {/* Dark overlay (Deep Marine #264653 at 45% opacity) */}
                 <div className="absolute inset-0 bg-[#264653]/45" aria-hidden="true" />
             </div>
 

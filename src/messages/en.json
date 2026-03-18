@@ -251,7 +251,21 @@
         "name7": "Assistant 2",
         "role7": "Teaching Assistant",
         "bio7": "Support in logistics, water safety and equipment preparation.",
-        "years7": "1+ year"
+        "years7": "1+ year",
+        "languages1": "Spanish, English",
+        "languages2": "Spanish, English",
+        "languages3": "Spanish",
+        "languages4": "Spanish",
+        "languages5": "Spanish",
+        "languages6": "Spanish",
+        "languages7": "Spanish",
+        "specialty1": "Freestyle, Hydrofoil",
+        "specialty2": "Freeride, Wave",
+        "specialty3": "Freeride",
+        "specialty4": "Discovery",
+        "specialty5": "Safety",
+        "specialty6": "Assistance",
+        "specialty7": "Logistics"
     },
     "testimonials": {
         "title": "What Our Students Say",

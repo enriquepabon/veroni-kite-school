@@ -251,7 +251,21 @@
         "name7": "Asistente 2",
         "role7": "Asistente de Instrucción",
         "bio7": "Apoyo en logística, seguridad en el agua y preparación de equipos.",
-        "years7": "1+ año"
+        "years7": "1+ año",
+        "languages1": "Español, Inglés",
+        "languages2": "Español, Inglés",
+        "languages3": "Español",
+        "languages4": "Español",
+        "languages5": "Español",
+        "languages6": "Español",
+        "languages7": "Español",
+        "specialty1": "Freestyle, Hidrofoil",
+        "specialty2": "Freeride, Wave",
+        "specialty3": "Freeride",
+        "specialty4": "Descubrimiento",
+        "specialty5": "Seguridad",
+        "specialty6": "Asistencia",
+        "specialty7": "Logística"
     },
     "testimonials": {
         "title": "Lo Que Dicen Nuestros Estudiantes",
