@@ -51,7 +51,7 @@ export default function SocialProof() {
     }, [t]);
 
     return (
-        <section ref={sectionRef} className="py-8 bg-deep-marine-800/50 border-y border-white/5">
+        <section ref={sectionRef} className="py-8 bg-night-tide border-y border-white/10">
             <div className="max-w-6xl mx-auto px-4">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
                     {STATS.map((stat, i) => (
@@ -62,7 +62,7 @@ export default function SocialProof() {
                             >
                                 {stat.isNumber ? '0' : t(stat.countKey)}
                             </span>
-                            <p className="text-sm text-white/60 font-medium">{t(stat.labelKey)}</p>
+                            <p className="text-sm text-white/80 font-medium">{t(stat.labelKey)}</p>
                         </div>
                     ))}
                 </div>
